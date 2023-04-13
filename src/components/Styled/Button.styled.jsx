@@ -11,6 +11,7 @@ export const Button = styled.button`
   border-radius: 30px;
   font-weight: 700;
   cursor: pointer;
+  width: 182px;
   &.orange {
     height: 44px;
     padding: 13px 25px;
@@ -22,6 +23,9 @@ export const Button = styled.button`
     color: ${colors.color1};
     border: 2px solid ${colors.color1};
     box-shadow: none;
+  }
+  &.regLogbutton {
+    width: 182px;
   }
   &.start {
     width: 210px;
