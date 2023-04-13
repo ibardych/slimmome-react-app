@@ -9,12 +9,12 @@ export const Button = styled.button`
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
   border-radius: 30px;
   &.login-orange {
-    width: 181px;
+    width: 182px;
     height: 44px;
     padding: 13px 0;
   }
   &.login-white {
-    width: 181px;
+    width: 182px;
     height: 44px;
     padding: 13px 0;
     background: #fff;
@@ -24,7 +24,7 @@ export const Button = styled.button`
   }
   &.start {
     width: 210px;
-    height: 43px;
+    height: 44px;
     padding: 13px 0;
   }
   &.add-product {
