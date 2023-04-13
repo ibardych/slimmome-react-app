@@ -24,6 +24,9 @@ export const DiaryStyled = styled.div`
   display: flex;
   flex-direction: column;
 
+  input:focus {
+    outline: none;
+  }
   & .Diary__box_line {
     display: flex;
     flex-direction: column;
@@ -190,12 +193,15 @@ export const DiaryStyled = styled.div`
     align-items: center;
     @media screen and (min-width: ${mediaSizes.mobile}) {
       margin-bottom: 32px;
+      height: 20px;
     }
     @media screen and (min-width: ${mediaSizes.tablet}) {
       margin-bottom: 60px;
+      height: 38px;
     }
     @media screen and (min-width: ${mediaSizes.desktop}) {
       margin-bottom: 60px;
+      height: 38px;
     }
   }
   & .Diary__data {
@@ -212,12 +218,28 @@ export const DiaryStyled = styled.div`
       line-height: 22px;
     }
     @media screen and (min-width: ${mediaSizes.tablet}) {
-      font-size: 18px;
-      line-height: 22px;
+      font-size: 34px;
+      line-height: 41px;
     }
     @media screen and (min-width: ${mediaSizes.desktop}) {
-      font-size: 18px;
-      line-height: 22px;
+      font-size: 34px;
+      line-height: 41px;
+    }
+  }
+  & .Diary__icon-data {
+    width: 25px;
+    height: 25px;
+    @media screen and (min-width: ${mediaSizes.mobile}) {
+      width: 15px;
+      height: 15px;
+    }
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      width: 25px;
+      height: 25px;
+    }
+    @media screen and (min-width: ${mediaSizes.desktop}) {
+      width: 25px;
+      height: 25px;
     }
   }
 `;

@@ -21,7 +21,7 @@ export const DiaryMain = () => {
     <DiaryStyled>
       <div className="Diary__header-wraper-data">
         <p className="Diary__data">{currentDate}</p>
-        <AiOutlineCalendar />
+        <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
       </div>
       <DiaryForm>
         <div className="Diary__box_input">
