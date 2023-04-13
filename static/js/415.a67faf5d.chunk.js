@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkslimmome_react_app=self.webpackChunkslimmome_react_app||[]).push([[415],{415:function(e,a,t){t.r(a);var c=t(184);a.default=function(){return(0,c.jsx)(c.Fragment,{children:"Welcome to Home Page"})}}}]);
+//# sourceMappingURL=415.a67faf5d.chunk.js.map

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkslimmome_react_app=self.webpackChunkslimmome_react_app||[]).push([[111],{111:function(e,a,r){r.r(a);var n=r(184);a.default=function(){return(0,n.jsx)(n.Fragment,{children:"Diary Page"})}}}]);
+//# sourceMappingURL=111.2839c307.chunk.js.map
