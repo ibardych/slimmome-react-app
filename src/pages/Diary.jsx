@@ -1,5 +1,11 @@
+import { DiaryMain } from 'components/Diary/Diary';
+
 const Diary = () => {
-  return <>Diary Page</>;
+  return (
+    <>
+      <DiaryMain />
+    </>
+  );
 };
 
 export default Diary;
