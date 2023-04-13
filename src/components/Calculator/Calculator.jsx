@@ -1,12 +1,13 @@
-import { CalculatorStyled } from './Calculator.styled';
+import { CalculatorStyled, InputsWrapper,FormWrapper, Input, Form, RadioGroup, RadioTitle, RadioLabel, RadioInput, CalcBtn } from './Calculator.styled';
 
 export const CalculatorEl = () => {
   return (
     <CalculatorStyled>
       <h2>Calculate your daily calorie intake right now</h2>
-      <form>
-        <div>
-          <input
+      <Form>
+        <FormWrapper>
+        <InputsWrapper >
+          <Input
             placeholder="Height *"
             type="text"
             name="height"
@@ -16,7 +17,7 @@ export const CalculatorEl = () => {
             title="Height may contain only numbers. For example 165"
             required
           />
-          <input
+          <Input
             placeholder="Age *"
             type="text"
             name="height"
@@ -26,7 +27,7 @@ export const CalculatorEl = () => {
             title="Height may contain only numbers. For example 35"
             required
           />
-          <input
+          <Input
             placeholder="Current weight *"
             type="text"
             name="height"
@@ -36,9 +37,9 @@ export const CalculatorEl = () => {
             title="Height may contain only numbers. For example 85"
             required
           />
-        </div>
-        <div>
-          <input
+        </InputsWrapper>
+        <InputsWrapper>
+          <Input
             placeholder="Desired weight *"
             type="text"
             name="height"
@@ -49,158 +50,30 @@ export const CalculatorEl = () => {
             required
           />
           <div>
-            <div>Blood type *</div>
+            <RadioTitle>Blood type *</RadioTitle>
 
-            <div>
-              <label>
-                <input type="radio" name="bloodType" value="1" required />1
-              </label>
-              <label>
-                <input type="radio" name="bloodType" value="2" required />2
-              </label>
-              <label>
-                <input type="radio" name="bloodType" value="3" required />3
-              </label>
-              <label>
-                <input type="radio" name="bloodType" value="4" required />4
-              </label>
-            </div>
+            <RadioGroup>
+              <RadioLabel>
+                <RadioInput type="radio" name="bloodType" value="1" required />1
+              </RadioLabel>
+              <RadioLabel>
+                <RadioInput type="radio" name="bloodType" value="2" required />2
+              </RadioLabel>
+              <RadioLabel>
+                <RadioInput type="radio" name="bloodType" value="3" required />3
+              </RadioLabel>
+              <RadioLabel>
+                <RadioInput type="radio" name="bloodType" value="4" required />4
+              </RadioLabel>
+            </RadioGroup>
           </div>
-          <button type="submit">
-          Start losing weight
-              </button>
-        </div>
-      </form>
-      {/* <form className={css.form}>
-              <div className={css.inputsWrapper}>
-                <div className={css.inputsLeft}>
-                  <div>
-                    <Field
-                      type="text"
-                      name="height"
-                      min="120"
-                      max="220"
-                      required
-                      placeholder="Зріст *"
-                      className={
-                        errors.height && touched.height
-                          ? css.inputError
-                          : css.input
-                      }
-                    />
-                    {errors.height && touched.height && (
-                      <p className="error">{errors.height}</p>
-                    )}
-                  </div>
-                  <div>
-                    <Field
-                      className={
-                        errors.age && touched.age ? css.inputError : css.input
-                      }
-                      type="text"
-                      name="age"
-                      min="18"
-                      max="100"
-                      placeholder="Вік *"
-                      required
-                    />
-                    {errors.age && touched.age && (
-                      <p className="error">{errors.age}</p>
-                    )}
-                  </div>
-                  <div>
-                    <Field
-                      className={
-                        errors.weight && touched.weight
-                          ? css.inputError
-                          : css.input
-                      }
-                      type="text"
-                      name="weight"
-                      min="40"
-                      max="200"
-                      placeholder="Вага *"
-                      required
-                    />
-                    {errors.weight && touched.weight && (
-                      <p className="error">{errors.weight}</p>
-                    )}
-                  </div>
-                </div>
-                <div className={css.inputsRight}>
-                  <div>
-                    <Field
-                      className={
-                        errors.desiredWeight && touched.desiredWeight
-                          ? css.inputError
-                          : css.input
-                      }
-                      type="text"
-                      name="desiredWeight"
-                      min="40"
-                      max="200"
-                      placeholder="Бажана вага *"
-                      required
-                    />
-                    {errors.desiredWeight && touched.desiredWeight && (
-                      <p className="error">{errors.desiredWeight}</p>
-                    )}
-                  </div>
-                  <div>
-                    <p className={css.radioTitle}>Група крові *</p>
-                    <div className={css.radioWrapper}>
-                      <label className={css.radioLabel}>
-                        <Field
-                          className={css.radioInput}
-                          type="radio"
-                          name="bloodType"
-                          value="1"
-                          required
-                        />
-                        1
-                      </label>
-                      <label className={css.radioLabel}>
-                        <Field
-                          className={css.radioInput}
-                          type="radio"
-                          name="bloodType"
-                          value="2"
-                          required
-                        />
-                        2
-                      </label>
-                      <label className={css.radioLabel}>
-                        <Field
-                          className={css.radioInput}
-                          type="radio"
-                          name="bloodType"
-                          value="3"
-                          required
-                        />
-                        3
-                      </label>
-                      <label className={css.radioLabel}>
-                        <Field
-                          className={css.radioInput}
-                          type="radio"
-                          name="bloodType"
-                          value="4"
-                          required
-                        />
-                        4
-                      </label>
-                    </div>
-                    {errors.bloodType && touched.bloodType && (
-                      <p className="error">{errors.bloodType}</p>
-                    )}
-                  </div>
-                </div>
-              </div> */}
+        </InputsWrapper>
 
-      {/* <button className={css.startBtn} type="submit">
-                Розпочати схуднення
-              </button>
-            </form> */}
+        </FormWrapper>
+          <CalcBtn type="submit">
+          Start losing weight
+              </CalcBtn>
+      </Form>
     </CalculatorStyled>
   );
 };
