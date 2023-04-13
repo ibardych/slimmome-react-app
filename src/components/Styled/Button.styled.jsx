@@ -1,25 +1,26 @@
 import styled from '@emotion/styled';
+import { colors } from 'constants';
 
 export const Button = styled.button`
   font-size: 16px;
   padding: 13px 0;
   color: #fff;
   border: none;
-  background: #fc842d;
+  background: ${colors.color1};
   box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
   border-radius: 30px;
-  &.login-orange {
-    width: 182px;
+  font-weight: 700;
+  cursor: pointer;
+  &.orange {
     height: 44px;
-    padding: 13px 0;
+    padding: 13px 25px;
   }
-  &.login-white {
-    width: 182px;
+  &.white {
     height: 44px;
-    padding: 13px 0;
+    padding: 13px 23px;
     background: #fff;
-    color: #fc842d;
-    border: 2px solid #fc842d;
+    color: ${colors.color1};
+    border: 2px solid ${colors.color1};
     box-shadow: none;
   }
   &.start {

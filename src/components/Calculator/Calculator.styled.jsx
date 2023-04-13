@@ -3,17 +3,15 @@ import { transition } from 'helpers';
 import { Button } from 'components/Styled';
 
 import { mediaSizes } from 'constants/media';
+import { colors } from 'constants';
 
 export const ButtonCalc = styled(Button)`
-  width: 210px;
-  height: 43px;
   @media screen and (min-width: ${mediaSizes.desktop}) {
     margin-left: 340px;
   }
 `;
 
 export const CalculatorStyled = styled.div`
-  font-family: 'Verdana';
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +34,7 @@ export const CalculatorStyled = styled.div`
     font-size: 18px;
     font-weight: 700;
     line-height: 1.4;
-    color: #212121;
+    color: ${colors.color4};
     text-align: left;
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 554px;
@@ -89,8 +87,8 @@ export const Input = styled.input`
   border: none;
   font-size: 14px;
   font-weight: 700;
-  border-bottom: 1px solid #e0e0e0;
-  color: #9b9faa;
+  border-bottom: 1px solid ${colors.color3};
+  color: ${colors.color2};
   @media screen and (min-width: ${mediaSizes.tablet}) {
     height: 37px;
   }
@@ -98,7 +96,7 @@ export const Input = styled.input`
     outline: none;
   }
   &::placeholder {
-    color: #9b9faa;
+    color: ${colors.color2};
     font-size: 14px;
     font-weight: 700;
     line-height: 1.21;
@@ -122,21 +120,21 @@ export const RadioTitle = styled.div`
   font-weight: 700;
   line-height: 1.21;
   letter-spacing: 0.04em;
-  color: #9b9faa;
-  border-bottom: 1px solid #e0e0e0;
+  color: ${colors.color2};
+  border-bottom: 1px solid ${colors.color3};
   @media screen and (min-width: ${mediaSizes.tablet}) {
     margin-bottom: 8px;
   }
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
     padding-bottom: 20px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid ${colors.color3};
   }
 `;
 export const RadioLabel = styled.label`
   display: flex;
   gap: 8px;
-  color: #9b9faa;
+  color: ${colors.color2};
   font-size: 14px;
   font-weight: 400;
   line-height: 1.6;
@@ -144,11 +142,11 @@ export const RadioLabel = styled.label`
   text-align: left;
   &:checked {
     font-weight: 700;
-    color: #fc842d;
+    color: ${colors.color1};
   }
   &:focus-within {
     font-weight: 700;
-    color: #fc842d;
+    color: ${colors.color1};
   }
 `;
 export const RadioInput = styled.input`
@@ -160,8 +158,8 @@ export const RadioInput = styled.input`
   align-items: center;
   appearance: none;
   background-color: #fff;
-  color: #fc842d;
-  border: 1px solid #e0e0e0;
+  color: ${colors.color1};
+  border: 1px solid ${colors.color3};
   border-radius: 50%;
   &:before {
     content: '';
@@ -171,13 +169,13 @@ export const RadioInput = styled.input`
     transform: scale(0);
 
     ${transition('transform')};
-    box-shadow: inset 10px 10px #fc842d;
+    box-shadow: inset 10px 10px ${colors.color1};
     background-color: transparent;
   }
   &:checked::before {
     transform: scale(1);
   }
   &:focus {
-    outline: 1px solid #e0e0e0;
+    outline: 1px solid ${colors.color3};
   }
 `;
