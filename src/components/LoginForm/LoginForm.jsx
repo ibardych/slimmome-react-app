@@ -44,7 +44,12 @@ export const LoginForm = () => {
           value={fields.name}
           onChange={handleInputChange}
         />
-        <Button type="submit">Log In</Button>
+        <Button className="login-orange" type="submit">
+          Log In
+        </Button>
+        <Button className="login-white" type="submit">
+          Register
+        </Button>
       </FormContainer>
     </LoginFormStyled>
   );

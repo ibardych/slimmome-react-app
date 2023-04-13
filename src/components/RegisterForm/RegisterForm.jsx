@@ -52,7 +52,9 @@ export const RegisterForm = () => {
           value={fields.password}
           onChange={handleInputChange}
         />
-        <Button type="submit">Register</Button>
+        <Button className="login-orange" type="submit">
+          Register
+        </Button>
       </FormContainer>
     </RegisterFormStyled>
   );
