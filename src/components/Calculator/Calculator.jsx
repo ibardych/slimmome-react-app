@@ -1,4 +1,4 @@
-import { CalculatorStyled, InputsWrapper,FormWrapper, Input, Form, RadioGroup, RadioTitle, RadioLabel, RadioInput, CalcBtn } from './Calculator.styled';
+import { CalculatorStyled, InputsWrapper,FormWrapper, Input, Form, RadioGroup, RadioTitle, RadioLabel, RadioInput, ButtonCalc } from './Calculator.styled';
 
 export const CalculatorEl = () => {
   return (
@@ -70,9 +70,9 @@ export const CalculatorEl = () => {
         </InputsWrapper>
 
         </FormWrapper>
-          <CalcBtn type="submit">
+          <ButtonCalc type="submit">
           Start losing weight
-              </CalcBtn>
+              </ButtonCalc>
       </Form>
     </CalculatorStyled>
   );

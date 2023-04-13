@@ -1,7 +1,16 @@
 import styled from '@emotion/styled';
 import { transition } from 'helpers';
+import { Button } from 'components/Styled';
 
 import { mediaSizes } from 'constants/media';
+
+export const ButtonCalc = styled(Button)`
+  width: 210px;
+  height: 43px;
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    margin-left: 340px;
+  }
+`;
 
 export const CalculatorStyled = styled.div`
   font-family: 'Verdana';
@@ -160,7 +169,7 @@ export const RadioInput = styled.input`
     height: 10px;
     border-radius: 50%;
     transform: scale(0);
-    
+
     ${transition('transform')};
     box-shadow: inset 10px 10px #fc842d;
     background-color: transparent;
@@ -170,29 +179,5 @@ export const RadioInput = styled.input`
   }
   &:focus {
     outline: 1px solid #e0e0e0;
-  }
-`;
-
-export const CalcBtn = styled.button`
-  width: 210px;
-  height: 43px;
-  padding: 12px 4px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.21;
-  letter-spacing: 0.04em;
-  color: #ffffff;
-  background-color: #fc842d;
-  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
-  border-radius: 30px;
-  border: transparent;
-  ${transition('transform', 'box-shadow')};
-  @media screen and (min-width: ${mediaSizes.desktop}) {
-    margin-left: 340px;
-  }
-  &:hover,
-  &:focus {
-    box-shadow: 0px 4px 4px rgba(252, 132, 45, 0.5);
-    transform: scale(1.05);
   }
 `;
