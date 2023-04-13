@@ -13,7 +13,10 @@ export const ButtonDiary = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  :hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+  }
   @media screen and (min-width: ${mediaSizes.mobile}) {
     margin-left: 0px;
     margin-top: 60px;
