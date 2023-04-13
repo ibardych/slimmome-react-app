@@ -2,11 +2,12 @@ import styled from '@emotion/styled';
 
 export const Button = styled.button`
   font-size: 16px;
-  background-color: #3c61c6;
   padding: 8px 16px;
   color: #fff;
   border: none;
-
+  background: #fc842d;
+  box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+  border-radius: 30px;
   &:hover {
   }
 
