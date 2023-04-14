@@ -13,9 +13,10 @@ export const ButtonDiary = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  :hover {
-    transform: scale(1.1);
-    transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    animation: jelly 0.5s;
   }
   @media screen and (min-width: ${mediaSizes.mobile}) {
     margin-left: 0px;
@@ -29,5 +30,19 @@ export const ButtonDiary = styled.button`
     flex-direction: row;
     margin-left: 60px;
     margin-top: 0px;
+  }
+
+  @keyframes jelly {
+    25% {
+      transform: scale(0.9, 1.1);
+    }
+
+    50% {
+      transform: scale(1.1, 0.9);
+    }
+
+    75% {
+      transform: scale(0.95, 1.05);
+    }
   }
 `;

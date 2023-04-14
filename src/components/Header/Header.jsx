@@ -56,11 +56,7 @@ const Header = () => {
   };
 
   return (
-    <HeaderStyled
-      style={{
-        backgroundColor: isScrolled ? 'rgba(255, 255, 255, 1)' : 'transparent',
-      }}
-    >
+    <HeaderStyled className={isScrolled ? 'bg' : ''}>
       <HeaderContainer>
         <Logo />
         {!showBurgerIcon && <Navigation />}

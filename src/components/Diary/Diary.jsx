@@ -178,7 +178,6 @@ export const DiaryMain = () => {
             </ul>
           </li>
         </DiaryStyledList>
-        <div className="wrap__bottom-hiding"></div>
         {/* <ButtonDiary>
           <AiOutlinePlus color="white" />
         </ButtonDiary> */}
