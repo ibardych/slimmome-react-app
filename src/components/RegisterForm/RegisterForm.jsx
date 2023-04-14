@@ -28,7 +28,7 @@ export const RegisterForm = () => {
         password: form.elements.password.value,
       })
     );
-    form.reset();
+    form.reset(handleSubmit);
   };
 
   const handleInputChange = e => {
@@ -42,6 +42,7 @@ export const RegisterForm = () => {
     navigate(path);
   };
 
+  console.log(fields);
   return (
     <RegisterFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
