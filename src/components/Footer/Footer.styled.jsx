@@ -2,10 +2,11 @@ import styled from '@emotion/styled';
 import { colors } from 'constants';
 
 export const FooterStyled = styled.footer`
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   left: 0;
   bottom: 0;
+  padding-top: 15px;
   padding-bottom: 15px;
 
   & ul {
