@@ -1,14 +1,11 @@
 import styled from '@emotion/styled';
+import { container } from 'helpers';
 
 export const NavigationStyled = styled.ul`
-  margin: 0 auto;
-  width: 500px;
-  max-width: 100%;
+  ${container}
   display: flex;
-  justify-content: center;
-  font-size: 16px;
-  padding-top: 20px;
+  flex-wrap: wrap;
+  margin-top: 50px;
   margin-bottom: 50px;
-  display: flex;
-  gap: 40px;
+  gap: 10px;
 `;

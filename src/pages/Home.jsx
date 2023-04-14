@@ -1,5 +1,11 @@
+import { CalculatorEl } from 'components/Calculator/Calculator';
+
 const Home = () => {
-  return <>Welcome to Home Page</>;
+  return (
+    <>
+      <CalculatorEl />
+    </>
+  );
 };
 
 export default Home;
