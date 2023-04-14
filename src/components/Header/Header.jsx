@@ -3,11 +3,11 @@ import { RiMenuFill, RiCloseLine } from 'react-icons/ri';
 import Navigation from 'components/Navigation/Navigation';
 import UserInfo from 'components/UserInfo/UserInfo';
 import MobileMenu from 'components/MobileMenu/MobileMenu';
-import { ReactComponent as Logo } from '../logo.svg';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { mediaSizes } from 'constants/media';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { Logo } from 'components/Logo/Logo';
 
 const Header = () => {
   const [showBurgerIcon, setShowBurgerIcon] = useState(false);
