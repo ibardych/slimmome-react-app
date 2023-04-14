@@ -10,6 +10,7 @@ import {
 export const ModalDailyCalories = () => {
   // const isLoading = useSelector(selectIsLoading);
   const notAllowedProducts = useSelector(selectNotAllowedProducts);
+  console.log(notAllowedProducts);
   const dailyRate = useSelector(selectDailyRate);
 
   return (

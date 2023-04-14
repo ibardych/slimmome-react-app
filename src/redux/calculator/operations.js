@@ -15,7 +15,9 @@ export const calculatorAnonim = createAsyncThunk(
     try {
 
       const res = await axios.post('/daily-rate', credentials);
+      console.log(res);
       return res.data;
+
     } catch (error) {
       console.log(error.message);
       console.log(error.response.data.message);

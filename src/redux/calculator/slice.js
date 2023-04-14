@@ -18,6 +18,7 @@ const calculatorSlice = createSlice({
       .addCase(calculatorAnonim.fulfilled, (state, action) => {
         state.dailyRate = action.payload.dailyRate;
         state.notAllowedProducts = action.payload.notAllowedProducts;
+
         state.isLoading = false;
       })
       .addCase(calculatorAnonim.pending, state => {
@@ -30,6 +31,7 @@ const calculatorSlice = createSlice({
       .addCase(calculatorLogIn.fulfilled, (state, action) => {
         state.dailyRate = action.payload.dailyRate;
         state.notAllowedProducts = action.payload.notAllowedProducts;
+        // state.summaries = action.payload.summaries;
         state.isLoading = false;
       })
       .addCase(calculatorLogIn.pending, state => {
