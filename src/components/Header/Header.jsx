@@ -1,38 +1,80 @@
-import { HeaderStyled } from './Header.styled';
-import { LinkStyled } from 'components/Navigation/Link.styled';
-import { NavigationStyled } from 'components/Navigation/Navigation.styled';
-import { Button } from 'components/Styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from 'redux/auth/operations';
+import { HeaderStyled, MenuButton, Icon } from './Header.styled';
+import { RiMenuFill, RiCloseLine } from 'react-icons/ri';
+import Navigation from 'components/Navigation/Navigation';
+import UserInfo from 'components/UserInfo/UserInfo';
+import MobileMenu from 'components/MobileMenu/MobileMenu';
+import { ReactComponent as Logo } from '../logo.svg';
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { mediaSizes } from 'constants/media';
+import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 const Header = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  const dispatch = useDispatch();
+  const [showBurgerIcon, setShowBurgerIcon] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const onLogOut = () => {
-    console.log('1');
-    dispatch(logOut());
+  useEffect(() => {
+    const handleScroll = () => {
+      const isTop = window.scrollY < 20;
+      setIsScrolled(!isTop);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= parseInt(mediaSizes.desktop)) {
+        setShowBurgerIcon(true);
+      } else {
+        setShowBurgerIcon(false);
+      }
+    };
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const clickHandler = () => {
+    if (!isLoggedIn) return;
+    setIsMobileMenuOpen(state => !state);
   };
 
   return (
-    <HeaderStyled>
-      <NavigationStyled>
-        <LinkStyled to="/">Logo/Home</LinkStyled>
-        {isLoggedIn ? (
-          <>
-            <LinkStyled to="/calculator">Calculator</LinkStyled>
-            <LinkStyled to="/diary">Diary</LinkStyled>
-            <Button className="white" type="button" onClick={onLogOut}>
-              Logout
-            </Button>
-          </>
-        ) : (
-          <>
-            <LinkStyled to="/login">Login</LinkStyled>
-            <LinkStyled to="/register">Register</LinkStyled>
-          </>
-        )}
-      </NavigationStyled>
+    <HeaderStyled
+      style={{
+        backgroundColor: isScrolled ? 'rgba(255, 255, 255, 1)' : 'transparent',
+      }}
+    >
+      <Logo />
+      {!showBurgerIcon && <Navigation />}
+      {isLoggedIn && <UserInfo />}
+      {showBurgerIcon && (
+        <MenuButton
+          style={{ marginLeft: isLoggedIn ? '51px' : 'auto' }}
+          onClick={clickHandler}
+        >
+          {isMobileMenuOpen ? (
+            <Icon>
+              <RiCloseLine />
+            </Icon>
+          ) : (
+            <RiMenuFill width="18" height="12" />
+          )}
+        </MenuButton>
+      )}
+      {isMobileMenuOpen && <MobileMenu />}
+
     </HeaderStyled>
   );
 };
