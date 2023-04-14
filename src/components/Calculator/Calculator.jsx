@@ -16,17 +16,7 @@ import { selectModalOpened } from 'redux/selectors';
 import { setModalOpened } from 'redux/modalOpenedSlice';
 import { ModalDailyCalories } from 'components/ModalDailyCalories';
 import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
-// import { selectIsLoading } from 'redux/calculator/selectors';
 import { selectIsLoggedIn, selectUser, selectToken } from 'redux/auth/selectors';
-
-// {
-//   "weight": 100,
-//   "height": 170,
-//   "age": 30,
-//   "desiredWeight": 60,
-//   "bloodType": 1
-// }
-// id
 
 export const CalculatorEl = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -45,23 +35,23 @@ export const CalculatorEl = () => {
   const onEditCalculator = event => {
     switch (event.target.name) {
       case 'weight':
-        setWeight(s => (s = event.target.value));
+        setWeight(s => (s = Number(event.target.value)));
 
         break;
       case 'height':
-        setHeight(s => (s = event.target.value));
+        setHeight(s => (s = Number(event.target.value)));
 
         break;
       case 'age':
-        setAge(s => (s = event.target.value));
+        setAge(s => (s = Number(event.target.value)));
 
         break;
       case 'desiredWeight':
-        setDesiredWeight(s => (s = event.target.value));
+        setDesiredWeight(s => (s = Number(event.target.value)));
 
         break;
       case 'bloodType':
-        setBloodType(s => (s = event.target.value));
+        setBloodType(s => (s = Number(event.target.value)));
 
         break;
       default:
@@ -75,7 +65,6 @@ export const CalculatorEl = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const id = user.id;
-    console.log(id);
     const form = e.currentTarget;
     const data = {
       weight,
@@ -204,5 +193,3 @@ export const CalculatorEl = () => {
     </>
   );
 };
-
-// onClick={openModal}
