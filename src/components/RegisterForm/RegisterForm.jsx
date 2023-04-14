@@ -7,6 +7,7 @@ import {
 } from 'components/Form/Form.styled';
 import Input from 'components/Form/Input';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Styled';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
@@ -22,7 +23,7 @@ export const RegisterForm = () => {
     const form = e.currentTarget;
     dispatch(
       register({
-        name: form.elements.name.value,
+        username: form.elements.name.value,
         email: form.elements.email.value,
         password: form.elements.password.value,
       })
@@ -33,6 +34,12 @@ export const RegisterForm = () => {
   const handleInputChange = e => {
     const { name, value } = e.target;
     setFields(fields => ({ ...fields, [name]: value }));
+  };
+
+  const navigate = useNavigate();
+  const redirection = () => {
+    const path = '/login';
+    navigate(path);
   };
 
   return (
@@ -63,7 +70,11 @@ export const RegisterForm = () => {
           />
         </FormFields>
         <ButtonContainer>
-          <Button className="white regLogbutton" type="submit">
+          <Button
+            className="white regLogbutton"
+            type="submit"
+            onClick={redirection}
+          >
             Log In
           </Button>
           <Button className="orange regLogbutton" type="submit">

@@ -1,11 +1,23 @@
 import styled from '@emotion/styled';
-import { container } from 'helpers';
+import { mediaSizes } from 'constants/media';
 
 export const NavigationStyled = styled.ul`
-  ${container}
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  gap: 10px;
+
+  align-items: center;
+  gap: 14px;
+  height: 32px;
+  margin-left: 32px;
+
+  @media screen and (min-width: ${mediaSizes.mobile}) {
+    gap: 24px;
+    margin-left: 32px;
+  }
+
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    border-left: 1px solid rgba(224, 224, 224, 1);
+    margin-left: 32px;
+    padding-left: 20px;
+  }
+
 `;
