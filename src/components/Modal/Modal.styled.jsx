@@ -4,15 +4,14 @@ import { ishidden, transition } from 'helpers';
 
 export const ModalStyled = styled.div`
   position: fixed;
+  z-index: 3;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #00000091;
-  z-index: 3;
+  background-color: rgba(33, 33, 33, 0.12);
   opacity: 1;
   ${transition('visible')};
-  border-radius: 10px;
 
   &.is-hidden {
     ${ishidden};
@@ -23,68 +22,82 @@ export const ModalStyled = styled.div`
     }
   }
 
-  & .window {
+  & .modal {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: calc(${mediaSizes.mobile} - 24px * 2);
-    max-width: calc(100% - 24px * 2);
+    width: 100%;
+    height: 100%;
     transform: translateX(-50%) translateY(-50%);
 
     @media screen and (min-width: ${mediaSizes.tablet}) {
-      width: ${mediaSizes.mobile};
-      max-width: ${mediaSizes.mobile};
+      width: 672px;
+      height: auto;
+      max-width: calc(100% - 24px * 2);
     }
   }
 
   & .inner {
+    height: 100%;
     transform: scale(1);
-    border-radius: 10px;
-    box-shadow: 10px 10px 30px 10px #00000044;
     ${transition('transform')};
     overflow: hidden;
+    padding: 80px 40px;
+    background-color: #ffffff;
+    overflow: hidden;
+    position: relative;
+
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      box-shadow: 0px 22px 40px rgba(0, 0, 0, 0.1);
+      padding: 64px 82px 82px 82px;
+    }
   }
 
   & .close {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 14px;
-    right: 14px;
-    cursor: pointer;
-    background-color: rgb(0 0 0 / 0);
+    background-color: #eff1f3;
+    width: 100%;
+    height: 40px;
     border: none;
+    cursor: pointer;
     padding: 0;
-    color: #333;
-    ${transition('opacity')};
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      background-color: transparent;
+      border: none;
+
+      width: 20px;
+      height: 20px;
+      right: 24px;
+      top: 24px;
+      ${transition('transform')}
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      &__icon {
+        fill: #000000;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  & .return__icon {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 25px;
+    height: 20px;
+    cursor: pointer;
+    ${transition('transform')}
 
     &:hover {
-      opacity: 0.7;
+      transform: scale(1.2);
     }
-
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      width: 24px;
-      height: 24px;
-      top: 16px;
-      right: 16px;
-    }
-  }
-
-  & .container {
-    padding: 28px 16px;
-    background-color: #fff;
-    position: relative;
-    z-index: 1;
-    border-radius: 8px;
-
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      padding: 48px 32px;
-    }
-  }
-
-  & .text {
-    color: #333;
-    font-size: 30px;
-    font-weight: 300;
   }
 `;
