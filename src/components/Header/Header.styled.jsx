@@ -1,9 +1,9 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants/media';
 
 export const HeaderStyled = styled.header`
   position: fixed;
+  top: 0;
   display: flex;
   width: 100%;
   align-items: center;
