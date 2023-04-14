@@ -14,6 +14,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 import { ModalOpenedReducer } from './modalOpenedSlice';
+import { calculatorReducer } from './calculator/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -25,6 +26,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
     modalopened: ModalOpenedReducer,
+    calculator: calculatorReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
