@@ -25,6 +25,9 @@ const authSlice = createSlice({
         // state.token = action.payload.refreshToken;
         state.isLoggedIn = true;
       })
+      .addCase(logIn.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(logOut.fulfilled, state => {
         state.user = { username: null, email: null };
         state.token = null;
