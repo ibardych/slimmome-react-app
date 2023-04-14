@@ -1,10 +1,14 @@
-import { RiMenuFill } from 'react-icons/ri';
-import { Menu, NavBar } from 'MobileMenu.styled.jsx';
+import { Menu, Link, List } from './MobileMenu.styled.jsx';
 
 const MobileMenu = () => {
   return (
     <Menu>
-      <NavBar></NavBar>
+      <List>
+        <Link to="diary">diary</Link>
+        <Link to="calculator">calculator</Link>
+      </List>
     </Menu>
   );
 };
+
+export default MobileMenu;

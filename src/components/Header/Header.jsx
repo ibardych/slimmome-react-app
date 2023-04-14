@@ -1,9 +1,8 @@
-import { HeaderStyled } from './Header.styled';
-import { RiMenuFill } from 'react-icons/ri';
-import { Button } from './Header.styled';
-// import { LinkStyled } from 'components/Navigation/Link.styled';
-// import { NavigationStyled } from 'components/Navigation/Navigation.styled';
+import { HeaderStyled, MenuButton, Icon } from './Header.styled';
+import { RiMenuFill, RiCloseLine } from 'react-icons/ri';
 import Navigation from 'components/Navigation/Navigation';
+import UserInfo from 'components/UserInfo/UserInfo';
+import MobileMenu from 'components/MobileMenu/MobileMenu';
 import { ReactComponent as Logo } from '../logo.svg';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
@@ -12,34 +11,68 @@ import { mediaSizes } from 'constants/media';
 const Header = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const [showBurgerIcon, setShowBurgerIcon] = useState(false);
-  const screenWidth = window.innerWidth;
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isTop = window.scrollY < 20;
+      setIsScrolled(!isTop);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
-      if (screenWidth <= 480) {
+      if (window.innerWidth <= parseInt(mediaSizes.desktop)) {
         setShowBurgerIcon(true);
       } else {
         setShowBurgerIcon(false);
       }
     };
     handleResize();
-  }, [screenWidth]);
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const clickHandler = () => {
+    if (!isLoggedIn) return;
+    setIsMobileMenuOpen(state => !state);
+  };
 
   return (
-    <HeaderStyled>
+    <HeaderStyled
+      style={{
+        backgroundColor: isScrolled ? 'rgba(255, 255, 255, 1)' : 'transparent',
+      }}
+    >
       <Logo />
-      {/* <NavigationStyled>
-        <LinkStyled to="/login">Login</LinkStyled>
-        <LinkStyled to="/register">Register</LinkStyled>
-        <LinkStyled to="/calculator">Calculator</LinkStyled>
-        <LinkStyled to="/diary">Diary</LinkStyled>
-      </NavigationStyled> */}
       {!showBurgerIcon && <Navigation />}
+      {isLoggedIn && <UserInfo />}
       {showBurgerIcon && (
-        <Button>
-          <RiMenuFill />
-        </Button>
+        <MenuButton
+          style={{ marginLeft: isLoggedIn ? '51px' : 'auto' }}
+          onClick={clickHandler}
+        >
+          {isMobileMenuOpen ? (
+            <Icon>
+              <RiCloseLine />
+            </Icon>
+          ) : (
+            <RiMenuFill width="18" height="12" />
+          )}
+        </MenuButton>
       )}
+      {isMobileMenuOpen && <MobileMenu />}
     </HeaderStyled>
   );
 };
