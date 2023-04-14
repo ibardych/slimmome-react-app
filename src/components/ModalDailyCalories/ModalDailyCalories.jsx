@@ -1,3 +1,4 @@
+import { nanoid } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux';
 import Modal from 'components/Modal/Modal';
 import { ModalDailyCaloriesStyled } from './ModalDailyCalories.styled';
@@ -11,11 +12,12 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 export const ModalDailyCalories = () => {
+
   // const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notAllowedProducts = useSelector(selectNotAllowedProducts);
-  console.log(notAllowedProducts);
+
   const dailyRate = useSelector(selectDailyRate);
 
   const clickHandler = () => {
@@ -35,10 +37,7 @@ export const ModalDailyCalories = () => {
           <div className="recomendation">
             <p className="recomendation__title">Foods you should not eat</p>
             <ol className="recomendation__list">
-              <li className="recomendation__item">Flour products</li>
-              <li className="recomendation__item">Milk</li>
-              <li className="recomendation__item">Red meat</li>
-              <li className="recomendation__item">Smoked meats</li>
+              {notAllowedProducts.filter((pr, idx) => idx < 4).map((pr)=>(<li className="recomendation__item" key={nanoid()}>{pr}</li>))}
             </ol>
           </div>
         )}

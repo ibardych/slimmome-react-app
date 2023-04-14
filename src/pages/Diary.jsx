@@ -1,9 +1,11 @@
-import { DiaryMain } from 'components/Diary/Diary';
+import Sidebar from 'components/Sidebar/Sidebar';
+import { DiaryMain } from 'components/Diary/Diary' 
 
 const Diary = () => {
   return (
     <>
-      <DiaryMain />
+    <DiaryMain />
+      <Sidebar />
     </>
   );
 };

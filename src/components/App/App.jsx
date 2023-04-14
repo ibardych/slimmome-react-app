@@ -9,6 +9,8 @@ import { Loader } from 'components/Loader/Loader';
 import Home from 'pages/Home';
 import { refreshUser } from 'redux/auth/operations';
 import { selectIsLoading } from 'redux/calculator/selectors';
+import { selectToken } from 'redux/auth/selectors';
+import axios from 'axios';
 
 // const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('pages/Register'));
@@ -20,12 +22,18 @@ const NotFound = lazy(() => import('../NotFound/NotFound'));
 const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(state => state.auth.isRefreshing);
+  const isLoading = useSelector(selectIsLoading);
+  const token = useSelector(selectToken);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  const isLoading = useSelector(selectIsLoading);
+  useEffect(() => {
+    axios.defaults.headers.common.Authorization = token
+      ? `Bearer ${token}`
+      : '';
+  }, [token]);
 
   return (
     <>

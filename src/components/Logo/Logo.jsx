@@ -1,9 +1,10 @@
-import { ReactComponent as LogoIcon } from '../logo.svg';
+import { ReactComponent as LogoIcon } from 'images/logo.svg';
+import { LinkStyled } from './Logo.styled';
 
 export const Logo = () => {
   return (
-    <span>
+    <LinkStyled to="/">
       <LogoIcon />
-    </span>
+    </LinkStyled>
   );
 };

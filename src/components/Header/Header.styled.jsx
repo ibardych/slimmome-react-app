@@ -1,12 +1,11 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants/media';
+import { container } from 'helpers';
 
 export const HeaderStyled = styled.header`
   position: fixed;
-  display: flex;
+  top: 0;
   width: 100%;
-  align-items: center;
   padding: 20px;
   height: 80px;
   border-bottom: 1px solid #e0e0e0;
@@ -19,6 +18,12 @@ export const HeaderStyled = styled.header`
   @media screen and (min-width: ${mediaSizes.desktop}) {
     border-bottom: none;
   }
+`;
+
+export const HeaderContainer = styled.div`
+  ${container}
+  display: flex;
+  align-items: center;
 `;
 
 export const MenuButton = styled.button`
