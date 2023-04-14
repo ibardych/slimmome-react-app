@@ -40,7 +40,7 @@ export const LoginForm = () => {
     const path = '/register';
 
     navigate(path);
-  }
+  };
 
   return (
     <LoginFormStyled>
@@ -66,7 +66,11 @@ export const LoginForm = () => {
           <Button className="orange regLogbutton" type="submit ">
             Log In
           </Button>
-          <Button className="white regLogbutton" type="submit" onClick={redirection}>
+          <Button
+            className="white regLogbutton"
+            type="submit"
+            onClick={redirection}
+          >
             Register
           </Button>
         </ButtonContainer>

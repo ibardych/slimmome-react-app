@@ -13,6 +13,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import { loadingReducer } from './loader/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -25,6 +26,7 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     modalopened: ModalOpenedReducer,
     calculator: calculatorReducer,
+    loading: loadingReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

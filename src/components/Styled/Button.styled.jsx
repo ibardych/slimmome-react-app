@@ -11,13 +11,15 @@ export const Button = styled.button`
   border-radius: 30px;
   font-weight: 700;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   &.orange {
     height: 44px;
-    padding: 13px 25px;
+    padding: 0px 25px;
   }
   &.white {
     height: 44px;
-    padding: 13px 23px;
+    padding: 0px 23px;
     background: #fff;
     color: ${colors.color1};
     border: 2px solid ${colors.color1};
