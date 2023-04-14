@@ -1,12 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://slimmom-backend.goit.global';
+// axios.defaults.baseURL = 'https://slimmom-backend.goit.global';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
+// export const calculatorAnonim = createAsyncThunk(
+//   'calculator/calculatorAnonim',
+//   async ({weight, height, age, desiredWeight, bloodType}, thunkAPI) => {
+//     try {
+//       const response = await axios.post('/daily-rate', {weight, height, age, desiredWeight, bloodType});
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.message);
+//     }
+//   }
+// );
 
 export const calculatorAnonim = createAsyncThunk(
   'calculator/calculatorAnonim',
@@ -15,7 +26,7 @@ export const calculatorAnonim = createAsyncThunk(
     try {
 
       const res = await axios.post('/daily-rate', credentials);
-      console.log(res);
+      console.log(res.data);
       return res.data;
 
     } catch (error) {
@@ -61,3 +72,41 @@ export const calculatorLogIn = createAsyncThunk(
 //   }
 // );
 
+// export async function getData() {
+//   const response = await fetch(
+//     'https://slimmom-backend.goit.global/daily-rate',
+//     {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         weight: 100,
+//         height: 170,
+//         age: 30,
+//         desiredWeight: 60,
+//         bloodType: 1,
+//       }),
+//     }
+//   );
+//   const jsonData = await response.json();
+//   console.log(jsonData);
+// }
+
+// export const calculatorAnonim = createAsyncThunk(
+//   'calculator/calculatorAnonim',
+//   async function getData(data) {
+//     const response = await fetch(
+//       'https://slimmom-backend.goit.global/daily-rate',
+//       {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(data),
+//       }
+//     );
+//     const jsonData = await response.json();
+//     console.log(jsonData);
+//   }
+// );
