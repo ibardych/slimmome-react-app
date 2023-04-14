@@ -1,10 +1,17 @@
-import { useState, useEffect } from 'react';
-import { IoMdClose } from 'react-icons/io';
 import { ModalStyled } from './Modal.styled';
+import { IoMdClose } from 'react-icons/io';
 import { TbArrowBack } from 'react-icons/tb';
+import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectModalOpened } from 'redux/selectors';
+import { setModalOpened } from 'redux/modalOpenedSlice';
 
-function Modal() {
-  const [isOpen, setIsOpen] = useState(false);
+const modalRoot = document.querySelector('#modal-root');
+
+const Modal = ({ children }) => {
+  const dispatch = useDispatch();
+  const modalOpened = useSelector(selectModalOpened);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -18,13 +25,17 @@ function Modal() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  });
+
+  const closeModal = e => {
+    dispatch(setModalOpened(false));
+  };
 
   function handleBackdropClick(e) {
     if (e.target === e.currentTarget) {
@@ -38,73 +49,26 @@ function Modal() {
     }
   }
 
-  return (
-    <>
-      <button onClick={openModal}>Відкрити</button>
-      {isOpen && (
-        <ModalStyled
-          onClick={handleBackdropClick}
-          className={!isOpen ? 'is-hidden' : ''}
-          onKeyDown={handleKeyDown}
-          tabIndex={0}
-        >
-          <div className="modal">
-            <button className="close" onClick={closeModal}>
-              {isSmallScreen ? (
-                <TbArrowBack className="return__icon" />
-              ) : (
-                <IoMdClose className="close__icon" />
-              )}
-            </button>
-            <h2 className="title"> Your recommended daily calorie intake is</h2>
-            <p className="kcal">
-              <span className="kcal-number">2800</span>
-              <span className="kcal-text">kcal</span>
-            </p>
-            <div className="recomendation">
-              <p className="recomendation__title">Foods you should not eat</p>
-              <ol className="recomendation__list">
-                <li className="recomendation__item">Flour products</li>
-                <li className="recomendation__item">Milk</li>
-                <li className="recomendation__item">Red meat</li>
-                <li className="recomendation__item">Smoked meats</li>
-              </ol>
-            </div>
-            <button type="button">Start losing weight</button>
-          </div>
-        </ModalStyled>
-      )}
-    </>
+  return createPortal(
+    <ModalStyled
+      onClick={handleBackdropClick}
+      className={!modalOpened ? 'is-hidden' : ''}
+    >
+      <div className="modal">
+        <div className="inner">
+          <button type="buttn" className="close" onClick={closeModal}>
+            {isSmallScreen ? (
+              <TbArrowBack className="return__icon" />
+            ) : (
+              <IoMdClose className="close__icon" />
+            )}
+          </button>
+          <div className="text">{children}</div>
+        </div>
+      </div>
+    </ModalStyled>,
+    modalRoot
   );
-}
+};
 
 export default Modal;
-
-// import { PropTypes } from 'prop-types';
-// import { ModalStyled } from './Modal.styled';
-// import { TfiClose } from 'react-icons/tfi';
-
-// const Modal = ({ onCloseModal, modalOpened, children }) => {
-//   return (
-//     <ModalStyled
-//       onClick={onCloseModal}
-//       className={!modalOpened ? 'is-hidden' : ''}
-//     >
-// <div className="window">
-//   <div className="inner">
-//     <div className="container">
-//       <TfiClose onClick={onCloseModal} className="close"></TfiClose>
-//       <div className="text">{children}</div>
-//     </div>
-//   </div>
-// </div>
-//     </ModalStyled>
-//   );
-// };
-
-// Modal.propTypes = {
-//   onCloseModal: PropTypes.func.isRequired,
-//   modalOpened: PropTypes.bool.isRequired,
-// };
-
-// export default Modal;

@@ -1,24 +1,31 @@
-import { FormContainer } from 'components/Form/Form.styled';
+import {
+  FormContainer,
+  Caption,
+  Label,
+  ButtonContainer,
+} from 'components/Form/Form.styled';
 import Input from 'components/Form/Input';
 import { Button } from 'components/Styled';
 import { useState } from 'react';
-import { LoginFormStyled } from './LoginForm.styled';
+import { FormFields, LoginFormStyled } from './LoginForm.styled';
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
 
 const defaultFields = { email: '', password: '' };
 
 export const LoginForm = () => {
   const [fields, setFields] = useState(defaultFields);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    // dispatch(
-    //   logIn({
-    //     email: form.elements.email.value,
-    //     password: form.elements.password.value,
-    //   })
-    // );
+    dispatch(
+      logIn({
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
     form.reset();
   };
 
@@ -30,21 +37,31 @@ export const LoginForm = () => {
   return (
     <LoginFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
-        <Input
-          label="Email"
-          type="email"
-          name="email"
-          value={fields.name}
-          onChange={handleInputChange}
-        />
-        <Input
-          label="Password"
-          type="password"
-          name="password"
-          value={fields.name}
-          onChange={handleInputChange}
-        />
-        <Button type="submit">Log In</Button>
+        <Caption>Login</Caption>
+        <FormFields>
+          <Label>Email *</Label>
+          <Input
+            type="email"
+            name="email"
+            value={fields.name}
+            onChange={handleInputChange}
+          />
+          <Label>Password *</Label>
+          <Input
+            type="password"
+            name="password"
+            value={fields.name}
+            onChange={handleInputChange}
+          />
+        </FormFields>
+        <ButtonContainer>
+          <Button className="orange regLogbutton" type="submit">
+            Log In
+          </Button>
+          <Button className="white regLogbutton" type="submit">
+            Register
+          </Button>
+        </ButtonContainer>
       </FormContainer>
     </LoginFormStyled>
   );

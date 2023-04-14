@@ -1,3 +1,5 @@
+import { mediaSizes } from 'constants';
+
 export const transition = (...props) => {
   return `
     transition-property: ${props.join(', ')};
@@ -12,5 +14,18 @@ export const ishidden = () => {
     opacity: 0;
     pointer-events: none;
     ${transition('visibility', 'opacity')};
+  `;
+};
+
+export const container = () => {
+  return `
+    margin: 0 auto;
+    width: ${mediaSizes.desktop};
+    max-width: 100%;
+    padding: 0 20px;
+
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      padding: 0 32px;
+    }
   `;
 };

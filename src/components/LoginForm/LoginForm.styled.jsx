@@ -1,7 +1,16 @@
 import styled from '@emotion/styled';
+import { mediaSizes } from 'constants/media';
+import { container } from 'helpers';
 
 export const LoginFormStyled = styled.div`
-  margin: 0 auto;
-  width: 500px;
-  max-width: 100%;
+  ${container};
+
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+  }
+`;
+
+export const FormFields = styled.div`
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    max-width: 240px;
+  }
 `;

@@ -1,25 +1,32 @@
-import { RegisterFormStyled } from './RegisterForm.styled';
-import { FormContainer } from 'components/Form/Form.styled';
+import { FormFields, RegisterFormStyled } from './RegisterForm.styled';
+import {
+  FormContainer,
+  Caption,
+  Label,
+  ButtonContainer,
+} from 'components/Form/Form.styled';
 import Input from 'components/Form/Input';
 import { useState } from 'react';
 import { Button } from 'components/Styled';
+import { useDispatch } from 'react-redux';
+import { register } from 'redux/auth/operations';
 
 const defaultFields = { name: '', email: '', password: '' };
 
 export const RegisterForm = () => {
   const [fields, setFields] = useState(defaultFields);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    // dispatch(
-    //   register({
-    //     name: form.elements.name.value,
-    //     email: form.elements.email.value,
-    //     password: form.elements.password.value,
-    //   })
-    // );
+    dispatch(
+      register({
+        name: form.elements.name.value,
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+    );
     form.reset();
   };
 
@@ -31,28 +38,38 @@ export const RegisterForm = () => {
   return (
     <RegisterFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
-        <Input
-          label="Name"
-          type="text"
-          name="name"
-          value={fields.name}
-          onChange={handleInputChange}
-        />
-        <Input
-          label="Email"
-          type="email"
-          name="email"
-          value={fields.email}
-          onChange={handleInputChange}
-        />
-        <Input
-          label="Password"
-          type="password"
-          name="password"
-          value={fields.password}
-          onChange={handleInputChange}
-        />
-        <Button type="submit">Register</Button>
+        <Caption>Register</Caption>
+        <FormFields>
+          <Label>Name *</Label>
+          <Input
+            type="text"
+            name="name"
+            value={fields.name}
+            onChange={handleInputChange}
+          />
+          <Label>Email *</Label>
+          <Input
+            type="email"
+            name="email"
+            value={fields.email}
+            onChange={handleInputChange}
+          />
+          <Label>Password *</Label>
+          <Input
+            type="password"
+            name="password"
+            value={fields.password}
+            onChange={handleInputChange}
+          />
+        </FormFields>
+        <ButtonContainer>
+          <Button className="white regLogbutton" type="submit">
+            Log In
+          </Button>
+          <Button className="orange regLogbutton" type="submit">
+            Register
+          </Button>
+        </ButtonContainer>
       </FormContainer>
     </RegisterFormStyled>
   );

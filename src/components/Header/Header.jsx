@@ -6,6 +6,7 @@ const Header = () => {
   return (
     <HeaderStyled>
       <NavigationStyled>
+        <LinkStyled to="/">Logo/Home</LinkStyled>
         <LinkStyled to="/login">Login</LinkStyled>
         <LinkStyled to="/register">Register</LinkStyled>
         <LinkStyled to="/calculator">Calculator</LinkStyled>
