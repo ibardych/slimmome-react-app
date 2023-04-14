@@ -1,12 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-// import {}
-// const token = state => state.auth.token;
+
 axios.defaults.baseURL = 'https://slimmom-backend.goit.global';
 
-// const setAuthHeader = token => {
-//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// };
+const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
 
 
 export const calculatorAnonim = createAsyncThunk(
@@ -27,14 +26,13 @@ export const calculatorAnonim = createAsyncThunk(
 
 export const calculatorLogIn = createAsyncThunk(
   'calculator/calculatorLogIn',
-  async (id, credentials, thunkAPI) => {
+  async ([id, data, token], thunkAPI) => {
+    setAuthHeader(token);
     try {
-      // setAuthHeader(token);
-      // console.log(token);
-      const res = await axios.post(`/daily-rate/${id}`, credentials);
+      const res = await axios.post(`/daily-rate/${id}`, {...data});
       return res.data;
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       console.log(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -17,7 +17,7 @@ import { setModalOpened } from 'redux/modalOpenedSlice';
 import { ModalDailyCalories } from 'components/ModalDailyCalories';
 import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
 // import { selectIsLoading } from 'redux/calculator/selectors';
-import { selectIsLoggedIn, selectUser } from 'redux/auth/selectors';
+import { selectIsLoggedIn, selectUser, selectToken } from 'redux/auth/selectors';
 
 // {
 //   "weight": 100,
@@ -30,10 +30,8 @@ import { selectIsLoggedIn, selectUser } from 'redux/auth/selectors';
 
 export const CalculatorEl = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  console.log(isLoggedIn);
   const user = useSelector(selectUser);
-  console.log(user);
-  // const isLoading = useSelector(selectIsLoading);
+  const token = useSelector(selectToken);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [age, setAge] = useState('');
@@ -48,23 +46,23 @@ export const CalculatorEl = () => {
     switch (event.target.name) {
       case 'weight':
         setWeight(s => (s = event.target.value));
-        console.log(weight);
+
         break;
       case 'height':
         setHeight(s => (s = event.target.value));
-        console.log(height);
+
         break;
       case 'age':
         setAge(s => (s = event.target.value));
-        console.log(age);
+
         break;
       case 'desiredWeight':
         setDesiredWeight(s => (s = event.target.value));
-        console.log(desiredWeight);
+
         break;
       case 'bloodType':
         setBloodType(s => (s = event.target.value));
-        console.log(desiredWeight);
+
         break;
       default:
         return;
@@ -86,9 +84,7 @@ export const CalculatorEl = () => {
       desiredWeight,
       bloodType,
     };
-    console.log(data);
-    console.log(isLoggedIn);
-    isLoggedIn ? dispatch(calculatorLogIn(id, data)):dispatch(calculatorAnonim(data));
+    isLoggedIn ? dispatch(calculatorLogIn([id, data, token])):dispatch(calculatorAnonim(data));
     setWeight('');
     setHeight('');
     setAge('');
