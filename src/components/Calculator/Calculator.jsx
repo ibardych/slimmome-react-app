@@ -15,9 +15,9 @@ import {
 import { selectModalOpened } from 'redux/selectors';
 import { setModalOpened } from 'redux/modalOpenedSlice';
 import { ModalDailyCalories } from 'components/ModalDailyCalories';
-import { calculatorAnonim } from 'redux/calculator/operations';
+import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
 // import { selectIsLoading } from 'redux/calculator/selectors';
-// import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { selectIsLoggedIn, selectUser } from 'redux/auth/selectors';
 
 // {
 //   "weight": 100,
@@ -26,9 +26,12 @@ import { calculatorAnonim } from 'redux/calculator/operations';
 //   "desiredWeight": 60,
 //   "bloodType": 1
 // }
+// id
 
 export const CalculatorEl = () => {
-  // const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  console.log(isLoggedIn);
+  const user = useSelector(selectUser);
   // const isLoading = useSelector(selectIsLoading);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
@@ -72,6 +75,7 @@ export const CalculatorEl = () => {
   };
   const handleSubmit = e => {
     e.preventDefault();
+    const id = user.id
     const form = e.currentTarget;
     const data = {
       weight,
@@ -81,9 +85,8 @@ export const CalculatorEl = () => {
       bloodType,
     };
     console.log(data);
-    dispatch(
-      calculatorAnonim(data)
-    );
+    console.log(isLoggedIn);
+    isLoggedIn ? dispatch(calculatorLogIn(id, data)):dispatch(calculatorAnonim(data));
     setWeight('');
     setHeight('');
     setAge('');
