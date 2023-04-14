@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 import { Triangle } from 'react-loader-spinner';
 
 export const LoaderStyled = styled.div`
-  position: absolute;
+  position: fixed;
+  z-index: 1000;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
