@@ -14,6 +14,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { loadingReducer } from './loader/slice';
+import { productsReducer } from './dropdown/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -27,6 +28,7 @@ export const store = configureStore({
     modalopened: ModalOpenedReducer,
     calculator: calculatorReducer,
     loading: loadingReducer,
+    products: productsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
