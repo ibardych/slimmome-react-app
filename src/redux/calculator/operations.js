@@ -3,21 +3,21 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://slimmom-backend.goit.global';
 
-// const setAuthHeader = token => {
-//   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-// };
+const setAuthHeader = token => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
 
-// const clearAuthHeader = () => {
-//   axios.defaults.headers.common.Authorization = '';
-// };
 
 export const calculatorAnonim = createAsyncThunk(
   'calculator/calculatorAnonim',
   async (credentials, thunkAPI) => {
     console.log(credentials);
     try {
+
       const res = await axios.post('/daily-rate', credentials);
+      console.log(res);
       return res.data;
+
     } catch (error) {
       console.log(error.message);
       console.log(error.response.data.message);
@@ -26,20 +26,20 @@ export const calculatorAnonim = createAsyncThunk(
   }
 );
 
-// export const calculatorLogIn = createAsyncThunk(
-//   'auth/calculatorLogIn',
-//   async (credentials, thunkAPI) => {
-//     try {
-//       const res = await axios.post('/auth/login', credentials);
-//       setAuthHeader(res.data.token);
-//       return res.data;
-//     } catch (error) {
-//       console.log(error.message);
-//       console.log(error.response.data.message);
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const calculatorLogIn = createAsyncThunk(
+  'calculator/calculatorLogIn',
+  async ([id, data, token], thunkAPI) => {
+    setAuthHeader(token);
+    try {
+      const res = await axios.post(`/daily-rate/${id}`, {...data});
+      return res.data;
+    } catch (error) {
+      // console.log(error.message);
+      console.log(error.response.data.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 
 // export const refreshUser = createAsyncThunk(
