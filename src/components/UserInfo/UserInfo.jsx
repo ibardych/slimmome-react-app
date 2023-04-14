@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
 
 const UserInfo = () => {
-  const userName = useSelector(state => state.auth.user.name);
+  const userName = useSelector(state => state.auth.user.username);
   const dispatch = useDispatch();
 
   const clickHandler = () => {

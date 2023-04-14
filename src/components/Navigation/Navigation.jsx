@@ -4,7 +4,7 @@ import { NavigationStyled } from './Navigation.styled';
 import { useSelector } from 'react-redux';
 const Navigation = () => {
   const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
-  return isLoggedIn ? (
+  return !isLoggedIn ? (
     <NavigationStyled>
       <li>
         <LinkStyled to="/login">log in</LinkStyled>

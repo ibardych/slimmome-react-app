@@ -74,7 +74,6 @@ const Header = () => {
         </MenuButton>
       )}
       {isMobileMenuOpen && <MobileMenu />}
-
     </HeaderStyled>
   );
 };
