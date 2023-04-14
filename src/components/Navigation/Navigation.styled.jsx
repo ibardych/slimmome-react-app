@@ -3,6 +3,7 @@ import { mediaSizes } from 'constants/media';
 
 export const NavigationStyled = styled.ul`
   display: flex;
+
   align-items: center;
   gap: 14px;
   height: 32px;
@@ -18,4 +19,5 @@ export const NavigationStyled = styled.ul`
     margin-left: 32px;
     padding-left: 20px;
   }
+
 `;

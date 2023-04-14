@@ -7,12 +7,13 @@ import { ReactComponent as Logo } from '../logo.svg';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { mediaSizes } from 'constants/media';
+import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 const Header = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
   const [showBurgerIcon, setShowBurgerIcon] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,6 +74,7 @@ const Header = () => {
         </MenuButton>
       )}
       {isMobileMenuOpen && <MobileMenu />}
+
     </HeaderStyled>
   );
 };
