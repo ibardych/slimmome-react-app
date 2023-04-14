@@ -2,10 +2,15 @@ import { SidebarStyled } from './Sidebar.styled';
 import imagedesk from 'images/Sidebarimg/imgdesk2x.png';
 import imagetab from 'images/Sidebarimg/imgtab2x.png';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { DiaryStyledList } from 'components/Diary/Diary.styled';
 
 const Sidebar = () => {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isMobileScreen, setIsMobileScreen] = useState(false);
+  const forbiddenProducts = useSelector(
+    state => state.calculator.notAllowedProducts
+  );
   let styles = {
     background: `url(${isSmallScreen ? imagetab : imagedesk}) ${
       isSmallScreen ? `bottom right` : `right`
@@ -55,12 +60,11 @@ const Sidebar = () => {
       </div>
       <div className="reccommended">
         <h2 className="title">Food not reccommended</h2>
-        <ul className="listFood">
-          <li className="item">Flour products</li>
-          <li className="item">Milk</li>
-          <li className="item">Read meet</li>
-          <li className="item">Smoked meats</li>
-        </ul>
+        <DiaryStyledList className="listFood">
+          {forbiddenProducts.map(product => (
+            <li className="item">{product}</li>
+          ))}
+        </DiaryStyledList>
       </div>
     </SidebarStyled>
   );
