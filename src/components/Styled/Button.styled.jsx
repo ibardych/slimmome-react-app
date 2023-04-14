@@ -13,6 +13,7 @@ export const Button = styled.button`
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   &.orange {
     height: 44px;
     padding: 0px 25px;
