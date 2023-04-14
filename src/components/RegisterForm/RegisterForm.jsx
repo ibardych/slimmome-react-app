@@ -1,5 +1,10 @@
 import { RegisterFormStyled } from './RegisterForm.styled';
-import { FormContainer } from 'components/Form/Form.styled';
+import {
+  FormContainer,
+  Caption,
+  Label,
+  ButtonContainer,
+} from 'components/Form/Form.styled';
 import Input from 'components/Form/Input';
 import { useState } from 'react';
 import { Button } from 'components/Styled';
@@ -31,28 +36,36 @@ export const RegisterForm = () => {
   return (
     <RegisterFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
+        <Caption>Register</Caption>
+        <Label>Name *</Label>
         <Input
-          label="Name"
           type="text"
           name="name"
           value={fields.name}
           onChange={handleInputChange}
         />
+        <Label>Email *</Label>
         <Input
-          label="Email"
           type="email"
           name="email"
           value={fields.email}
           onChange={handleInputChange}
         />
+        <Label>Password *</Label>
         <Input
-          label="Password"
           type="password"
           name="password"
           value={fields.password}
           onChange={handleInputChange}
         />
-        <Button type="submit">Register</Button>
+        <ButtonContainer>
+          <Button className="white regLogbutton" type="submit">
+            Log In
+          </Button>
+          <Button className="orange regLogbutton" type="submit">
+            Register
+          </Button>
+        </ButtonContainer>
       </FormContainer>
     </RegisterFormStyled>
   );

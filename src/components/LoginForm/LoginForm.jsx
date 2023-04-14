@@ -1,4 +1,9 @@
-import { FormContainer } from 'components/Form/Form.styled';
+import {
+  FormContainer,
+  Caption,
+  Label,
+  ButtonContainer,
+} from 'components/Form/Form.styled';
 import Input from 'components/Form/Input';
 import { Button } from 'components/Styled';
 import { useState } from 'react';
@@ -30,21 +35,29 @@ export const LoginForm = () => {
   return (
     <LoginFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
+        <Caption>Login</Caption>
+        <Label>Email *</Label>
         <Input
-          label="Email"
           type="email"
           name="email"
           value={fields.name}
           onChange={handleInputChange}
         />
+        <Label>Password *</Label>
         <Input
-          label="Password"
           type="password"
           name="password"
           value={fields.name}
           onChange={handleInputChange}
         />
-        <Button type="submit">Log In</Button>
+        <ButtonContainer>
+          <Button className="orange regLogbutton" type="submit">
+            Log In
+          </Button>
+          <Button className="white regLogbutton" type="submit">
+            Register
+          </Button>
+        </ButtonContainer>
       </FormContainer>
     </LoginFormStyled>
   );

@@ -12,9 +12,15 @@ export const Title = styled.div`
 
 export const InputStyled = styled.input`
   width: 100%;
-  font-size: 20px;
+  height: 20px;
+  font-size: 16px;
   border: none;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
   padding: 12px 16px;
   outline: none;
-  background-color: #f5f5f5;
+  background-color: #FFF;
+  margin-bottom: 40px;
 `;
+
+
+
