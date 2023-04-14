@@ -1,6 +1,12 @@
 import { SidebarStyled } from './Sidebar.styled';
+import { useSelector } from 'react-redux';
+import { DiaryStyledList } from 'components/Diary/Diary.styled';
 
 const Sidebar = () => {
+  const forbiddenProducts = useSelector(
+    state => state.calculator.notAllowedProducts
+  );
+
   return (
     <SidebarStyled>
       <div className="summary">
@@ -26,12 +32,11 @@ const Sidebar = () => {
       </div>
       <div className="reccommended">
         <h2 className="title">Food not reccommended</h2>
-        <ul className="listFood">
-          <li className="item">Flour products</li>
-          <li className="item">Milk</li>
-          <li className="item">Read meet</li>
-          <li className="item">Smoked meats</li>
-        </ul>
+        <DiaryStyledList className="listFood">
+          {forbiddenProducts.map(product => (
+            <li className="item">{product}</li>
+          ))}
+        </DiaryStyledList>
       </div>
     </SidebarStyled>
   );
