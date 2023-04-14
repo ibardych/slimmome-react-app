@@ -7,6 +7,7 @@ import {
 import Input from 'components/Form/Input';
 import { Button } from 'components/Styled';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FormFields, LoginFormStyled } from './LoginForm.styled';
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
@@ -34,6 +35,13 @@ export const LoginForm = () => {
     setFields(fields => ({ ...fields, [name]: value }));
   };
 
+  const navigate = useNavigate();
+  const redirection = () => {
+    const path = '/register';
+
+    navigate(path);
+  }
+
   return (
     <LoginFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
@@ -55,10 +63,10 @@ export const LoginForm = () => {
           />
         </FormFields>
         <ButtonContainer>
-          <Button className="orange regLogbutton" type="submit">
+          <Button className="orange regLogbutton" type="submit ">
             Log In
           </Button>
-          <Button className="white regLogbutton" type="submit">
+          <Button className="white regLogbutton" type="submit" onClick={redirection}>
             Register
           </Button>
         </ButtonContainer>
