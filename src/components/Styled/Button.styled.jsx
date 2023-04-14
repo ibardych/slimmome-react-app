@@ -11,7 +11,6 @@ export const Button = styled.button`
   border-radius: 30px;
   font-weight: 700;
   cursor: pointer;
-  width: 182px;
   &.orange {
     height: 44px;
     padding: 13px 25px;

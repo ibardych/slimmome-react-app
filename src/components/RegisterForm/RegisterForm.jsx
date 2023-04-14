@@ -1,4 +1,4 @@
-import { RegisterFormStyled } from './RegisterForm.styled';
+import { FormFields, RegisterFormStyled } from './RegisterForm.styled';
 import {
   FormContainer,
   Caption,
@@ -37,27 +37,29 @@ export const RegisterForm = () => {
     <RegisterFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
         <Caption>Register</Caption>
-        <Label>Name *</Label>
-        <Input
-          type="text"
-          name="name"
-          value={fields.name}
-          onChange={handleInputChange}
-        />
-        <Label>Email *</Label>
-        <Input
-          type="email"
-          name="email"
-          value={fields.email}
-          onChange={handleInputChange}
-        />
-        <Label>Password *</Label>
-        <Input
-          type="password"
-          name="password"
-          value={fields.password}
-          onChange={handleInputChange}
-        />
+        <FormFields>
+          <Label>Name *</Label>
+          <Input
+            type="text"
+            name="name"
+            value={fields.name}
+            onChange={handleInputChange}
+          />
+          <Label>Email *</Label>
+          <Input
+            type="email"
+            name="email"
+            value={fields.email}
+            onChange={handleInputChange}
+          />
+          <Label>Password *</Label>
+          <Input
+            type="password"
+            name="password"
+            value={fields.password}
+            onChange={handleInputChange}
+          />
+        </FormFields>
         <ButtonContainer>
           <Button className="white regLogbutton" type="submit">
             Log In

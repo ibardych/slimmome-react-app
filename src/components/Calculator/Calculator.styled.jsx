@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { transition } from 'helpers';
+import { container, transition } from 'helpers';
 import { Button } from 'components/Styled';
 
 import { mediaSizes } from 'constants/media';
@@ -12,15 +12,15 @@ export const ButtonCalc = styled(Button)`
 `;
 
 export const CalculatorStyled = styled.div`
+  ${container};
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 20px 100px;
+  padding-top: 32px;
+  padding-bottom: 100px;
 
   @media screen and (min-width: ${mediaSizes.tablet}) {
     padding-top: 100px;
-    padding-left: 32px;
-    padding-right: 32px;
     align-items: flex-start;
   }
   @media screen and (min-width: ${mediaSizes.deskop}) {
@@ -58,7 +58,6 @@ export const Form = styled.form`
   }
 `;
 export const FormWrapper = styled.div`
-  width: 240px;
   margin-bottom: 32px;
   display: flex;
   flex-direction: column;

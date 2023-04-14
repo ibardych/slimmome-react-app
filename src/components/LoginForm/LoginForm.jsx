@@ -7,7 +7,7 @@ import {
 import Input from 'components/Form/Input';
 import { Button } from 'components/Styled';
 import { useState } from 'react';
-import { LoginFormStyled } from './LoginForm.styled';
+import { FormFields, LoginFormStyled } from './LoginForm.styled';
 
 const defaultFields = { email: '', password: '' };
 
@@ -36,20 +36,22 @@ export const LoginForm = () => {
     <LoginFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
         <Caption>Login</Caption>
-        <Label>Email *</Label>
-        <Input
-          type="email"
-          name="email"
-          value={fields.name}
-          onChange={handleInputChange}
-        />
-        <Label>Password *</Label>
-        <Input
-          type="password"
-          name="password"
-          value={fields.name}
-          onChange={handleInputChange}
-        />
+        <FormFields>
+          <Label>Email *</Label>
+          <Input
+            type="email"
+            name="email"
+            value={fields.name}
+            onChange={handleInputChange}
+          />
+          <Label>Password *</Label>
+          <Input
+            type="password"
+            name="password"
+            value={fields.name}
+            onChange={handleInputChange}
+          />
+        </FormFields>
         <ButtonContainer>
           <Button className="orange regLogbutton" type="submit">
             Log In

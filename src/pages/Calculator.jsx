@@ -1,9 +1,11 @@
-import { CalculatorEl } from "components/Calculator/Calculator";
+import { CalculatorEl } from 'components/Calculator/Calculator';
 
 const Calculator = () => {
-  return <>
-  <CalculatorEl/>
-  </>;
+  return (
+    <>
+      <CalculatorEl />
+    </>
+  );
 };
 
 export default Calculator;
