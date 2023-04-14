@@ -32,6 +32,7 @@ export const CalculatorEl = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   console.log(isLoggedIn);
   const user = useSelector(selectUser);
+  console.log(user);
   // const isLoading = useSelector(selectIsLoading);
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
@@ -75,7 +76,8 @@ export const CalculatorEl = () => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    const id = user.id
+    const id = user.id;
+    console.log(id);
     const form = e.currentTarget;
     const data = {
       weight,

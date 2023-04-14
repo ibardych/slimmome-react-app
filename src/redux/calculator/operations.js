@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+// import {}
+// const token = state => state.auth.token;
 axios.defaults.baseURL = 'https://slimmom-backend.goit.global';
 
 // const setAuthHeader = token => {
@@ -13,6 +14,7 @@ export const calculatorAnonim = createAsyncThunk(
   async (credentials, thunkAPI) => {
     console.log(credentials);
     try {
+
       const res = await axios.post('/daily-rate', credentials);
       return res.data;
     } catch (error) {
@@ -27,6 +29,8 @@ export const calculatorLogIn = createAsyncThunk(
   'calculator/calculatorLogIn',
   async (id, credentials, thunkAPI) => {
     try {
+      // setAuthHeader(token);
+      // console.log(token);
       const res = await axios.post(`/daily-rate/${id}`, credentials);
       return res.data;
     } catch (error) {
