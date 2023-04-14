@@ -8,4 +8,5 @@ export const NavigationStyled = styled.ul`
   margin-top: 50px;
   margin-bottom: 50px;
   gap: 10px;
+  align-items: center;
 `;

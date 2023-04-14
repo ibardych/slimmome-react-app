@@ -8,6 +8,7 @@ import { PrivateRoute } from 'components/PrivateRoute';
 import { Loader } from 'components/Loader/Loader';
 import Home from 'pages/Home';
 import { refreshUser } from 'redux/auth/operations';
+import { selectIsLoading } from 'redux/calculator/selectors';
 
 // const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('pages/Register'));
@@ -24,37 +25,51 @@ const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return isRefreshing ? (
-    <Loader />
-  ) : (
-    <MainContainer>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Home />} />
-          <Route
-            path="login"
-            element={<RestrictedRoute redirectTo="/" component={<Login />} />}
-          />
-          <Route
-            path="register"
-            element={
-              <RestrictedRoute redirectTo="/" component={<Register />} />
-            }
-          />
-          <Route
-            path="diary"
-            element={<PrivateRoute redirectTo="/login" component={<Diary />} />}
-          />
-          <Route
-            path="calculator"
-            element={
-              <PrivateRoute redirectTo="/login" component={<Calculator />} />
-            }
-          />
-          <Route path="/*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </MainContainer>
+  const isLoading = useSelector(selectIsLoading);
+
+  return (
+    <>
+      {isRefreshing && <Loader />}
+      {isLoading && <Loader />}
+
+      {!isRefreshing && (
+        <MainContainer>
+          <Routes>
+            <Route path="/" element={<SharedLayout />}>
+              <Route index element={<Home />} />
+              <Route
+                path="login"
+                element={
+                  <RestrictedRoute redirectTo="/" component={<Login />} />
+                }
+              />
+              <Route
+                path="register"
+                element={
+                  <RestrictedRoute redirectTo="/" component={<Register />} />
+                }
+              />
+              <Route
+                path="diary"
+                element={
+                  <PrivateRoute redirectTo="/login" component={<Diary />} />
+                }
+              />
+              <Route
+                path="calculator"
+                element={
+                  <PrivateRoute
+                    redirectTo="/login"
+                    component={<Calculator />}
+                  />
+                }
+              />
+              <Route path="/*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </MainContainer>
+      )}
+    </>
   );
 };
 
