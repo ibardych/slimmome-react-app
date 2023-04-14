@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
 import { MainContainer } from './App.styled';
 import { lazy } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SharedLayout from '../SharedLayout/SharedLayout';
 import { RestrictedRoute } from 'components/RestrictedRoute';
 import { PrivateRoute } from 'components/PrivateRoute';
-// import { Loader } from 'components/Loader/Loader';
+import { Loader } from 'components/Loader/Loader';
+import Home from 'pages/Home';
 
 // const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('pages/Register'));
@@ -15,15 +16,14 @@ const Diary = lazy(() => import('pages/Diary'));
 const NotFound = lazy(() => import('../NotFound/NotFound'));
 
 const App = () => {
-  const isRefreshing = useSelector(state => state.auth.isRefreshing)
+  const isRefreshing = useSelector(state => state.auth.isRefreshing);
   return isRefreshing ? (
-    'Application is loading...'
+    <Loader />
   ) : (
     <MainContainer>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Navigate to="/login" replace={true} />} />
-          {/* <Route index element={<Navigate to="/login" replace={true} />} /> */}
+          <Route index element={<Home />} />
           <Route
             path="login"
             element={<RestrictedRoute redirectTo="/" component={<Login />} />}
@@ -35,11 +35,11 @@ const App = () => {
             }
           />
           <Route
-            path="/diary"
+            path="diary"
             element={<PrivateRoute redirectTo="/login" component={<Diary />} />}
-          />         
+          />
           <Route
-            path="/calculator"
+            path="calculator"
             element={
               <PrivateRoute redirectTo="/login" component={<Calculator />} />
             }
