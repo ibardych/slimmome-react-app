@@ -1,29 +1,66 @@
 import { SidebarStyled } from './Sidebar.styled';
+import imagedesk from 'images/Sidebarimg/imgdesk2x.png';
+import imagetab from 'images/Sidebarimg/imgtab2x.png';
+import { useEffect, useState } from 'react';
 
 const Sidebar = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isMobileScreen, setIsMobileScreen] = useState(false);
+  let styles = {
+    background: `url(${isSmallScreen ? imagetab : imagedesk}) ${
+      isSmallScreen ? `bottom right` : `right`
+    } #F0F1F3 no-repeat`,
+    backgroundSize: `${isSmallScreen ? `335px 510px` : `auto 100%`}`,
+  };
+  if (isMobileScreen) {
+    styles = {
+      background: `#F0F1F3`,
+    };
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileScreen(window.outerWidth <= 320);
+      setIsSmallScreen(window.innerWidth <= 768);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <SidebarStyled>
-        <div className="summary">
-      <h2 className="title">Summary for 13.04.2023</h2>
-      <ul className="listData">
-        <li className="item">Left</li>
-        <li className="item">Consumed</li>
-        <li className="item">Daily rate</li>
-        <li className="item">n% of normal</li>
-      </ul>
+    <SidebarStyled style={styles}>
+      <div className="summary">
+        <h2 className="title">Summary for 13.04.2023</h2>
+        <ul className="listData">
+          <li className="item">
+            <h3 className="title__name">Left</h3>
+            <p>625 kgal</p>
+          </li>
+          <li className="item">
+            <h3 className="title__name">Consumed</h3>
+            <p>2175 kcal</p>
+          </li>
+          <li className="item">
+            <h3 className="title__name">Daily rate</h3>
+            <p>2800 kcal</p>
+          </li>
+          <li className="item">
+            <h3 className="title__name">n% of normal</h3>
+            <p>78 %</p>
+          </li>
+        </ul>
       </div>
       <div className="reccommended">
-      <h2 className="title">Food not reccommended</h2>
-      <ul className="listFood">
-        <li className="item">Flour products</li>
-        <li>625 kgal</li>
-        <li className="item">Milk</li>
-        <li>2175 kcal</li>
-        <li className="item">Read meet</li>
-        <li>2800 kcal</li>
-        <li className="item">Smoked meats</li>
-        <li>78 %</li>
-      </ul>
+        <h2 className="title">Food not reccommended</h2>
+        <ul className="listFood">
+          <li className="item">Flour products</li>
+          <li className="item">Milk</li>
+          <li className="item">Read meet</li>
+          <li className="item">Smoked meats</li>
+        </ul>
       </div>
     </SidebarStyled>
   );
