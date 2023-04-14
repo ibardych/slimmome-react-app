@@ -1,4 +1,9 @@
-import { LoaderContainer, LoaderStyled, StrawberryImg, StyledTriangle } from './Loader.styled';
+import {
+  LoaderContainer,
+  LoaderStyled,
+  StrawberryImg,
+  StyledTriangle,
+} from './Loader.styled';
 import Strawberry from '../../images/strawberry.png';
 
 export const Loader = () => {

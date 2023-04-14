@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import reducers
-
+import storage from 'redux-persist/lib/storage';
+import { authReducer } from './auth/slice';
+import { ModalOpenedReducer } from './modalOpenedSlice';
+import { calculatorReducer } from './calculator/slice';
 import {
   persistStore,
   persistReducer,
@@ -11,10 +13,6 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { authReducer } from './auth/slice';
-import { ModalOpenedReducer } from './modalOpenedSlice';
-import { calculatorReducer } from './calculator/slice';
 
 const authPersistConfig = {
   key: 'auth',
