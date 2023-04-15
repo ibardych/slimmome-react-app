@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 export const LinkStyled = styled(NavLink)`
   cursor: pointer;
+  position: relative;
+  top: 2px;
 
   &:hover {
   }

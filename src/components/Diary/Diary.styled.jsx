@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants';
+import { colors } from 'constants';
 
 export const DiaryForm = styled.form`
   display: flex;
@@ -81,7 +82,6 @@ export const DiaryStyled = styled.div`
     }
   }
   & .Diary__list-name {
-    font-family: 'Verdana';
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.04em;
@@ -105,7 +105,6 @@ export const DiaryStyled = styled.div`
     }
   }
   & .Diary__list-gram {
-    font-family: 'Verdana';
     font-size: 14px;
     line-height: 17px;
     text-align: right;
@@ -130,7 +129,6 @@ export const DiaryStyled = styled.div`
     }
   }
   & .Diary__list-kcal {
-    font-family: 'Verdana';
     font-size: 14px;
     line-height: 17px;
     text-align: right;
@@ -163,6 +161,7 @@ export const DiaryStyled = styled.div`
     width: 15px;
     height: 15px;
     color: #9b9faa;
+    margin-right: 40px;
   }
   & .Diarty__list {
     display: flex;
@@ -174,6 +173,8 @@ export const DiaryStyled = styled.div`
   }
 
   & .Diarty__header-wrapper {
+    position: relative;
+
     @media screen and (min-width: ${mediaSizes.mobile}) {
       display: flex;
       flex-direction: column;
@@ -186,6 +187,39 @@ export const DiaryStyled = styled.div`
     @media screen and (min-width: ${mediaSizes.desktop}) {
       display: flex;
       align-items: flex-start;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      pointer-events: none;
+
+      @media screen and (min-width: ${mediaSizes.mobile}) {
+      }
+      @media screen and (min-width: ${mediaSizes.tablet}) {
+        width: 100%;
+        height: 60px;
+        margin-top: -50px;
+        position: relative;
+        background-image: linear-gradient(
+          0deg,
+          #ffffff 18%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
+      @media screen and (min-width: ${mediaSizes.desktop}) {
+        width: calc(100% - 5px);
+        height: 60px;
+        margin-top: -50px;
+        position: relative;
+        background-image: linear-gradient(
+          0deg,
+          #ffffff 18%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
     }
   }
   & .Diary__header-wraper-data {
@@ -205,7 +239,6 @@ export const DiaryStyled = styled.div`
     }
   }
   & .Diary__data {
-    font-family: 'Verdana';
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
@@ -310,4 +343,83 @@ export const DiaryStyledList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 280px;
+  position: relative;
+  overflow-y: auto;
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #f0f1f3;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #264061;
+    background-size: contain;
+  }
+`;
+
+export const ProductsList = styled.ul`
+  list-style: none;
+  padding: 8px;
+  padding-top: 15px;
+  max-height: 300px;
+  width: 350px;
+  overflow-y: scroll;
+  border: 1px solid ${colors.color2};
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 3;
+  top: 92px;
+  background-color: white;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    background: rgba(50, 50, 93, 0.15);
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 20px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: ${colors.color1};
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 0, 0, 0.4);
+  }
+
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    top: 144px;
+    max-height: 400px;
+    width: 400px;
+  }
+
+  & li {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: ${colors.color2};
+    border-bottom: 1px solid ${colors.color5};
+
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  & li:hover {
+    background-color: #f2f2f2;
+  }
 `;

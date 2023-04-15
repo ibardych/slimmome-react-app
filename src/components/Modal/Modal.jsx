@@ -26,37 +26,30 @@ const Modal = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleCloseModal);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleCloseModal);
     };
   });
 
-  const closeModal = e => {
-    dispatch(setModalOpened(false));
+  const handleCloseModal = e => {
+    if (
+      (e.type === 'click' && e.target === e.currentTarget) ||
+      (e.type === 'keydown' && e.key === 'Escape')
+    ) {
+      dispatch(setModalOpened(false));
+    }
   };
-
-  function handleBackdropClick(e) {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  }
-
-  function handleKeyDown(e) {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-  }
 
   return createPortal(
     <ModalStyled
-      onClick={handleBackdropClick}
+      onClick={handleCloseModal}
       className={!modalOpened ? 'is-hidden' : ''}
     >
       <div className="modal">
         <div className="inner">
-          <button type="buttn" className="close" onClick={closeModal}>
+          <button type="buttn" className="close" onClick={handleCloseModal}>
             {isSmallScreen ? (
               <TbArrowBack className="return__icon" />
             ) : (
