@@ -1,17 +1,14 @@
 import {
   FormContainer,
   Caption,
-  Label,
   ButtonContainer,
 } from 'components/Form/Form.styled';
-import Input from 'components/Form/Input';
 import {
   InputWraper,
   InputField,
   LabeForInput,
-  LabelInfo
+  LabelInfo,
 } from 'components/Form/Input.styled';
-import css from '../Form/Input.module.css';
 import { Button } from 'components/Styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -67,7 +64,7 @@ export const LoginForm = () => {
               value={fields.name}
               onChange={handleInputChange}
             />
-            <LabeForInput for="email" className="labelName">
+            <LabeForInput htmlFor="email" className="labelName">
               <LabelInfo className="contentName">Email *</LabelInfo>
             </LabeForInput>
           </InputWraper>
@@ -81,7 +78,7 @@ export const LoginForm = () => {
               value={fields.name}
               onChange={handleInputChange}
             />
-            <LabeForInput for="password" className="labelName">
+            <LabeForInput htmlFor="password" className="labelName">
               <LabelInfo className="contentName">Password *</LabelInfo>
             </LabeForInput>
           </InputWraper>

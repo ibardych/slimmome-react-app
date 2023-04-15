@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { colors } from 'constants';
 import { mediaSizes } from 'constants/media';
 
 export const FormContainer = styled.form``;
@@ -9,12 +10,11 @@ export const Caption = styled.p`
   margin-bottom: 55px;
   margin-right: auto;
   text-transform: uppercase;
-  font-family: 'Verdana';
   font-weight: 700;
   font-size: 14px;
   line-height: 1.2;
   letter-spacing: 0.04em;
-  color: #fc842d;
+  color: ${colors.color1};
 `;
 
 export const Label = styled.span`
@@ -25,7 +25,7 @@ export const Label = styled.span`
   font-size: 14px;
   line-height: 1.2;
   letter-spacing: 0.04em;
-  color: #9b9faa;
+  color: ${colors.color2};
 `;
 
 export const ButtonContainer = styled.div`

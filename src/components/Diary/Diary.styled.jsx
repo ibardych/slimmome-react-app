@@ -82,7 +82,6 @@ export const DiaryStyled = styled.div`
     }
   }
   & .Diary__list-name {
-    font-family: 'Verdana';
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.04em;
@@ -106,7 +105,6 @@ export const DiaryStyled = styled.div`
     }
   }
   & .Diary__list-gram {
-    font-family: 'Verdana';
     font-size: 14px;
     line-height: 17px;
     text-align: right;
@@ -131,7 +129,6 @@ export const DiaryStyled = styled.div`
     }
   }
   & .Diary__list-kcal {
-    font-family: 'Verdana';
     font-size: 14px;
     line-height: 17px;
     text-align: right;
@@ -242,7 +239,6 @@ export const DiaryStyled = styled.div`
     }
   }
   & .Diary__data {
-    font-family: 'Verdana';
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;

@@ -2,7 +2,6 @@ import { FormFields, RegisterFormStyled } from './RegisterForm.styled';
 import {
   FormContainer,
   Caption,
-  Label,
   ButtonContainer,
 } from 'components/Form/Form.styled';
 import {
@@ -11,7 +10,6 @@ import {
   LabeForInput,
   LabelInfo,
 } from 'components/Form/Input.styled';
-import Input from 'components/Form/Input';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Styled';
@@ -49,7 +47,6 @@ export const RegisterForm = () => {
     navigate(path);
   };
 
-  console.log(fields);
   return (
     <RegisterFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
@@ -64,7 +61,7 @@ export const RegisterForm = () => {
               value={fields.name}
               onChange={handleInputChange}
             />
-            <LabeForInput for="email" className="labelName">
+            <LabeForInput htmlFor="email" className="labelName">
               <LabelInfo className="contentName">Email *</LabelInfo>
             </LabeForInput>
           </InputWraper>
@@ -78,7 +75,7 @@ export const RegisterForm = () => {
               value={fields.name}
               onChange={handleInputChange}
             />
-            <LabeForInput for="email" className="labelName">
+            <LabeForInput htmlFor="email" className="labelName">
               <LabelInfo className="contentName">Email *</LabelInfo>
             </LabeForInput>
           </InputWraper>
@@ -92,7 +89,7 @@ export const RegisterForm = () => {
               value={fields.name}
               onChange={handleInputChange}
             />
-            <LabeForInput for="password" className="labelName">
+            <LabeForInput htmlFor="password" className="labelName">
               <LabelInfo className="contentName">Password *</LabelInfo>
             </LabeForInput>
           </InputWraper>

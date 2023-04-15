@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { colors } from 'constants';
 
 export const Label = styled.label`
   display: block;
@@ -15,31 +16,27 @@ export const InputStyled = styled.input`
   height: 20px;
   font-size: 16px;
   border: none;
-  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  border-bottom: 1px solid ${colors.color3};
   padding: 12px 16px;
   outline: none;
   background-color: #fff;
-  
 `;
 
 export const InputWraper = styled.div`
   width: 100%;
   position: relative;
   height: 40px;
-  color: #9b9faa;
+  color: ${colors.color2};
   overflow: hidden;
-  margin-bottom: 40px;  
+  margin-bottom: 40px;
 
   & input {
     width: 100%;
     height: 100%;
-    color: #9B9FAA;
+    color: ${colors.color2};
     padding-top: 20px;
     border: none;
     background-color: #fff;
-
-    &:focus
-    
   }
   & label {
     position: absolute;
@@ -51,13 +48,13 @@ export const InputWraper = styled.div`
     border-bottom: 1px solid white;
   }
   & label::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: -1px;
     left: 0px;
     width: 100%;
     height: 100%;
-    border-bottom: 1px solid rgba(224, 224, 224, 1);
+    border-bottom: 1px solid ${colors.color3};
     transition: all 0.3s ease;
   }
 `;
@@ -65,7 +62,7 @@ export const InputWraper = styled.div`
 export const InputField = styled.input`
   width: 100%;
   height: 100%;
-  color: #9b9faa;
+  color: ${colors.color2};
   padding-top: 20px;
   border: none;
   background-color: #fff;
@@ -78,7 +75,7 @@ export const InputField = styled.input`
     transform: translateY(-100%);
     font-size: 10px;
     left: 0px;
-    color: #9B9FAA;
+    color: ${colors.color2};
   }
 `;
 
@@ -90,7 +87,6 @@ export const LabeForInput = styled.label`
   height: 100%;
   pointer-events: none;
   border-bottom: 1px solid white;
- 
 `;
 
 export const LabelInfo = styled.span`
