@@ -24,6 +24,7 @@ export const SidebarStyled = styled.div`
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
     display: block;
+    padding: 149px 0 0 106px;
     background: none;
     flex-basis: 40%;
     flex-grow: 0;
@@ -33,12 +34,14 @@ export const SidebarStyled = styled.div`
   }
 
   & .summary {
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      margin-bottom: 60px;
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      margin-right: 132px;
     }
 
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      margin-right: auto;
+    @media screen and (min-width: ${mediaSizes.desktop}) {
+      padding-right: 142px;
+      margin-bottom: 60px;
+      margin-right: 0;
     }
   }
 
@@ -71,6 +74,7 @@ export const SidebarStyled = styled.div`
 
   & .listData {
     margin-bottom: 40px;
+    width: 284px;
 
     display: flex;
     flex-direction: column;
@@ -81,6 +85,7 @@ export const SidebarStyled = styled.div`
     }
 
     @media screen and (min-width: ${mediaSizes.desktop}) {
+      width: 272px;
       margin-bottom: 60px;
     }
   }
