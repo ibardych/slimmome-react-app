@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants/media';
+import imagetab from 'images/Sidebarimg/imgtab2x.png';
 
 export const SidebarStyled = styled.div`
-  font-family: 'Verdana';
-  background-color: #f0f1f3;
   padding-left: 20px;
   padding-right: 15px;
   padding-top: 40px;
   padding-bottom: 40px;
+  background-color: #f0f1f3;
+  margin: 0 -20px;
 
   @media screen and (min-width: ${mediaSizes.tablet}) {
     display: flex;
@@ -15,15 +16,21 @@ export const SidebarStyled = styled.div`
     padding-bottom: 80px;
     padding-top: 80px;
     padding-right: 141px;
+    margin: 0 -32px;
+
+    background: url(${imagetab}) bottom right #f0f1f3 no-repeat;
+    background-size: 335px 510px;
   }
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    width: 517px;
     display: block;
-    padding-left: 106px;
-    padding-bottom: 166px;
-    padding-right: 123px;
-    padding-top: 292px;
+    padding: 292px 0 0 106px;
+    background: none;
+    flex-basis: 40%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin: 0;
+    margin-left: 124px;
   }
 
   & .summary {

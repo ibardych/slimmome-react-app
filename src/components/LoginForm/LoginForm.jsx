@@ -9,8 +9,10 @@ import { Button } from 'components/Styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormFields, LoginFormStyled } from './LoginForm.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
+import { selectError } from 'redux/auth/selectors';
+import Message from 'components/Message/Message';
 
 const defaultFields = { email: '', password: '' };
 
@@ -41,6 +43,8 @@ export const LoginForm = () => {
 
     navigate(path);
   };
+
+  const message = useSelector(selectError);
 
   return (
     <LoginFormStyled>
@@ -75,6 +79,7 @@ export const LoginForm = () => {
           </Button>
         </ButtonContainer>
       </FormContainer>
+      {message && <Message>{message}</Message>}
     </LoginFormStyled>
   );
 };

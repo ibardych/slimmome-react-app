@@ -8,9 +8,9 @@ import { PrivateRoute } from 'components/PrivateRoute';
 import { Loader } from 'components/Loader/Loader';
 import Home from 'pages/Home';
 import { refreshUser } from 'redux/auth/operations';
-import { selectIsLoading } from 'redux/calculator/selectors';
-import { selectToken } from 'redux/auth/selectors';
+import { selectIsRefreshing, selectToken } from 'redux/auth/selectors';
 import axios from 'axios';
+import { selectIsLoading } from 'redux/loader/selectors';
 
 // const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('pages/Register'));
@@ -21,7 +21,7 @@ const NotFound = lazy(() => import('../NotFound/NotFound'));
 
 const App = () => {
   const dispatch = useDispatch();
-  const isRefreshing = useSelector(state => state.auth.isRefreshing);
+  const isRefreshing = useSelector(selectIsRefreshing);
   const isLoading = useSelector(selectIsLoading);
   const token = useSelector(selectToken);
 

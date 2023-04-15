@@ -4,7 +4,7 @@ import { ModalMessageStyled } from './ModalMessage.styled';
 import { Button } from 'components/Styled';
 import { selectError } from 'redux/auth/selectors';
 
-export const ModalDailyCalories = () => {
+export const ModalMessage = () => {
   const message = useSelector(selectError);
 
   return (

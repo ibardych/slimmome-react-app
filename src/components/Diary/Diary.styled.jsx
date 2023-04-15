@@ -176,6 +176,8 @@ export const DiaryStyled = styled.div`
   }
 
   & .Diarty__header-wrapper {
+    position: relative;
+
     @media screen and (min-width: ${mediaSizes.mobile}) {
       display: flex;
       flex-direction: column;
@@ -188,6 +190,39 @@ export const DiaryStyled = styled.div`
     @media screen and (min-width: ${mediaSizes.desktop}) {
       display: flex;
       align-items: flex-start;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      pointer-events: none;
+
+      @media screen and (min-width: ${mediaSizes.mobile}) {
+      }
+      @media screen and (min-width: ${mediaSizes.tablet}) {
+        width: 100%;
+        height: 60px;
+        margin-top: -50px;
+        position: relative;
+        background-image: linear-gradient(
+          0deg,
+          #ffffff 18%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
+      @media screen and (min-width: ${mediaSizes.desktop}) {
+        width: calc(100% - 5px);
+        height: 60px;
+        margin-top: -50px;
+        position: relative;
+        background-image: linear-gradient(
+          0deg,
+          #ffffff 18%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
     }
   }
   & .Diary__header-wraper-data {
@@ -242,32 +277,6 @@ export const DiaryStyled = styled.div`
     @media screen and (min-width: ${mediaSizes.desktop}) {
       width: 25px;
       height: 25px;
-    }
-  }
-  & .wrap__bottom-hiding {
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-    }
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      width: 100%;
-      height: 60px;
-      margin-top: -50px;
-      position: relative;
-      background-image: linear-gradient(
-        0deg,
-        #ffffff 18%,
-        rgba(255, 255, 255, 0) 100%
-      );
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      width: 55%;
-      height: 60px;
-      margin-top: -50px;
-      position: relative;
-      background-image: linear-gradient(
-        0deg,
-        #ffffff 18%,
-        rgba(255, 255, 255, 0) 100%
-      );
     }
   }
 `;

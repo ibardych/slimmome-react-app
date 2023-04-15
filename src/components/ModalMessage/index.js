@@ -1,1 +1,1 @@
-export * from './ModalDailyCalories';
+export * from './ModalMessage';

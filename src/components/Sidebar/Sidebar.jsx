@@ -1,37 +1,14 @@
 import { SidebarStyled } from './Sidebar.styled';
-import imagedesk from 'images/Sidebarimg/imgdesk2x.png';
-import imagetab from 'images/Sidebarimg/imgtab2x.png';
-import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { DiaryStyledList } from 'components/Diary/Diary.styled';
 
 const Sidebar = () => {
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [isMobileScreen, setIsMobileScreen] = useState(false);
-  let styles = {
-    background: `url(${isSmallScreen ? imagetab : imagedesk}) ${
-      isSmallScreen ? `bottom right` : `right`
-    } #F0F1F3 no-repeat`,
-    backgroundSize: `${isSmallScreen ? `335px 510px` : `auto 100%`}`,
-  };
-  if (isMobileScreen) {
-    styles = {
-      background: `#F0F1F3`,
-    };
-  }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileScreen(window.outerWidth <= 320);
-      setIsSmallScreen(window.innerWidth <= 768);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const forbiddenProducts = useSelector(
+    state => state.calculator.notAllowedProducts
+  );
 
   return (
-    <SidebarStyled style={styles}>
+    <SidebarStyled>
       <div className="summary">
         <h2 className="title">Summary for 13.04.2023</h2>
         <ul className="listData">
@@ -55,12 +32,13 @@ const Sidebar = () => {
       </div>
       <div className="reccommended">
         <h2 className="title">Food not reccommended</h2>
-        <ul className="listFood">
-          <li className="item">Flour products</li>
-          <li className="item">Milk</li>
-          <li className="item">Read meet</li>
-          <li className="item">Smoked meats</li>
-        </ul>
+        <DiaryStyledList className="listFood">
+          {forbiddenProducts.map((product, index) => (
+            <li key={index} className="item">
+              {product}
+            </li>
+          ))}
+        </DiaryStyledList>
       </div>
     </SidebarStyled>
   );

@@ -13,7 +13,7 @@ export const Menu = styled.div`
   flex-direction: column;
   justify-content: center;
   background-color: ${colors.color5};
-  z-index: 999;
+  z-index: 1;
 `;
 
 export const Link = styled(NavLink)`
