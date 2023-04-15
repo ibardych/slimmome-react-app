@@ -24,7 +24,6 @@ export const SidebarStyled = styled.div`
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
     display: block;
-    padding: 292px 0 0 106px;
     background: none;
     flex-basis: 40%;
     flex-grow: 0;
