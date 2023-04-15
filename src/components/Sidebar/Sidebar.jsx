@@ -30,7 +30,8 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-      <div className="reccommended">
+      { forbiddenProducts.length>0 && 
+        <div className="reccommended">
         <h2 className="title">Food not reccommended</h2>
         <DiaryStyledList className="listFood">
           {forbiddenProducts.map((product, index) => (
@@ -40,6 +41,8 @@ const Sidebar = () => {
           ))}
         </DiaryStyledList>
       </div>
+      }
+      
     </SidebarStyled>
   );
 };
