@@ -30,16 +30,6 @@ export const Button = styled.button`
   &.regLogbutton {
     width: 182px;
   }
-  &.start {
-    width: 210px;
-    height: 44px;
-    padding: 13px 0;
-  }
-  &.add-product {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-  }
   &:hover {
     animation: jelly 0.5s;
   }

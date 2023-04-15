@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants/media';
 import { colors } from 'constants';
+import { transition } from 'helpers';
 
 export const Div = styled.div`
   @media screen and (min-width: ${mediaSizes.mobile}) {
@@ -29,5 +30,11 @@ export const Button = styled.button`
   font-size: 14px;
   line-height: 1.21;
   letter-spacing: 0.04em;
+  cursor: pointer;
   color: ${colors.color2};
+  ${transition('color')};
+
+  &:hover {
+    color: ${colors.color4};
+  }
 `;

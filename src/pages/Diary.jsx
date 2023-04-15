@@ -1,12 +1,13 @@
 import Sidebar from 'components/Sidebar/Sidebar';
-import { DiaryMain } from 'components/Diary/Diary' 
+import { DiaryMain } from 'components/Diary/Diary';
+import { DiaryStyled } from 'components/Styled/DiaryPage.styled';
 
 const Diary = () => {
   return (
-    <>
-    <DiaryMain />
+    <DiaryStyled>
+      <DiaryMain />
       <Sidebar />
-    </>
+    </DiaryStyled>
   );
 };
 

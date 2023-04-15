@@ -12,7 +12,7 @@ import { Button } from 'components/Styled';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
 
-const defaultFields = { name: '', email: '', password: '' };
+const defaultFields = { username: '', email: '', password: '' };
 
 export const RegisterForm = () => {
   const [fields, setFields] = useState(defaultFields);
@@ -23,11 +23,12 @@ export const RegisterForm = () => {
     const form = e.currentTarget;
     dispatch(
       register({
-        username: form.elements.name.value,
+        username: form.elements.username.value,
         email: form.elements.email.value,
         password: form.elements.password.value,
       })
     );
+
     form.reset();
   };
 
@@ -42,6 +43,7 @@ export const RegisterForm = () => {
     navigate(path);
   };
 
+  console.log(fields);
   return (
     <RegisterFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
@@ -50,8 +52,8 @@ export const RegisterForm = () => {
           <Label>Name *</Label>
           <Input
             type="text"
-            name="name"
-            value={fields.name}
+            name="username"
+            value={fields.username}
             onChange={handleInputChange}
           />
           <Label>Email *</Label>
