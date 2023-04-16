@@ -9,7 +9,7 @@ import Navigation from 'components/Navigation/Navigation';
 import UserInfo from 'components/UserInfo/UserInfo';
 import MobileMenu from 'components/MobileMenu/MobileMenu';
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { mediaSizes } from 'constants/media';
 import { selectIsLoggedIn } from 'redux/auth/selectors';
 import { Logo } from 'components/Logo/Logo';
@@ -17,8 +17,22 @@ import { Logo } from 'components/Logo/Logo';
 const Header = () => {
   const [showBurgerIcon, setShowBurgerIcon] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserInfoShown, setUserInfoShown] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+
+  const clickHandler = useCallback(
+    event => {
+      if (!isLoggedIn) return;
+      if (
+        event.type === 'click' ||
+        (event.type === 'keydown' && event.key === 'Escape')
+      ) {
+        setIsMobileMenuOpen(state => !state);
+      }
+    },
+    [isLoggedIn]
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +54,11 @@ const Header = () => {
       } else {
         setShowBurgerIcon(false);
       }
+      if (window.innerWidth >= parseInt(mediaSizes.mobile)) {
+        setUserInfoShown(true);
+      } else {
+        setUserInfoShown(false);
+      }
     };
     handleResize();
 
@@ -50,20 +69,20 @@ const Header = () => {
     };
   }, []);
 
-  const clickHandler = () => {
-    if (!isLoggedIn) return;
-    setIsMobileMenuOpen(state => !state);
-  };
+  useEffect(() => {
+    document.addEventListener('keydown', clickHandler);
+    return () => document.removeEventListener('keydown', clickHandler);
+  }, [clickHandler]);
 
   return (
     <HeaderStyled className={isScrolled ? 'bg' : ''}>
       <HeaderContainer>
         <Logo />
         {!showBurgerIcon && <Navigation />}
-        {isLoggedIn && <UserInfo />}
+        {isLoggedIn && isUserInfoShown && <UserInfo />}
         {showBurgerIcon && (
           <MenuButton
-            style={{ marginLeft: isLoggedIn ? '51px' : 'auto' }}
+            style={{ marginLeft: isUserInfoShown ? '51px' : 'auto' }}
             onClick={clickHandler}
           >
             {isMobileMenuOpen ? (
@@ -75,8 +94,11 @@ const Header = () => {
             )}
           </MenuButton>
         )}
-        {isMobileMenuOpen && <MobileMenu />}
+        {isMobileMenuOpen && showBurgerIcon && (
+          <MobileMenu handleClick={clickHandler} />
+        )}
       </HeaderContainer>
+      {!isUserInfoShown && <UserInfo />}
     </HeaderStyled>
   );
 };
