@@ -20,9 +20,7 @@ export const register = createAsyncThunk(
       const resLogin = await axios.post('/auth/login', { email, password });
       return resLogin.data;
     } catch (error) {
-      console.log(error.message);
-      console.log(error.response.data.message);
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );

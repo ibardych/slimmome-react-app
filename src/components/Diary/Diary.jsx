@@ -55,7 +55,7 @@ export const DiaryMain = () => {
   };
 
   const deleteProduct = id => {
-    dispatch(deleteProductThunk([id, selectedDayId]))
+    dispatch(deleteProductThunk([id, selectedDayId]));
   };
 
   return (
@@ -111,9 +111,17 @@ export const DiaryMain = () => {
                 <li key={product.id} className="Diarty__list-wrapper">
                   <ul className="Diarty__list">
                     <li className="Diary__list-name">{product.title}</li>
-                    <li className="Diary__list-gram">{product.weight?.toFixed(2)} g</li>
-                    <li className="Diary__list-kcal">{product.kcal?.toFixed(2)} kcal</li>
-                    <button className="Diary__btn" type="button" onClick={() => deleteProduct(product.id)}>
+                    <li className="Diary__list-gram">
+                      {product.weight?.toFixed(2)} g
+                    </li>
+                    <li className="Diary__list-kcal">
+                      {product.kcal?.toFixed(2)} kcal
+                    </li>
+                    <button
+                      className="Diary__btn"
+                      type="button"
+                      onClick={() => deleteProduct(product.id)}
+                    >
                       <AiOutlineClose />
                     </button>
                   </ul>
