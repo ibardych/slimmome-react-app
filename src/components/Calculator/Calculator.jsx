@@ -26,11 +26,18 @@ export const CalculatorEl = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
   const token = useSelector(selectToken);
-  const [weight, setWeight] = useState(100);
-  const [height, setHeight] = useState(160);
-  const [age, setAge] = useState(35);
-  const [desiredWeight, setDesiredWeight] = useState(70);
-  const [bloodType, setBloodType] = useState(1);
+  const userWeight = user.userData.weight;
+  const userHeight = user.userData.height;
+  const userAge = user.userData.age;
+  const userdesiredWeight = user.userData.desiredWeight;
+  const userBloodType = user.userData.bloodType;
+
+  console.log(userBloodType);
+  const [weight, setWeight] = useState(userWeight);
+  const [height, setHeight] = useState(userHeight);
+  const [age, setAge] = useState(userAge);
+  const [desiredWeight, setDesiredWeight] = useState(userdesiredWeight);
+  const [bloodType, setBloodType] = useState(userBloodType);
 
   const dispatch = useDispatch();
 
@@ -40,23 +47,18 @@ export const CalculatorEl = () => {
     switch (event.target.name) {
       case 'weight':
         setWeight(s => (s = Number(event.target.value)));
-
         break;
       case 'height':
         setHeight(s => (s = Number(event.target.value)));
-
         break;
       case 'age':
         setAge(s => (s = Number(event.target.value)));
-
         break;
       case 'desiredWeight':
         setDesiredWeight(s => (s = Number(event.target.value)));
-
         break;
       case 'bloodType':
         setBloodType(s => (s = Number(event.target.value)));
-
         break;
       default:
         return;
@@ -69,7 +71,7 @@ export const CalculatorEl = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const id = user.id;
-    const form = e.currentTarget;
+
     const data = {
       weight,
       height,
@@ -80,13 +82,7 @@ export const CalculatorEl = () => {
     isLoggedIn
       ? dispatch(calculatorLogIn([id, data, token]))
       : dispatch(calculatorAnonim(data));
-    setWeight('');
-    setHeight('');
-    setAge('');
-    setDesiredWeight('');
-    setDesiredWeight('');
     openModal();
-    form.reset();
   };
 
   return (
@@ -156,6 +152,7 @@ export const CalculatorEl = () => {
                       name="bloodType"
                       value="1"
                       required
+                      defaultChecked={userBloodType === 1 ? true : false}
                     />
                     1
                   </RadioLabel>
@@ -165,6 +162,7 @@ export const CalculatorEl = () => {
                       name="bloodType"
                       value="2"
                       required
+                      defaultChecked={userBloodType === 2 ? true : false}
                     />
                     2
                   </RadioLabel>
@@ -174,6 +172,7 @@ export const CalculatorEl = () => {
                       name="bloodType"
                       value="3"
                       required
+                      defaultChecked={userBloodType === 3 ? true : false}
                     />
                     3
                   </RadioLabel>
@@ -183,6 +182,7 @@ export const CalculatorEl = () => {
                       name="bloodType"
                       value="4"
                       required
+                      defaultChecked={userBloodType === 4 ? true : false}
                     />
                     4
                   </RadioLabel>

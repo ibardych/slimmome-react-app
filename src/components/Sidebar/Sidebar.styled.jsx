@@ -30,7 +30,8 @@ export const SidebarStyled = styled.div`
     flex-grow: 0;
     flex-shrink: 0;
     margin: 0;
-    margin-left: 124px;
+    position: relative;
+    left: 124px;
   }
 
   & .summary {
