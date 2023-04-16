@@ -12,7 +12,6 @@ export const HeaderStyled = styled.header`
   z-index: 999;
   top: 0;
   width: 100%;
-  padding: 0 20px;
   height: 80px;
   border-bottom: 2px solid ${colors.color3};
 
@@ -26,7 +25,6 @@ export const HeaderStyled = styled.header`
   }
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    padding: 0 16px;
     border-bottom: none;
     margin-top: 80px;
   }
