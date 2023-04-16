@@ -26,7 +26,7 @@ export const CalculatorStyled = styled.div`
       bottom: 0;
       width: 40%;
       height: 100vh;
-      background: url(${imagedesk}) top 80px right #f0f1f3 no-repeat;
+      background: url(${imagedesk}) top 20px right #f0f1f3 no-repeat;
       background-size: auto 900px;
     }
   }

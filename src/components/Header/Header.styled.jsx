@@ -1,16 +1,19 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants/media';
-import { container, transition } from 'helpers';
+import { container } from 'helpers';
+import { colors } from 'constants/colors';
 
 export const HeaderStyled = styled.header`
+  @media screen and (max-width: ${mediaSizes.mobile}) {
+    height: 120px;
+    border: none;
+  }
   position: sticky;
   z-index: 999;
   top: 0;
   width: 100%;
-  padding: 20px 0;
   height: 80px;
-  border-bottom: 1px solid #e0e0e0;
-  padding-right: 8px;
+  border-bottom: 2px solid ${colors.color3};
 
   &.bg {
     background-color: #fff;
@@ -19,6 +22,7 @@ export const HeaderStyled = styled.header`
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
     border-bottom: none;
+    margin-top: 80px;
   }
 `;
 
@@ -26,11 +30,14 @@ export const HeaderContainer = styled.div`
   ${container}
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  height: 80px;
+  justify-content: space-between;
 `;
 
 export const MenuButton = styled.button`
   border: none;
-  padding: 15px;
+  padding: 10px;
   background-color: transparent;
   display: flex;
   justify-content: center;

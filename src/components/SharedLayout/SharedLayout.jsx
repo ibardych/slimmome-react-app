@@ -2,7 +2,7 @@ import Footer from 'components/Footer/Footer';
 import Header from 'components/Header/Header';
 import { Suspense, useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { SharedLayoutStyled } from './SharedLayout.styled';
+import { Container, SharedLayoutStyled } from './SharedLayout.styled';
 import { Button } from 'components/Styled';
 import { BiUpArrow } from 'react-icons/bi';
 import { Loader } from 'components/Loader/Loader';
@@ -34,10 +34,12 @@ const SharedLayout = () => {
 
   return (
     <SharedLayoutStyled>
-      <Header />
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
+      <Container>
+        <Header />
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
+      </Container>
       <Footer />
       {isVisible && (
         <Button type="button" className="icon totop" onClick={scrollToTop}>

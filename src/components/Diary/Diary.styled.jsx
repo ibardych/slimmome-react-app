@@ -3,14 +3,17 @@ import { mediaSizes } from 'constants';
 import { colors } from 'constants';
 
 export const DiaryForm = styled.form`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
+  display: none;
   @media screen and (min-width: ${mediaSizes.mobile}) {
-    flex-direction: column;
-    align-items: center;
+    /* flex-direction: column;
+    align-items: center; */
+    /* display: none; */
   }
   @media screen and (min-width: ${mediaSizes.tablet}) {
+    display: flex;
     flex-direction: row;
     align-items: center;
   }
@@ -24,10 +27,16 @@ export const DiaryStyled = styled.div`
   margin-top: 140px;
   display: flex;
   flex-direction: column;
+  margin-right: -20px;
+
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    margin-right: 0px;
+  }
 
   input:focus {
     outline: none;
   }
+
   & .Diary__box_line {
     display: flex;
     flex-direction: column;
@@ -85,6 +94,7 @@ export const DiaryStyled = styled.div`
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 0.04em;
+    font-weight: 400;
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
@@ -109,6 +119,7 @@ export const DiaryStyled = styled.div`
     line-height: 17px;
     text-align: right;
     letter-spacing: 0.04em;
+    font-weight: 400;
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
@@ -133,6 +144,7 @@ export const DiaryStyled = styled.div`
     line-height: 17px;
     text-align: right;
     letter-spacing: 0.04em;
+    font-weight: 400;
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
@@ -225,9 +237,9 @@ export const DiaryStyled = styled.div`
   & .Diary__header-wraper-data {
     display: flex;
     align-items: center;
+    margin-bottom: 32px;
+    height: 20px;
     @media screen and (min-width: ${mediaSizes.mobile}) {
-      margin-bottom: 32px;
-      height: 20px;
     }
     @media screen and (min-width: ${mediaSizes.tablet}) {
       margin-bottom: 60px;
@@ -339,17 +351,18 @@ export const DiaryStyledInp2 = styled.input`
 // `;
 
 export const DiaryStyledList = styled.ul`
-  margin-top: 80px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 280px;
+  height: 180px;
   position: relative;
   overflow-y: auto;
+  width: 100%;
 
   /* width */
   ::-webkit-scrollbar {
     width: 6px;
+    height: 0px;
   }
 
   /* Track */
@@ -360,7 +373,11 @@ export const DiaryStyledList = styled.ul`
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #264061;
-    background-size: contain;
+  }
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    margin-top: 80px;
+    height: 280px;
+    width: auto;
   }
 `;
 
@@ -422,4 +439,9 @@ export const ProductsList = styled.ul`
   & li:hover {
     background-color: #f2f2f2;
   }
+`;
+
+export const EmptyProductsMessage = styled.p`
+  margin-top: 30px;
+  color: ${colors.color2};
 `;
