@@ -80,6 +80,9 @@ export const ModalDailyCaloriesStyled = styled.div`
 
       margin-bottom: 40px;
 
+      height: 110px;
+      overflow: auto;
+      margin-right: 5px;
       /* width */
       ::-webkit-scrollbar {
         width: 6px;
