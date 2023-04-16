@@ -7,7 +7,8 @@ import { colors } from 'constants';
 
 export const ButtonCalc = styled(Button)`
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    margin-left: 340px;
+    min-width: 210px;
+    margin-left: 320px;
   }
 `;
 
