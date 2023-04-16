@@ -1,4 +1,4 @@
-import { nanoid } from '@reduxjs/toolkit'
+import { nanoid } from '@reduxjs/toolkit';
 import { useSelector } from 'react-redux';
 import Modal from 'components/Modal/Modal';
 import { ModalDailyCaloriesStyled } from './ModalDailyCalories.styled';
@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 export const ModalDailyCalories = () => {
-
   // const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,7 +36,13 @@ export const ModalDailyCalories = () => {
           <div className="recomendation">
             <p className="recomendation__title">Foods you should not eat</p>
             <ol className="recomendation__list">
-              {notAllowedProducts.filter((pr, idx) => idx < 4).map((pr)=>(<li className="recomendation__item" key={nanoid()}>{pr}</li>))}
+              {notAllowedProducts
+                .filter((pr, idx) => idx < 10)
+                .map(pr => (
+                  <li className="recomendation__item" key={nanoid()}>
+                    {pr}
+                  </li>
+                ))}
             </ol>
           </div>
         )}

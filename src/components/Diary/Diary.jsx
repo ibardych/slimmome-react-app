@@ -53,182 +53,184 @@ export const DiaryMain = () => {
 
   return (
     <DiaryStyled>
-      <div className="Diary__header-wraper-data">
-        <p className="Diary__data">
-          <DatePicker />
-        </p>
-        <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
-      </div>
-      <DiaryForm>
-        <div className="Diary__box_input">
-          <div className="Diary__box_line">
-            <DiaryStyledInp1
-              type="text"
-              id="search"
-              name="search"
-              value={searchValue}
-              onChange={handleSearchChange}
-              onBlur={handleInputBlur}
-              className="Diary__input_name"
-              placeholder="Enter product name"
-            />
-            {showDropdown && filteredProducts.length > 1 && (
-              <ProductsList>
-                {filteredProducts.map(product => (
-                  <li key={product.title.ua}>{product.title.ua}</li>
-                ))}
-              </ProductsList>
-            )}
-          </div>
-          <div className="Diary__box_line">
-            <DiaryStyledInp2
-              className="Diary__input_grams"
-              type="number"
-              placeholder="Grams"
-            />
-          </div>
+      <div className="mobile-diary-wrap">
+        <div className="Diary__header-wraper-data">
+          <p className="Diary__data">
+            <DatePicker/>
+          </p>
+          <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
         </div>
+        <DiaryForm>
+          <div className="Diary__box_input">
+            <div className="Diary__box_line">
+              <DiaryStyledInp1
+                type="text"
+                id="search"
+                name="search"
+                value={searchValue}
+                onChange={handleSearchChange}
+                onBlur={handleInputBlur}
+                className="Diary__input_name"
+                placeholder="Enter product name"
+              />
+              {showDropdown && filteredProducts.length > 1 && (
+                <ProductsList>
+                  {filteredProducts.map(product => (
+                    <li key={product.title.ua}>{product.title.ua}</li>
+                  ))}
+                </ProductsList>
+              )}
+            </div>
+            <div className="Diary__box_line">
+              <DiaryStyledInp2
+                className="Diary__input_grams"
+                type="number"
+                placeholder="Grams"
+              />
+            </div>
+          </div>
 
-        <ButtonDiary>
-          <AiOutlinePlus color="white" />
-        </ButtonDiary>
-      </DiaryForm>
-      <div className="Diarty__header-wrapper">
-        <DiaryStyledList>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-          <li className="Diarty__list-wrapper">
-            <ul className="Diarty__list">
-              <li className="Diary__list-name">name</li>
-              <li className="Diary__list-gram">100g</li>
-              <li className="Diary__list-kcal">320kcal</li>
-              <button className="Diary__btn" type="button">
-                <AiOutlineClose />
-              </button>
-            </ul>
-          </li>
-        </DiaryStyledList>
-        {/* <ButtonDiary>
+          <ButtonDiary>
+            <AiOutlinePlus color="white" />
+          </ButtonDiary>
+        </DiaryForm>
+        <div className="Diarty__header-wrapper">
+          <DiaryStyledList>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+            <li className="Diarty__list-wrapper">
+              <ul className="Diarty__list">
+                <li className="Diary__list-name">name</li>
+                <li className="Diary__list-gram">100g</li>
+                <li className="Diary__list-kcal">320kcal</li>
+                <button className="Diary__btn" type="button">
+                  <AiOutlineClose />
+                </button>
+              </ul>
+            </li>
+          </DiaryStyledList>
+          {/* <ButtonDiary>
           <AiOutlinePlus color="white" />
         </ButtonDiary> */}
+        </div>
       </div>
 
       {/* <DiaryStyled>Loading...</DiaryStyled> */}

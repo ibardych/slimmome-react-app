@@ -2,10 +2,14 @@ import { FormFields, RegisterFormStyled } from './RegisterForm.styled';
 import {
   FormContainer,
   Caption,
-  Label,
   ButtonContainer,
 } from 'components/Form/Form.styled';
-import Input from 'components/Form/Input';
+import {
+  InputWraper,
+  InputField,
+  LabeForInput,
+  LabelInfo,
+} from 'components/Form/Input.styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Styled';
@@ -43,33 +47,52 @@ export const RegisterForm = () => {
     navigate(path);
   };
 
-  console.log(fields);
   return (
     <RegisterFormStyled>
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
         <Caption>Register</Caption>
         <FormFields>
-          <Label>Name *</Label>
-          <Input
-            type="text"
-            name="username"
-            value={fields.username}
-            onChange={handleInputChange}
-          />
-          <Label>Email *</Label>
-          <Input
-            type="email"
-            name="email"
-            value={fields.email}
-            onChange={handleInputChange}
-          />
-          <Label>Password *</Label>
-          <Input
-            type="password"
-            name="password"
-            value={fields.password}
-            onChange={handleInputChange}
-          />
+          <InputWraper>
+            <InputField
+              type="text"
+              name="username"
+              autocomplete="off"
+              required
+              value={fields.name}
+              onChange={handleInputChange}
+            />
+            <LabeForInput htmlFor="email" className="labelName">
+              <LabelInfo className="contentName">Email *</LabelInfo>
+            </LabeForInput>
+          </InputWraper>
+
+          <InputWraper>
+            <InputField
+              type="text"
+              name="email"
+              autocomplete="off"
+              required
+              value={fields.name}
+              onChange={handleInputChange}
+            />
+            <LabeForInput htmlFor="email" className="labelName">
+              <LabelInfo className="contentName">Email *</LabelInfo>
+            </LabeForInput>
+          </InputWraper>
+
+          <InputWraper>
+            <InputField
+              type="password"
+              name="password"
+              autocomplete="off"
+              required
+              value={fields.name}
+              onChange={handleInputChange}
+            />
+            <LabeForInput htmlFor="password" className="labelName">
+              <LabelInfo className="contentName">Password *</LabelInfo>
+            </LabeForInput>
+          </InputWraper>
         </FormFields>
         <ButtonContainer>
           <Button

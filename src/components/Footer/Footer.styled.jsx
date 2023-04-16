@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { mediaSizes } from 'constants';
 import { colors } from 'constants';
 
 export const FooterStyled = styled.footer`
@@ -8,6 +9,14 @@ export const FooterStyled = styled.footer`
   bottom: 0;
   padding-top: 15px;
   padding-bottom: 15px;
+
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    margin-top: 100px;
+  }
+
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    margin-top: 200px;
+  }
 
   & ul {
     display: flex;

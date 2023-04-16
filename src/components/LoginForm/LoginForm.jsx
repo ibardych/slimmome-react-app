@@ -1,10 +1,14 @@
 import {
   FormContainer,
   Caption,
-  Label,
   ButtonContainer,
 } from 'components/Form/Form.styled';
-import Input from 'components/Form/Input';
+import {
+  InputWraper,
+  InputField,
+  LabeForInput,
+  LabelInfo,
+} from 'components/Form/Input.styled';
 import { Button } from 'components/Styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -51,20 +55,33 @@ export const LoginForm = () => {
       <FormContainer onSubmit={handleSubmit} autoComplete="off">
         <Caption>Login</Caption>
         <FormFields>
-          <Label>Email *</Label>
-          <Input
-            type="email"
-            name="email"
-            value={fields.name}
-            onChange={handleInputChange}
-          />
-          <Label>Password *</Label>
-          <Input
-            type="password"
-            name="password"
-            value={fields.name}
-            onChange={handleInputChange}
-          />
+          <InputWraper>
+            <InputField
+              type="text"
+              name="email"
+              autocomplete="off"
+              required
+              value={fields.name}
+              onChange={handleInputChange}
+            />
+            <LabeForInput htmlFor="email" className="labelName">
+              <LabelInfo className="contentName">Email *</LabelInfo>
+            </LabeForInput>
+          </InputWraper>
+
+          <InputWraper>
+            <InputField
+              type="password"
+              name="password"
+              autocomplete="off"
+              required
+              value={fields.name}
+              onChange={handleInputChange}
+            />
+            <LabeForInput htmlFor="password" className="labelName">
+              <LabelInfo className="contentName">Password *</LabelInfo>
+            </LabeForInput>
+          </InputWraper>
         </FormFields>
         <ButtonContainer>
           <Button className="orange regLogbutton" type="submit ">
