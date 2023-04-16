@@ -1,25 +1,16 @@
 import { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomDatePicker } from './DatePicker.styled';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { diaryDayInfo } from 'redux/diary/operations';
 
 const DatePicker = () => {
+  const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
-    const fetchData = async () => {
-      const dataToSend = { date: startDate.toISOString().slice(0, 10) };
-      try {
-        await axios.post(
-          'https://slimmom-backend.goit.global/day/info',
-          dataToSend
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [startDate]);
+    dispatch(diaryDayInfo(startDate));
+  }, [dispatch, startDate]);
 
   const handleDateChange = date => {
     setStartDate(date);

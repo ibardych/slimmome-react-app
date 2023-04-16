@@ -55,9 +55,9 @@ export const DiaryMain = () => {
     <DiaryStyled>
       <div className="mobile-diary-wrap">
         <div className="Diary__header-wraper-data">
-          <p className="Diary__data">
+          <div className="Diary__data">
             <DatePicker/>
-          </p>
+          </div>
           <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
         </div>
         <DiaryForm>
