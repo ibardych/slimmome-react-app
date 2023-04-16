@@ -72,8 +72,9 @@ export const InputField = styled.input`
   }
   &:focus + .labelName .contentName,
   &:valid + .labelName .contentName {
-    transform: translateY(-100%);
-    font-size: 10px;
+    transform: translateY(-20px);
+    font-size: 12px;
+    font-weight: 100;
     left: 0px;
     color: ${colors.color2};
   }

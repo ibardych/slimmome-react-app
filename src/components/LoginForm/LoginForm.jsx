@@ -71,7 +71,7 @@ export const LoginForm = () => {
 
           <InputWraper>
             <InputField
-              type="text"
+              type="password"
               name="password"
               autocomplete="off"
               required

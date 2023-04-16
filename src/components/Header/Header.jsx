@@ -19,7 +19,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserInfoShown, setUserInfoShown] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const clickHandler = useCallback(
     event => {
@@ -36,7 +36,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY < 20;
+      const isTop = window.scrollY <= 80;
       setIsScrolled(!isTop);
     };
 

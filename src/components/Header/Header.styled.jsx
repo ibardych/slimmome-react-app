@@ -28,6 +28,7 @@ export const HeaderStyled = styled.header`
   @media screen and (min-width: ${mediaSizes.desktop}) {
     padding: 0 16px;
     border-bottom: none;
+    margin-top: 80px;
   }
 `;
 

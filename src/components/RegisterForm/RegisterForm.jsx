@@ -82,7 +82,7 @@ export const RegisterForm = () => {
 
           <InputWraper>
             <InputField
-              type="text"
+              type="password"
               name="password"
               autocomplete="off"
               required
