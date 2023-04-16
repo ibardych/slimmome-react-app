@@ -89,7 +89,7 @@ export const LoginForm = () => {
           </Button>
           <Button
             className="white regLogbutton"
-            type="submit"
+            type="button"
             onClick={redirection}
           >
             Register

@@ -9,10 +9,8 @@ export const FooterStyled = styled.footer`
   bottom: 0;
   padding-top: 15px;
   padding-bottom: 15px;
-
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    margin-top: 100px;
-  }
+  margin-top: 100px;
+  margin-bottom: 10px;
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
     margin-top: 200px;

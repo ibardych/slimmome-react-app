@@ -6,7 +6,7 @@ export const FormContainer = styled.form``;
 
 export const Caption = styled.p`
   margin: 0;
-  margin-top: 160px;
+  margin-top: 40px;
   margin-bottom: 55px;
   margin-right: auto;
   text-transform: uppercase;
@@ -15,6 +15,12 @@ export const Caption = styled.p`
   line-height: 1.2;
   letter-spacing: 0.04em;
   color: ${colors.color1};
+  text-align: center;
+
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    margin-top: 160px;
+    text-align: left;
+  }
 `;
 
 export const Label = styled.span`

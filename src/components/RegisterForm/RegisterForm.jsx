@@ -97,7 +97,7 @@ export const RegisterForm = () => {
         <ButtonContainer>
           <Button
             className="white regLogbutton"
-            type="submit"
+            type="button"
             onClick={redirection}
           >
             Log In
