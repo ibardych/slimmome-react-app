@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants';
 import { colors } from 'constants';
+import { transition } from 'helpers';
 
 export const DiaryForm = styled.form`
   /* display: flex;
@@ -421,7 +422,7 @@ export const ProductsList = styled.ul`
 
   & li {
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.4;
     color: ${colors.color2};
 
@@ -430,12 +431,12 @@ export const ProductsList = styled.ul`
 
     &:not(:last-child) {
       border-bottom: 0.5px solid ${colors.color2};
-      transition: transform 300ms;
+      transition: ${transition};
     }
 
   &:hover {
-    // background-color: #f2f2f2;
-    transform: scale(1.015)
+    color: ${colors.color4};
+    border-bottom: 0.5px solid ${colors.color4};
   }
 `;
 
