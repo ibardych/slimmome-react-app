@@ -1,20 +1,32 @@
 import { SidebarStyled } from './Sidebar.styled';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { DiaryStyledList } from 'components/Diary/Diary.styled';
-import { selectDaySummary, selectSelectedDate } from 'redux/diary/selectors';
+import { selectDaySummary } from 'redux/diary/selectors';
 import { formatDate } from 'helpers';
+import { diaryDayInfo } from 'redux/diary/operations';
+// import { selectNotAllowedProducts } from 'redux/calculator/selectors';
+import { selectUser } from 'redux/auth/selectors';
+import { useEffect } from 'react';
+import { useMemo } from "react";
 
 const Sidebar = () => {
-  const selectedDate = useSelector(selectSelectedDate);
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const memoizedDayNow = useMemo(
+    () => new Date(),[]);
   const daySummary = useSelector(selectDaySummary);
-  const forbiddenProducts = useSelector(
-    state => state.calculator.notAllowedProducts
-  );
+  const forbiddenProducts = user.userData.notAllowedProducts;
+
+  useEffect(() => {
+    const date = memoizedDayNow.toISOString().slice(0, 10);
+    dispatch(diaryDayInfo(date));
+  }, [dispatch, memoizedDayNow]);
+
 
   return (
     <SidebarStyled>
       <div className="summary">
-        <h2 className="title">Summary for {formatDate(selectedDate)}</h2>
+        <h2 className="title">Summary for {formatDate(memoizedDayNow)}</h2>
         <ul className="listData">
           <li className="item">
             <h3 className="title__name">Left</h3>
