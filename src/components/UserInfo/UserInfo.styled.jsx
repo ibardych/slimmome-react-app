@@ -13,7 +13,7 @@ export const Div = styled.div`
     width: 100%;
     height: 40px;
     background-color: #eff1f3;
-    border-top: 2px solid ${colors.color3};
+    margin-left: auto;
   }
 
   @media screen and (min-width: ${mediaSizes.mobile}) {
@@ -49,8 +49,8 @@ export const Button = styled.button`
   margin-left: 15px;
   padding-left: 15px;
   border: none;
-  background-color: transparent;
   border-left: 2px solid ${colors.color3};
+  background-color: transparent;
   height: 32px;
   font-family: 'Verdana';
   font-style: normal;
