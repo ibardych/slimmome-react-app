@@ -19,7 +19,7 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserInfoShown, setUserInfoShown] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const clickHandler = useCallback(
     event => {
@@ -49,7 +49,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= parseInt(mediaSizes.desktop)) {
+      if (window.innerWidth <= parseInt(mediaSizes.desktop) && isLoggedIn) {
         setShowBurgerIcon(true);
       } else {
         setShowBurgerIcon(false);
@@ -67,7 +67,7 @@ const Header = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     document.addEventListener('keydown', clickHandler);
