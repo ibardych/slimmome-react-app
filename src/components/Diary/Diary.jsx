@@ -15,13 +15,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsList } from 'redux/dropdown/operations';
 import { useState } from 'react';
 import { selectProducts } from 'redux/dropdown/selectors';
+import DatePicker from 'components/DatePicker/DatePicker';
 
 export const DiaryMain = () => {
-  const today = new Date();
-  const day = today.getDate().toString().padStart(2, '0');
-  const month = (today.getMonth() + 1).toString().padStart(2, '0');
-  const year = today.getFullYear().toString();
-  const currentDate = `${day}.${month}.${year}`;
+  // const today = new Date();
+  // const day = today.getDate().toString().padStart(2, '0');
+  // const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  // const year = today.getFullYear().toString();
+  // const currentDate = `${day}.${month}.${year}`;
 
   const dispatch = useDispatch();
 
@@ -53,7 +54,9 @@ export const DiaryMain = () => {
   return (
     <DiaryStyled>
       <div className="Diary__header-wraper-data">
-        <p className="Diary__data">{currentDate}</p>
+        <p className="Diary__data">
+          <DatePicker />
+        </p>
         <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
       </div>
       <DiaryForm>
