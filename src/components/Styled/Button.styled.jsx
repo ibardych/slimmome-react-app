@@ -46,7 +46,7 @@ export const Button = styled.button`
 
     & svg {
       position: relative;
-      bottom: -2px;
+      bottom: 1px;
     }
 
     &::before,

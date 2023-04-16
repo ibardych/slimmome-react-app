@@ -25,76 +25,50 @@ export const InputStyled = styled.input`
 export const InputWraper = styled.div`
   width: 100%;
   position: relative;
-  height: 40px;
-  color: ${colors.color2};
-  overflow: hidden;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 
   & input {
     width: 100%;
     height: 100%;
-    color: ${colors.color2};
-    padding-top: 20px;
+    color: ${colors.color4};
+    margin-top: 20px;
     border: none;
     background-color: #fff;
+    border-bottom: 1px solid ${colors.color3};
+    padding-bottom: 7px;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus + label {
+      color: #dddddd;
+    }
+
+    &:not(:placeholder-shown) + label {
+      transform: translateY(-22px);
+      font-size: 12px;
+      font-weight: 100;
+      color: ${colors.color2};
+    }
   }
+
   & label {
     position: absolute;
-    bottom: 0px;
-    left: 0px;
+    bottom: 10px;
+    left: 2px;
     width: 100%;
-    height: 100%;
     pointer-events: none;
-    border-bottom: 1px solid white;
-  }
-  & label::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid ${colors.color3};
+    font-size: 14px;
+    color: ${colors.color2};
     transition: all 0.3s ease;
   }
-`;
 
-export const InputField = styled.input`
-  width: 100%;
-  height: 100%;
-  color: ${colors.color2};
-  padding-top: 20px;
-  border: none;
-  background-color: #fff;
-
-  &:focus {
-    outline: none;
-  }
-  &:focus + .labelName .contentName,
-  &:valid + .labelName .contentName {
-    transform: translateY(-20px);
+  & .error {
+    position: absolute;
+    top: 50px;
     font-size: 12px;
-    font-weight: 100;
-    left: 0px;
-    color: ${colors.color2};
+    color: ${colors.color1};
   }
 `;
-
-export const LabeForInput = styled.label`
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  border-bottom: 1px solid white;
-`;
-
-export const LabelInfo = styled.span`
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  padding-bottom: 5px;
-  transition: all 0.3s ease;
-  font-size: 14px;
-`;
+export const LabelInfo = styled.span``;

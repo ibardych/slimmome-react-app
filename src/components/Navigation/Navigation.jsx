@@ -14,7 +14,7 @@ const Navigation = () => {
       </li>
     </NavigationStyled>
   ) : (
-    <NavigationStyled>
+    <NavigationStyled className="borderLeft">
       <li>
         <LinkStyled to="/diary">diary</LinkStyled>
       </li>

@@ -4,12 +4,7 @@ import {
   Caption,
   ButtonContainer,
 } from 'components/Form/Form.styled';
-import {
-  InputWraper,
-  InputField,
-  LabeForInput,
-  LabelInfo,
-} from 'components/Form/Input.styled';
+import { InputWraper } from 'components/Form/Input.styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Styled';
@@ -53,51 +48,45 @@ export const RegisterForm = () => {
         <Caption>Register</Caption>
         <FormFields>
           <InputWraper>
-            <InputField
+            <input
               type="text"
               name="username"
-              autocomplete="off"
+              autoComplete="off"
               required
               value={fields.name}
               onChange={handleInputChange}
             />
-            <LabeForInput htmlFor="email" className="labelName">
-              <LabelInfo className="contentName">Email *</LabelInfo>
-            </LabeForInput>
+            <label htmlFor="email">Name *</label>
           </InputWraper>
 
           <InputWraper>
-            <InputField
+            <input
               type="text"
               name="email"
-              autocomplete="off"
+              autoComplete="off"
               required
               value={fields.name}
               onChange={handleInputChange}
             />
-            <LabeForInput htmlFor="email" className="labelName">
-              <LabelInfo className="contentName">Email *</LabelInfo>
-            </LabeForInput>
+            <label htmlFor="email">Email *</label>
           </InputWraper>
 
           <InputWraper>
-            <InputField
+            <input
               type="password"
               name="password"
-              autocomplete="off"
+              autoComplete="off"
               required
               value={fields.name}
               onChange={handleInputChange}
             />
-            <LabeForInput htmlFor="password" className="labelName">
-              <LabelInfo className="contentName">Password *</LabelInfo>
-            </LabeForInput>
+            <label htmlFor="password">Password *</label>
           </InputWraper>
         </FormFields>
         <ButtonContainer>
           <Button
             className="white regLogbutton"
-            type="submit"
+            type="button"
             onClick={redirection}
           >
             Log In
