@@ -440,3 +440,8 @@ export const ProductsList = styled.ul`
     background-color: #f2f2f2;
   }
 `;
+
+export const EmptyProductsMessage = styled.p`
+  margin-top: 30px;
+  color: ${colors.color2};
+`;

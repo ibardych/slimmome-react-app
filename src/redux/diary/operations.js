@@ -4,13 +4,26 @@ import axios from 'axios';
 export const diaryDayInfo = createAsyncThunk(
   'diary/dayInfo',
   async (date, thunkApi) => {
-    const dataToSend = { date: date.toISOString().slice(0, 10) };
     try {
-      const response = await axios.post('/day/info', dataToSend);
+      const response = await axios.post('/day/info', { date });
 
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteProductThunk = createAsyncThunk(
+  'diary/deleteProduct',
+  async ([eatenProductId, dayId], thunkApi) => {
+    try {
+        console.log({ dayId, eatenProductId })
+        const response = await axios.delete('/day', {data:{ dayId, eatenProductId }});
+
+        return {data: response.data, productId: eatenProductId};
+    } catch (error) {
+        return thunkApi.rejectWithValue(error.message);
     }
   }
 );
