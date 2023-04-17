@@ -71,4 +71,12 @@ export const InputWraper = styled.div`
     color: ${colors.color1};
   }
 `;
+
+export const ErrorBloodType = styled.div`
+    position: absolute;
+    top: 50px;
+    font-size: 12px;
+    color: ${colors.color1};
+  `
+
 export const LabelInfo = styled.span``;

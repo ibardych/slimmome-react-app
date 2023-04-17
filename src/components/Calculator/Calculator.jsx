@@ -16,6 +16,7 @@ import {
   RadioLabel,
   RadioInput,
   ButtonCalc,
+  ErrorMSG
 } from './Calculator.styled';
 import { setModalOpened } from 'redux/modalOpenedSlice';
 import { ModalDailyCalories } from 'components/ModalDailyCalories';
@@ -110,12 +111,12 @@ export const CalculatorEl = () => {
       bloodType: Number(bloodType),
     };
 
-    dispatch(setUserData({ weight, height, age, desiredWeight, bloodType }));
-
+  if (isLoggedIn) dispatch(setUserData({ weight, height, age, desiredWeight, bloodType }));
+    
     const id = user.id;
     isLoggedIn
-      ? dispatch(calculatorLogIn([id, sendData, token]))
-      : dispatch(calculatorAnonim(sendData));
+    ? dispatch(calculatorLogIn([id, sendData, token]))
+    : dispatch(calculatorAnonim(sendData));
     openModal();
   };
 
@@ -201,6 +202,10 @@ export const CalculatorEl = () => {
                     <RadioInput type="radio" name="bloodType" value="4" />4
                   </RadioLabel>
                 </RadioGroup>
+                  <ErrorMSG
+                    component="div"
+                    name="bloodType"
+                  />
               </InputsWrapper>
             </FormWrapper>
             <ButtonCalc className="orange" type="submit">
