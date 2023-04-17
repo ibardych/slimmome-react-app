@@ -37,7 +37,7 @@ export const ModalDailyCalories = () => {
             <p className="recomendation__title">Foods you should not eat</p>
             <ol className="recomendation__list">
               {notAllowedProducts
-                .filter((pr, idx) => idx < 10)
+                .filter((pr, idx) => idx < 20)
                 .map(pr => (
                   <li className="recomendation__item" key={nanoid()}>
                     {pr}
