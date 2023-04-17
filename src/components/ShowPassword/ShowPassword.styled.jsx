@@ -1,17 +1,18 @@
 import styled from '@emotion/styled';
 import { BsFillEyeFill } from 'react-icons/bs';
 import { BsFillEyeSlashFill } from 'react-icons/bs';
+import { mediaSizes } from 'constants/media';
 
 export const ShowPasswordButton = styled.button`
   position: absolute;
   top: 22px;
-  left: 210px;
+  right: 5px;
   border: none;
   background-color: transparent;
   padding: 5px;
   cursor: pointer;
-  //   pointer-events: none;
 `;
+
 export const ShowIcon = styled(BsFillEyeFill)`
   width: 14px;
   height: 12 px;
