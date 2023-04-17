@@ -8,11 +8,13 @@ import { register } from 'redux/auth/operations';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import Message from 'components/Message/Message';
+import ShowPassword from 'components/ShowPassword/ShowPassword';
 import { selectError } from 'redux/auth/selectors';
+import { useState } from 'react';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
-
+  const [passwordShown, setPasswordShown] = useState(false);
   const initialValues = { username: '', email: '', password: '' };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -32,6 +34,10 @@ export const RegisterForm = () => {
   const redirection = () => {
     const path = '/login';
     navigate(path);
+  };
+
+  const onClickHandler = () => {
+    setPasswordShown(state => !state);
   };
 
   return (
@@ -57,7 +63,15 @@ export const RegisterForm = () => {
             </InputWraper>
 
             <InputWraper>
-              <Field type="password" name="password" placeholder=" " />
+              <ShowPassword
+                clickHandler={onClickHandler}
+                isShown={passwordShown}
+              />
+              <Field
+                type={passwordShown ? 'text' : 'password'}
+                name="password"
+                placeholder=" "
+              />
               <label htmlFor="password">Password *</label>
               <ErrorMessage className="error" component="div" name="password" />
             </InputWraper>

@@ -7,11 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import { selectError } from 'redux/auth/selectors';
 import Message from 'components/Message/Message';
+import ShowPassword from 'components/ShowPassword/ShowPassword';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
+import { useState } from 'react';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const [passwordShown, setPasswordShown] = useState(false);
 
   const schema = yup.object().shape({
     email: yup.string().min(3).max(254).required(),
@@ -55,7 +58,15 @@ export const LoginForm = () => {
             </InputWraper>
 
             <InputWraper>
-              <Field type="password" name="password" placeholder=" " />
+              <ShowPassword
+                clickHandler={onClickHandler}
+                isShown={passwordShown}
+              />
+              <Field
+                type={passwordShown ? 'text' : 'password'}
+                name="password"
+                placeholder=" "
+              />
               <label htmlFor="password">Password *</label>
               <ErrorMessage className="error" component="div" name="password" />
             </InputWraper>

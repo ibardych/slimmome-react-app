@@ -4,7 +4,7 @@ import { BsFillEyeSlashFill } from 'react-icons/bs';
 
 export const ShowPasswordButton = styled.button`
   position: absolute;
-  bottom: 38px;
+  top: 22px;
   left: 210px;
   border: none;
   background-color: transparent;
