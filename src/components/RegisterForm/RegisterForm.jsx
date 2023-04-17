@@ -1,40 +1,32 @@
 import { FormFields, RegisterFormStyled } from './RegisterForm.styled';
-import {
-  FormContainer,
-  Caption,
-  ButtonContainer,
-} from 'components/Form/Form.styled';
+import { Caption, ButtonContainer } from 'components/Form/Form.styled';
 import { InputWraper } from 'components/Form/Input.styled';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from 'redux/auth/operations';
-
-const defaultFields = { username: '', email: '', password: '' };
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import * as yup from 'yup';
+import Message from 'components/Message/Message';
+import { selectError } from 'redux/auth/selectors';
 
 export const RegisterForm = () => {
-  const [fields, setFields] = useState(defaultFields);
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    dispatch(
-      register({
-        username: form.elements.username.value,
-        email: form.elements.email.value,
-        password: form.elements.password.value,
-      })
-    );
+  const initialValues = { username: '', email: '', password: '' };
 
-    form.reset();
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(register(values));
+    resetForm();
   };
 
-  const handleInputChange = e => {
-    const { name, value } = e.target;
-    setFields(fields => ({ ...fields, [name]: value }));
-  };
+  const schema = yup.object().shape({
+    username: yup.string().min(3).max(254).required(),
+    email: yup.string().min(3).max(254).required(),
+    password: yup.string().min(8).max(100).required(),
+  });
+
+  const message = useSelector(selectError);
 
   const navigate = useNavigate();
   const redirection = () => {
@@ -44,58 +36,47 @@ export const RegisterForm = () => {
 
   return (
     <RegisterFormStyled>
-      <FormContainer onSubmit={handleSubmit} autoComplete="off">
-        <Caption>Register</Caption>
-        <FormFields>
-          <InputWraper>
-            <input
-              type="text"
-              name="username"
-              autoComplete="off"
-              required
-              value={fields.name}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="email">Name *</label>
-          </InputWraper>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={schema}
+        onSubmit={handleSubmit}
+      >
+        <Form autoComplete="off">
+          <Caption>Register</Caption>
+          <FormFields>
+            <InputWraper>
+              <Field type="text" name="username" placeholder=" " />
+              <label htmlFor="username">Name *</label>
+              <ErrorMessage className="error" component="div" name="username" />
+            </InputWraper>
 
-          <InputWraper>
-            <input
-              type="text"
-              name="email"
-              autoComplete="off"
-              required
-              value={fields.name}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="email">Email *</label>
-          </InputWraper>
+            <InputWraper>
+              <Field type="text" name="email" placeholder=" " />
+              <label htmlFor="email">Email *</label>
+              <ErrorMessage className="error" component="div" name="email" />
+            </InputWraper>
 
-          <InputWraper>
-            <input
-              type="password"
-              name="password"
-              autoComplete="off"
-              required
-              value={fields.name}
-              onChange={handleInputChange}
-            />
-            <label htmlFor="password">Password *</label>
-          </InputWraper>
-        </FormFields>
-        <ButtonContainer>
-          <Button
-            className="white regLogbutton"
-            type="button"
-            onClick={redirection}
-          >
-            Log In
-          </Button>
-          <Button className="orange regLogbutton" type="submit">
-            Register
-          </Button>
-        </ButtonContainer>
-      </FormContainer>
+            <InputWraper>
+              <Field type="password" name="password" placeholder=" " />
+              <label htmlFor="password">Password *</label>
+              <ErrorMessage className="error" component="div" name="password" />
+            </InputWraper>
+          </FormFields>
+          <ButtonContainer>
+            <Button
+              className="white regLogbutton"
+              type="button"
+              onClick={redirection}
+            >
+              Log In
+            </Button>
+            <Button className="orange regLogbutton" type="submit">
+              Register
+            </Button>
+          </ButtonContainer>
+        </Form>
+      </Formik>
+      {message && <Message>{message}</Message>}
     </RegisterFormStyled>
   );
 };

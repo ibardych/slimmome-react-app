@@ -2,16 +2,24 @@ import styled from '@emotion/styled';
 import { mediaSizes } from 'constants/media';
 import { ishidden, transition } from 'helpers';
 
+const headerHeight = '80px';
+
 export const ModalStyled = styled.div`
   position: fixed;
   z-index: 3;
-  top: 0;
+  top: ${headerHeight};
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(33, 33, 33, 0.12);
+  height: calc(100% - ${headerHeight});
   opacity: 1;
   ${transition('visible')};
+
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    height: 100%;
+    z-index: 5;
+    top: 0;
+    background-color: rgba(33, 33, 33, 0.12);
+  }
 
   &.is-hidden {
     ${ishidden};
@@ -24,16 +32,18 @@ export const ModalStyled = styled.div`
 
   & .modal {
     position: fixed;
-    top: 50%;
+    top: ${headerHeight};
     left: 50%;
     width: 100%;
-    height: 100%;
-    transform: translateX(-50%) translateY(-50%);
+    height: calc(100% - ${headerHeight});
+    transform: translateX(-50%) translateY(0px);
 
     @media screen and (min-width: ${mediaSizes.tablet}) {
+      top: 50%;
       width: 672px;
       height: auto;
       max-width: calc(100% - 24px * 2);
+      transform: translateX(-50%) translateY(-50%);
     }
   }
 
@@ -60,6 +70,8 @@ export const ModalStyled = styled.div`
     border: none;
     cursor: pointer;
     padding: 0;
+    display: flex;
+    align-items: center;
 
     position: absolute;
     top: 0;
@@ -88,16 +100,18 @@ export const ModalStyled = styled.div`
   }
 
   & .return__icon {
-    position: absolute;
-    left: 20px;
-    top: 10px;
-    width: 25px;
-    height: 20px;
+    margin-left: 20px;
+    width: 12px;
+    height: 7px;
     cursor: pointer;
     ${transition('transform')}
 
     &:hover {
       transform: scale(1.2);
+    }
+
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      position: absolute;
     }
   }
 `;
