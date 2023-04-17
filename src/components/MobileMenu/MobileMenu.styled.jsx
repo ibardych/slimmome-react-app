@@ -19,13 +19,13 @@ export const Menu = styled.div`
 export const Link = styled(NavLink)`
   font-family: 'Verdana';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 18px;
   line-height: 1.22;
   text-align: center;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #fff;
+  color: ${colors.color2};
 
   @media screen and (min-width: ${mediaSizes.mobile}) {
     font-size: 24px;
@@ -33,7 +33,8 @@ export const Link = styled(NavLink)`
   }
 
   &.active {
-    color: ${colors.color2};
+    color: #fff;
+    font-weight: 700;
   }
 `;
 

@@ -15,8 +15,9 @@ export const ButtonCalc = styled(Button)`
 export const CalculatorStyled = styled.div`
   ${container};
   display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
   flex-direction: column;
-  align-items: center;
   padding-top: 32px;
   padding-bottom: 100px;
 
@@ -24,14 +25,14 @@ export const CalculatorStyled = styled.div`
     padding-top: 100px;
     align-items: flex-start;
   }
-  @media screen and (min-width: ${mediaSizes.deskop}) {
-    width: 608px;
-    padding-top: 153px;
-    padding-left: 13px;
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    padding: 0;
+    margin: 0;
+    padding-top: 140px;
+    width: 60%;
   }
 
   h2 {
-    width: 280px;
     font-size: 18px;
     font-weight: 700;
     line-height: 1.4;
@@ -50,6 +51,7 @@ export const CalculatorStyled = styled.div`
 `;
 
 export const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 34px;
@@ -58,6 +60,7 @@ export const Form = styled.form`
     margin-top: 68px;
   }
 `;
+
 export const FormWrapper = styled.div`
   margin-bottom: 32px;
   display: flex;
@@ -83,7 +86,7 @@ export const InputsWrapper = styled.div`
 
 export const Input = styled.input`
   height: 24px;
-  width: 240px;
+  width: 100%;
   border: none;
   font-size: 14px;
   font-weight: 700;
@@ -180,10 +183,9 @@ export const RadioInput = styled.input`
   }
 `;
 
-
 // <div className={css.form}>
 //              <input
-//               class="in" 
+//               class="in"
 //               type="email"
 //               name="email"
 //               autocomplete="off"
@@ -211,7 +213,7 @@ export const RadioInput = styled.input`
 //   padding-top: 20px;
 //   border: none;
 //   background-color: #fff;
-  
+
 // }
 // .form label {
 //   position: absolute;

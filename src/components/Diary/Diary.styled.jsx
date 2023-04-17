@@ -1,37 +1,19 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants';
 import { colors } from 'constants';
-import { transition } from 'helpers';
-
-export const DiaryForm = styled.form`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  display: none;
-  @media screen and (min-width: ${mediaSizes.mobile}) {
-    /* flex-direction: column;
-    align-items: center; */
-    /* display: none; */
-  }
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  @media screen and (min-width: ${mediaSizes.desktop}) {
-    flex-direction: row;
-    align-items: center;
-  }
-`;
+import { container, transition } from 'helpers';
 
 export const DiaryStyled = styled.div`
+  ${container}
   margin-top: 140px;
   display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
   flex-direction: column;
-  margin-right: -20px;
 
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    margin-right: 0px;
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    width: 60%;
+    padding: 0;
   }
 
   input:focus {
@@ -290,6 +272,27 @@ export const DiaryStyled = styled.div`
   }
 `;
 
+export const DiaryForm = styled.form`
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  display: none;
+  @media screen and (min-width: ${mediaSizes.mobile}) {
+    /* flex-direction: column;
+    align-items: center; */
+    /* display: none; */
+  }
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
 export const DiaryStyledInp1 = styled.input`
   border: none;
   border-bottom: 1px solid #e0e0e0;
@@ -355,10 +358,11 @@ export const DiaryStyledList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 180px;
+  max-height: 280px;
   position: relative;
   overflow-y: auto;
   width: 100%;
+  margin-top: 32px;
 
   /* width */
   ::-webkit-scrollbar {
@@ -376,9 +380,11 @@ export const DiaryStyledList = styled.ul`
     background: #264061;
   }
   @media screen and (min-width: ${mediaSizes.tablet}) {
-    margin-top: 80px;
-    height: 280px;
-    width: auto;
+    margin-top: 60px;
+  }
+
+  & > li:last-child {
+    margin-bottom: 6px;
   }
 `;
 
@@ -434,9 +440,10 @@ export const ProductsList = styled.ul`
       transition: ${transition};
     }
 
-  &:hover {
-    color: ${colors.color4};
-    border-bottom: 0.5px solid ${colors.color4};
+    &:hover {
+      color: ${colors.color4};
+      border-bottom: 0.5px solid ${colors.color4};
+    }
   }
 `;
 

@@ -26,11 +26,11 @@ export const CalculatorEl = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
   const token = useSelector(selectToken);
-  const userWeight = user.userData.weight;
-  const userHeight = user.userData.height;
-  const userAge = user.userData.age;
-  const userdesiredWeight = user.userData.desiredWeight;
-  const userBloodType = user.userData.bloodType;
+  const userWeight = user.userData?.weight ?? '';
+  const userHeight = user.userData?.height ?? '';
+  const userAge = user.userData?.age ?? '';
+  const userdesiredWeight = user.userData?.desiredWeight ?? '';
+  const userBloodType = user.userData?.bloodType ?? '';
 
   console.log(userBloodType);
   const [weight, setWeight] = useState(userWeight);
