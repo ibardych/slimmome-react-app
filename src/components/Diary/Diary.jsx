@@ -10,7 +10,6 @@ import {
 import { AiOutlinePlus } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ButtonDiary } from 'components/Styled/Button-Diary.styled';
-import { AiOutlineCalendar } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsList } from 'redux/dropdown/operations';
 import { useState } from 'react';
@@ -82,7 +81,6 @@ export const DiaryMain = () => {
           <div className="Diary__data">
             <DatePicker />
           </div>
-          <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
         </div>
         <DiaryForm>
           <div className="Diary__box_input">
@@ -138,7 +136,7 @@ export const DiaryMain = () => {
               {eatenProducts.map(product => (
                 <li key={product.id} className="Diarty__list-wrapper">
                   <ul className="Diarty__list">
-                    <li className="Diary__list-name">{product.title}</li>
+                    <li className="Diary__list-name" title={product.title}>{product.title}</li>
                     <li className="Diary__list-gram">
                       {product.weight?.toFixed(2)} g
                     </li>
