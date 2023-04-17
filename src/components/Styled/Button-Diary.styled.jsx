@@ -18,10 +18,10 @@ export const ButtonDiary = styled.button`
   &:hover {
     animation: jelly 0.5s;
   }
-  @media screen and (min-width: ${mediaSizes.mobile}) {
+  /* @media screen and (min-width: ${mediaSizes.mobile}) {
     margin-left: 0px;
     margin-top: 60px;
-  }
+  } */
   @media screen and (min-width: ${mediaSizes.tablet}) {
     margin-left: 87px;
     margin-top: 0px;

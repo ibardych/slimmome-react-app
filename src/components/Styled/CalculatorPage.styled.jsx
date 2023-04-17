@@ -4,13 +4,15 @@ import { container } from 'helpers';
 import imagedesk from 'images/Sidebarimg/imgdesk2x.png';
 
 export const CalculatorStyled = styled.div`
-  ${container}
   display: flex;
   flex-direction: column;
+  align-items: center;
   row-gap: 55px;
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
+    ${container}
     flex-direction: row;
+    align-items: flex-start;
   }
 
   &::before {
