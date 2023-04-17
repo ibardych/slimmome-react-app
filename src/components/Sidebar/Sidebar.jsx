@@ -2,14 +2,16 @@ import { SidebarStyled } from './Sidebar.styled';
 import { useSelector } from 'react-redux';
 import { DiaryStyledList } from 'components/Diary/Diary.styled';
 import { selectDaySummary, selectSelectedDate } from 'redux/diary/selectors';
+import { selectUser } from 'redux/auth/selectors';
 import { formatDate } from 'helpers';
 
 const Sidebar = () => {
   const selectedDate = useSelector(selectSelectedDate);
   const daySummary = useSelector(selectDaySummary);
   const forbiddenProducts = useSelector(
-    state => state.calculator.notAllowedProducts
+    state => state.auth.user.userData.notAllowedProducts
   );
+  const userState = useSelector(selectUser);
 
   return (
     <SidebarStyled>
@@ -34,7 +36,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
-      {forbiddenProducts.length > 0 && (
+      {forbiddenProducts.length > 0 && userState && (
         <div className="reccommended">
           <h2 className="title">Food not reccommended</h2>
           <DiaryStyledList className="listFood">
