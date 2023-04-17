@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { container, transition } from 'helpers';
 import { Button } from 'components/Styled';
-
+import { ErrorMessage } from 'formik';
 import { mediaSizes } from 'constants/media';
 import { colors } from 'constants';
 import { Field } from 'formik';
@@ -149,4 +149,10 @@ export const RadioInput = styled(Field)`
   &:focus {
     outline: 1px solid ${colors.color3};
   }
+`;
+
+export const ErrorMSG = styled(ErrorMessage)`
+  padding-top: 5px;
+  font-size: 12px;
+  color: ${colors.color1};
 `;
