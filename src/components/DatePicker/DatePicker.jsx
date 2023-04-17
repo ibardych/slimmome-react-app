@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CalendarIcon, CustomDatePicker, Label } from './DatePicker.styled';
+import { CalendarIcon, CustomDatePicker, DatePickerContainer } from './DatePicker.styled';
 import { useDispatch } from 'react-redux';
 import { diaryDayInfo } from 'redux/diary/operations';
 import { setSelectedDate } from 'redux/diary/slice';
@@ -17,15 +17,18 @@ const DatePicker = () => {
   }, [dispatch, startDate]);
 
   return (
-    <Label>
+    <DatePickerContainer>
       <CustomDatePicker
+        id="date-picker"
         dateFormat="dd.MM.yyyy"
         selected={startDate}
         onChange={setStartDate}
         readonly
       />
-      <CalendarIcon color="#9B9FAA" />
-    </Label>
+      <label htmlFor="date-picker">
+        <CalendarIcon color="#9B9FAA" />
+      </label>
+    </DatePickerContainer>
   );
 };
 
