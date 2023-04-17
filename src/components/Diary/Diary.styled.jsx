@@ -95,21 +95,18 @@ export const DiaryStyled = styled.div`
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px;
-    width: 240px;
-    margin-right: 48px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      width: 130px;
-      height: 21px;
-    }
+    padding-bottom: 8px;
+    width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+   
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 240px;
-      height: 34px;
+      padding-bottom: 20px;
     }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      width: 240px;
-      height: 34px;
-    }
+  
   }
   & .Diary__list-gram {
     font-size: 14px;
@@ -117,23 +114,16 @@ export const DiaryStyled = styled.div`
     text-align: right;
     letter-spacing: 0.04em;
     font-weight: 400;
+    white-space: nowrap;
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px;
-    width: 106px;
-    margin-right: 32px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      width: 49px;
-      height: 21px;
-    }
+    padding-bottom: 8px;
+    width: 49px;
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 106px;
-      height: 34px;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      width: 106px;
-      height: 34px;
+      padding-bottom: 20px;
     }
   }
   & .Diary__list-kcal {
@@ -142,26 +132,18 @@ export const DiaryStyled = styled.div`
     text-align: right;
     letter-spacing: 0.04em;
     font-weight: 400;
+    white-space: nowrap;
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px;
-    width: 106px;
-    margin-right: 32px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      width: 58px;
-      margin-right: 17px;
-      height: 21px;
-    }
+    padding-bottom: 8px;
+    width: 58px;
+    margin-right: 17px;
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 106px;
       margin-right: 32px;
-      height: 34px;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      width: 106px;
-      margin-right: 32px;
-      height: 34px;
+      padding-bottom: 20px;
     }
   }
   & .Diary__btn {
@@ -170,7 +152,8 @@ export const DiaryStyled = styled.div`
     width: 15px;
     height: 15px;
     color: #9b9faa;
-    margin-right: 40px;
+    margin-right: 10px;
+
     &:hover {
       transform: rotate(45deg);
       transition: all 0.3s ease;
@@ -178,27 +161,25 @@ export const DiaryStyled = styled.div`
   }
   & .Diarty__list {
     display: flex;
+    gap: 10px;
   }
 
   & .Diarty__list-wrapper {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      gap: 16px;
+    }
   }
 
   & .Diarty__header-wrapper {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
     @media screen and (min-width: ${mediaSizes.tablet}) {
-      display: flex;
-      align-items: flex-start;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      display: flex;
       align-items: flex-start;
     }
 
@@ -209,8 +190,6 @@ export const DiaryStyled = styled.div`
       bottom: 0px;
       pointer-events: none;
 
-      @media screen and (min-width: ${mediaSizes.mobile}) {
-      }
       @media screen and (min-width: ${mediaSizes.tablet}) {
         width: 100%;
         height: 60px;
@@ -224,24 +203,14 @@ export const DiaryStyled = styled.div`
       }
       @media screen and (min-width: ${mediaSizes.desktop}) {
         width: calc(100% - 5px);
-        height: 60px;
-        margin-top: -50px;
-        position: relative;
-        background-image: linear-gradient(
-          0deg,
-          #ffffff 18%,
-          rgba(255, 255, 255, 0) 100%
-        );
       }
     }
   }
   & .Diary__header-wraper-data {
     display: flex;
     align-items: center;
-    margin-bottom: 32px;
     height: 20px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-    }
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
       margin-bottom: 60px;
       height: 38px;
