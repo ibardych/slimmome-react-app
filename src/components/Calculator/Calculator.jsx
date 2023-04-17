@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectModalOpened } from 'redux/selectors';
 import * as yup from 'yup';
@@ -6,6 +6,7 @@ import Message from 'components/Message/Message';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { InputWraper } from 'components/Form/Input.styled';
 import { selectError } from 'redux/calculator/selectors';
+import { diaryDayInfo } from 'redux/diary/operations';
 
 import {
   CalculatorStyled,
@@ -27,19 +28,73 @@ import {
 } from 'redux/auth/selectors';
 
 export const CalculatorEl = () => {
-  const schema = yup.object().shape({
-    weight: yup.number().required().positive().integer(),
-    height: yup.number().required().positive().integer(),
-    age: yup.number().required().positive().integer(),
-    desiredWeight: yup.number().required().positive().integer(),
-    bloodType: yup.number().required().positive().integer(),
-  });
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const userWeight = user.userData?.weight ?? '';
   const userHeight = user.userData?.height ?? '';
   const userAge = user.userData?.age ?? '';
   const userdesiredWeight = user.userData?.desiredWeight ?? '';
   const userBloodType = user.userData?.bloodType ?? '';
+
+  const [weight, setWeight] = useState(userWeight);
+  const [height, setHeight] = useState(userHeight);
+  const [age, setAge] = useState(userAge);
+  const [desiredWeight, setDesiredWeight] = useState(userdesiredWeight);
+  const [bloodType, setBloodType] = useState(userBloodType);
+
+  const handleOnChange = e => {
+    switch (e.target.name) {
+      case 'weight':
+        setWeight(Number(e.target.value));
+        break;
+
+      case 'height':
+        setHeight(Number(e.target.value));
+        break;
+
+      case 'age':
+        setAge(Number(e.target.value));
+        break;
+
+      case 'bloodType':
+        setBloodType(Number(e.target.value));
+        break;
+
+      case 'desiredWeight':
+        setDesiredWeight(Number(e.target.value));
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  // useEffect(() => {
+  //   const id = user.id;
+  //   const sendData = {
+  //     weight,
+  //     height,
+  //     age,
+  //     desiredWeight,
+  //     bloodType,
+  //   };
+  //   dispatch(calculatorLogIn([id, sendData, token]))
+  // }, [dispatch, weight, height, age, desiredWeight, bloodType]);
+
+  const schema = yup.object().shape({
+    weight: yup.number().required().min(20).max(500).positive().integer(),
+    height: yup.number().required().min(100).max(250).positive().integer(),
+    age: yup.number().required().min(18).max(100).positive().integer(),
+    desiredWeight: yup
+      .number()
+      .min(20)
+      .max(500)
+      .required()
+      .positive()
+      .integer(),
+    bloodType: yup.number().min(1).max(4).required().positive().integer(),
+  });
+
   const initialValues = {
     weight: String(userWeight),
     height: String(userHeight),
@@ -47,18 +102,18 @@ export const CalculatorEl = () => {
     desiredWeight: String(userdesiredWeight),
     bloodType: String(userBloodType),
   };
+
   const message = useSelector(selectError);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const token = useSelector(selectToken);
-
-  const dispatch = useDispatch();
 
   const modalOpened = useSelector(selectModalOpened);
 
   const openModal = () => {
     dispatch(setModalOpened(true));
   };
-  const handleSubmit = (value, actions) => {
+
+  const handleSubmit = value => {
     const sendData = {
       weight: Number(value.weight),
       height: Number(value.height),
@@ -82,7 +137,7 @@ export const CalculatorEl = () => {
           validationSchema={schema}
           onSubmit={handleSubmit}
         >
-          <Form autoComplete="off">
+          <Form autoComplete="off" onChange={handleOnChange}>
             <FormWrapper>
               <InputsWrapper>
                 <InputWraper>
@@ -92,7 +147,7 @@ export const CalculatorEl = () => {
                     min="140"
                     max="210"
                     placeholder=" "
-                    required
+                    value={height}
                   />
                   <label htmlFor="height">Height *</label>
                   <ErrorMessage
@@ -108,7 +163,7 @@ export const CalculatorEl = () => {
                     min="16"
                     max="120"
                     placeholder=" "
-                    required
+                    value={age}
                   />
                   <label htmlFor="age">Age *</label>
                   <ErrorMessage className="error" component="div" name="age" />
@@ -120,7 +175,7 @@ export const CalculatorEl = () => {
                     min="40"
                     max="220"
                     placeholder=" "
-                    required
+                    value={weight}
                   />
                   <label htmlFor="weight">Current weight *</label>
                   <ErrorMessage
@@ -138,7 +193,7 @@ export const CalculatorEl = () => {
                     min="40"
                     max="150"
                     placeholder=" "
-                    required
+                    value={desiredWeight}
                   />
                   <label htmlFor="desiredWeight">Desired weight *</label>
                   <ErrorMessage
@@ -151,36 +206,16 @@ export const CalculatorEl = () => {
                 <RadioTitle>Blood type *</RadioTitle>
                 <RadioGroup>
                   <RadioLabel>
-                    <RadioInput
-                      type="radio"
-                      name="bloodType"
-                      value="1"
-                    />
-                    1
+                    <RadioInput type="radio" name="bloodType" value="1" />1
                   </RadioLabel>
                   <RadioLabel>
-                    <RadioInput
-                      type="radio"
-                      name="bloodType"
-                      value="2"
-                    />
-                    2
+                    <RadioInput type="radio" name="bloodType" value="2" />2
                   </RadioLabel>
                   <RadioLabel>
-                    <RadioInput
-                      type="radio"
-                      name="bloodType"
-                      value="3"
-                    />
-                    3
+                    <RadioInput type="radio" name="bloodType" value="3" />3
                   </RadioLabel>
                   <RadioLabel>
-                    <RadioInput
-                      type="radio"
-                      name="bloodType"
-                      value="4"
-                    />
-                    4
+                    <RadioInput type="radio" name="bloodType" value="4" />4
                   </RadioLabel>
                 </RadioGroup>
               </InputsWrapper>
