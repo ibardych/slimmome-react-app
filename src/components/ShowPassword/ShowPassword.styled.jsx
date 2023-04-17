@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { BsFillEyeFill } from 'react-icons/bs';
 import { BsFillEyeSlashFill } from 'react-icons/bs';
-import { mediaSizes } from 'constants/media';
 
 export const ShowPasswordButton = styled.button`
   position: absolute;
