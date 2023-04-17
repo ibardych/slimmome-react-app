@@ -16,6 +16,7 @@ import {
 import { loadingReducer } from './loader/slice';
 import { productsReducer } from './dropdown/slice';
 import { diaryReducer } from './diary/slice';
+import { addProductModalReducer } from './ModalAddProductOpened/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -30,7 +31,8 @@ export const store = configureStore({
     calculator: calculatorReducer,
     loading: loadingReducer,
     products: productsReducer,
-    diary: diaryReducer
+    diary: diaryReducer,
+    addproductmodalopened: addProductModalReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

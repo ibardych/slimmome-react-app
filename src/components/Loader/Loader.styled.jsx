@@ -44,7 +44,20 @@ export const LoaderSmallStyled = styled.div`
   width: 47px;
   height: 49px;
   background: url(${img}) no-repeat center;
+  background-size: contain;
   animation: spin 1.5s infinite linear;
+
+  &.eatenProducts {
+    margin: 50px auto;
+  }
+
+  &.deleteProduct {
+    position: absolute;
+    right: -2px;
+    top: -4px;
+    width: 30px;
+    height: 30px;
+  }
 
   @keyframes spin {
     to {

@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { mediaSizes } from 'constants';
 import { colors } from 'constants';
 import { container, transition } from 'helpers';
-import { Form } from 'formik';
 
 export const DiaryStyled = styled.div`
   ${container}
@@ -172,6 +171,7 @@ export const DiaryStyled = styled.div`
 
   & .Diarty__list {
     display: flex;
+    position: relative;
     /* gap: 10px; */
   }
 
@@ -272,16 +272,12 @@ export const DiaryStyled = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
     &:hover {
       animation: jelly 0.5s;
     }
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      display: flex;
-    }
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
-      display: none;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
       display: none;
     }
 
@@ -297,45 +293,6 @@ export const DiaryStyled = styled.div`
       75% {
         transform: scale(0.95, 1.05);
       }
-    }
-  }
-`;
-
-export const DiaryForm = styled(Form)`
-  display: none;
-
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 48px;
-  }
-  @media screen and (min-width: ${mediaSizes.desktop}) {
-  }
-
-  & input[name='search'] {
-    width: 280px;
-
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      width: 240px;
-    }
-
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-    }
-  }
-
-  & input[name='grams'] {
-    width: 280px;
-
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      width: 106px;
-    }
-
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-    }
-
-    & + label {
-      text-align: right;
     }
   }
 `;
@@ -375,65 +332,6 @@ export const DiaryStyledList = styled.ul`
 
     @media screen and (min-width: ${mediaSizes.tablet}) {
       margin-bottom: 6px;
-    }
-  }
-`;
-
-export const ProductsList = styled.ul`
-  list-style: none;
-  padding: 15px;
-  max-height: 300px;
-  width: 350px;
-  overflow-y: scroll;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  z-index: 3;
-  top: 122px;
-  background-color: white;
-  // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 0px;
-  }
-
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px #f0f1f3;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #264061;
-  }
-
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    top: 364px;
-    max-height: 400px;
-    width: 400px;
-  }
-
-  @media screen and (min-width: ${mediaSizes.desktop}) {
-    top: 444px;
-    max-height: 350px;
-    width: 440px;
-  }
-
-  & li {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.4;
-    color: ${colors.color2};
-
-    padding: 10px 0;
-    cursor: pointer;
-
-    &:not(:last-child) {
-      border-bottom: 0.5px solid ${colors.color2};
-      transition: ${transition};
-    }
-
-    &:hover {
-      color: ${colors.color4};
-      border-bottom: 0.5px solid ${colors.color4};
     }
   }
 `;

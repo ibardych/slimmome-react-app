@@ -25,6 +25,6 @@ export const Loader = () => {
   );
 };
 
-export const LoaderSmall = () => {
-  return <LoaderSmallStyled />;
+export const LoaderSmall = ({ name }) => {
+  return <LoaderSmallStyled className={name} />;
 };

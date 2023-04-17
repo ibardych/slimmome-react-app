@@ -1,88 +1,54 @@
 import {
   DiaryStyled,
-  DiaryForm,
   DiaryStyledList,
-  ProductsList,
   EmptyProductsMessage,
 } from './Diary.styled';
-import { AiOutlinePlus } from 'react-icons/ai';
+
 import { AiOutlineClose } from 'react-icons/ai';
-import { ButtonDiary } from 'components/Styled/ButtonDiary.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProductsList } from 'redux/dropdown/operations';
-import { useState } from 'react';
-import { selectProducts } from 'redux/dropdown/selectors';
+import { useEffect, useState } from 'react';
 import DatePicker from 'components/DatePicker/DatePicker';
 import {
   selectDayId,
   selectEatenProducts,
   selectEatenProductsLoading,
+  selectIsDeleting,
 } from 'redux/diary/selectors';
-import { addProductThunk, deleteProductThunk } from 'redux/diary/operations';
-import { ErrorMessage, Field, Formik } from 'formik';
-import * as yup from 'yup';
-import { InputWraper } from 'components/Form/Input.styled';
+import { deleteProductThunk } from 'redux/diary/operations';
+import { LoaderSmall } from 'components/Loader/Loader';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { DiaryForm } from 'components/DiaryForm/DiaryForm';
+import { setProductModalOpened } from 'redux/ModalAddProductOpened/slice';
+import ModalAddProduct from 'components/ModalAddProduct/ModalAddProduct';
 
 export const DiaryMain = () => {
   const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
-  /** selectedDate - це дата (що вибрана в дейтпікері), яку можна використати для запросу на сервер під час додавання продуктів */
-  const selectedDate = useSelector(state => state.diary.selectedDate);
   const selectedDayId = useSelector(selectDayId);
   const eatenProductsLoading = useSelector(selectEatenProductsLoading);
   const eatenProducts = useSelector(selectEatenProducts);
   const eatenProductsSorted = [...eatenProducts].reverse();
-  const [weight, setWeight] = useState(0);
-  const [searchValue, setSearchValue] = useState('');
-  const [productId, setProductId] = useState('');
-  const [showDropdown, setShowDropdown] = useState(false);
-
-  const handleSearchChange = value => {
-    setSearchValue(value);
-
-    dispatch(fetchProductsList(value));
-    setShowDropdown(true);
-
-    if (value.length === 0) {
-      setShowDropdown(false);
-    }
-  };
-
-  const filteredProducts = products.filter(product =>
-    product.title.ua.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const [deletingProductId, setDeletingProductId] = useState(null);
+  const isDeleting = useSelector(selectIsDeleting);
+  const [isMobile, setIsMobile] = useState(false);
 
   const deleteProduct = id => {
+    setDeletingProductId(id);
     dispatch(deleteProductThunk([id, selectedDayId]));
   };
 
-  const handleSubmit = () => {
-    dispatch(
-      addProductThunk({
-        date: selectedDate,
-        productId: productId,
-        weight: weight,
-      })
-    );
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-    setSearchValue('');
-    setWeight('');
-  };
+    handleResize();
+    window.addEventListener('resize', handleResize);
 
-  const initialValues = { search: '', grams: '' };
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  const schema = yup.object().shape({
-    search: yup.string().min(1).max(30).required(),
-    grams: yup.number().min(1).max(3000).required().positive().integer(),
-  });
-
-  const handleOnChange = e => {
-    if (e.target.name === 'search') {
-      handleSearchChange(e.target.value);
-    }
-    if (e.target.name === 'grams') {
-      setWeight(e.target.value);
-    }
+  const openAddProductModal = () => {
+    dispatch(setProductModalOpened(true));
   };
 
   return (
@@ -93,73 +59,26 @@ export const DiaryMain = () => {
             <DatePicker />
           </div>
         </div>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={schema}
-          onSubmit={handleSubmit}
-        >
-          <DiaryForm autoComplete="off" onChange={handleOnChange}>
-            <InputWraper>
-              <Field
-                type="text"
-                name="search"
-                placeholder=" "
-                value={searchValue}
-              />
-              <label htmlFor="search">Enter product name</label>
-              <ErrorMessage className="error" component="div" name="search" />
-            </InputWraper>
 
-            <InputWraper>
-              <Field
-                type="number"
-                name="grams"
-                placeholder=" "
-                value={weight || ''}
-              />
-              <label htmlFor="grams">Grams</label>
-              <ErrorMessage className="error" component="div" name="grams" />
-            </InputWraper>
+        {!isMobile && <DiaryForm />}
 
-            <ButtonDiary type="submit">
-              <AiOutlinePlus color="white" />
-            </ButtonDiary>
-
-            {showDropdown && filteredProducts.length > 1 && (
-              <ProductsList>
-                {filteredProducts.map(product => (
-                  <li
-                    onClick={() => {
-                      setSearchValue(product.title.ua);
-                      setProductId(product._id);
-                      setShowDropdown(false);
-                    }}
-                    key={product.title.ua}
-                  >
-                    {product.title.ua}
-                  </li>
-                ))}
-              </ProductsList>
-            )}
-          </DiaryForm>
-        </Formik>
         {eatenProductsLoading ? (
-          <span>Loading...</span>
+          <LoaderSmall name="eatenProducts" />
         ) : eatenProductsSorted.length ? (
           <div className="Diarty__header-wrapper">
             <DiaryStyledList>
               {eatenProductsSorted.map(product => (
                 <li key={product.id} className="Diary__list-wrapper">
-                  <ul className="Diarty__list">
-                    <li className="Diary__list-name" title={product.title}>
+                  <div className="Diarty__list">
+                    <div className="Diary__list-name" title={product.title}>
                       {product.title}
-                    </li>
-                    <li className="Diary__list-gram">
+                    </div>
+                    <div className="Diary__list-gram">
                       {Math.ceil(product.weight)} g
-                    </li>
-                    <li className="Diary__list-kcal">
+                    </div>
+                    <div className="Diary__list-kcal">
                       {Math.ceil(product.kcal)} <span>kcal</span>
-                    </li>
+                    </div>
                     <button
                       className="Diary__btn-delete"
                       type="button"
@@ -167,7 +86,10 @@ export const DiaryMain = () => {
                     >
                       <AiOutlineClose />
                     </button>
-                  </ul>
+                    {isDeleting && deletingProductId === product.id && (
+                      <LoaderSmall name="deleteProduct" />
+                    )}
+                  </div>
                 </li>
               ))}
             </DiaryStyledList>
@@ -177,9 +99,10 @@ export const DiaryMain = () => {
             You did not add any products!
           </EmptyProductsMessage>
         )}
-        <button className="Diary__btn-add">
+        <button className="Diary__btn-add" onClick={openAddProductModal}>
           <AiOutlinePlus color="white" />
         </button>
+        <ModalAddProduct />
       </div>
 
       {/* <DiaryStyled>Loading...</DiaryStyled> */}

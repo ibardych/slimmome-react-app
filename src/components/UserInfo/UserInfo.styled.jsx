@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 import { mediaSizes } from 'constants/media';
 import { colors } from 'constants';
 import { transition } from 'helpers';

@@ -4,12 +4,15 @@ import { selectIsLoggedIn } from 'redux/auth/selectors';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
-import { setModalOpened } from 'redux/modalOpenedSlice';
 import { selectModalOpened } from 'redux/selectors';
+import { setModalOpened } from 'redux/modalOpenedSlice';
+import { selectAddProductModalOpened } from 'redux/ModalAddProductOpened/selectors';
+import { setProductModalOpened } from 'redux/ModalAddProductOpened/slice';
 
 const UserInfo = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const modalOpened = useSelector(selectModalOpened);
+  const addProductModalOpened = useSelector(selectAddProductModalOpened);
   const userName = useSelector(state => state.auth.user.username);
   const dispatch = useDispatch();
 
@@ -19,12 +22,13 @@ const UserInfo = () => {
 
   const closeModal = () => {
     dispatch(setModalOpened(false));
+    dispatch(setProductModalOpened(false));
   };
 
   return (
     isLoggedIn && (
       <Div>
-        {modalOpened && (
+        {(modalOpened || addProductModalOpened) && (
           <BackButton onClick={closeModal}>
             <BackArrow width="12" height="7" />
           </BackButton>

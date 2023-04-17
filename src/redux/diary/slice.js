@@ -9,6 +9,7 @@ const initialState = {
   dayInfo: null,
   selectedDate: null,
   isLoading: false,
+  isDeleting: false,
   error: null,
 };
 
@@ -52,12 +53,13 @@ const diarySlice = createSlice({
           product => product.id !== action.payload.productId
         );
         state.dayInfo.daySummary = action.payload.data.newDaySummary;
+        state.isDeleting = false;
       })
       .addCase(deleteProductThunk.pending, state => {
-        // add loading field on delete product
+        state.isDeleting = true;
       })
       .addCase(deleteProductThunk.rejected, (state, action) => {
-        // add error on delete
+        state.isDeleting = false;
       }),
 });
 

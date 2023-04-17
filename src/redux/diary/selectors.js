@@ -10,3 +10,5 @@ export const selectEatenProductsLoading = state => state.diary.isLoading;
 export const selectDayId = state => state.diary.dayInfo?.id;
 
 export const selectIsLoading = state => state.diary.isLoading;
+
+export const selectIsDeleting = state => state.diary.isDeleting;
