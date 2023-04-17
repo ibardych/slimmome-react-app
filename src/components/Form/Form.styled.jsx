@@ -18,6 +18,7 @@ export const Caption = styled.p`
 `;
 
 export const Label = styled.span`
+  position: relative;
   margin: 0;
   margin-right: auto;
   font-family: 'Verdana';

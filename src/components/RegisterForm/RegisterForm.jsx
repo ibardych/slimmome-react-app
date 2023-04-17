@@ -11,11 +11,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Styled';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
+import ShowPassword from 'components/ShowPassword/ShowPassword';
 
 const defaultFields = { username: '', email: '', password: '' };
 
 export const RegisterForm = () => {
   const [fields, setFields] = useState(defaultFields);
+  const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -43,6 +45,10 @@ export const RegisterForm = () => {
     navigate(path);
   };
 
+  const onClickHandler = () => {
+    setPasswordShown(state => !state);
+  };
+
   console.log(fields);
   return (
     <RegisterFormStyled>
@@ -63,13 +69,19 @@ export const RegisterForm = () => {
             value={fields.email}
             onChange={handleInputChange}
           />
-          <Label>Password *</Label>
-          <Input
-            type="password"
-            name="password"
-            value={fields.password}
-            onChange={handleInputChange}
-          />
+          <Label>
+            Password *
+            <Input
+              type={passwordShown ? 'text' : 'password'}
+              name="password"
+              value={fields.password}
+              onChange={handleInputChange}
+            />
+            <ShowPassword
+              clickHandler={onClickHandler}
+              isShown={passwordShown}
+            />
+          </Label>
         </FormFields>
         <ButtonContainer>
           <Button

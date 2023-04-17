@@ -13,11 +13,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logIn } from 'redux/auth/operations';
 import { selectError } from 'redux/auth/selectors';
 import Message from 'components/Message/Message';
+import ShowPassword from 'components/ShowPassword/ShowPassword';
 
 const defaultFields = { email: '', password: '' };
 
 export const LoginForm = () => {
   const [fields, setFields] = useState(defaultFields);
+  const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -35,6 +37,10 @@ export const LoginForm = () => {
   const handleInputChange = e => {
     const { name, value } = e.target;
     setFields(fields => ({ ...fields, [name]: value }));
+  };
+
+  const onClickHandler = () => {
+    setPasswordShown(state => !state);
   };
 
   const navigate = useNavigate();
@@ -58,13 +64,19 @@ export const LoginForm = () => {
             value={fields.name}
             onChange={handleInputChange}
           />
-          <Label>Password *</Label>
-          <Input
-            type="password"
-            name="password"
-            value={fields.name}
-            onChange={handleInputChange}
-          />
+          <Label>
+            Password *
+            <Input
+              type={passwordShown ? 'text' : 'password'}
+              name="password"
+              value={fields.name}
+              onChange={handleInputChange}
+            />
+            <ShowPassword
+              clickHandler={onClickHandler}
+              isShown={passwordShown}
+            />
+          </Label>
         </FormFields>
         <ButtonContainer>
           <Button className="orange regLogbutton" type="submit ">
