@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { mediaSizes } from 'constants';
 import { colors } from 'constants';
 import { container, transition } from 'helpers';
+import { Form } from 'formik';
 
 export const DiaryStyled = styled.div`
   ${container}
@@ -34,11 +35,6 @@ export const DiaryStyled = styled.div`
     }
   }
 
-  & .Diary__box_line {
-    display: flex;
-    flex-direction: column;
-    height: 35px;
-  }
   & .Diary__input_name::placeholder {
     font-family: 'Verdana';
     font-weight: 700;
@@ -70,21 +66,6 @@ export const DiaryStyled = styled.div`
     }
     @media screen and (min-width: ${mediaSizes.mobile}) {
       text-align: right;
-    }
-  }
-  & .Diary__box_input {
-    display: flex;
-    flex-direction: column;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      gap: 47px;
-    }
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      gap: 22px;
-      flex-direction: row;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      gap: 48px;
-      flex-direction: row;
     }
   }
   & .Diary__list-name {
@@ -330,87 +311,45 @@ export const DiaryStyled = styled.div`
   }
 `;
 
-export const DiaryForm = styled.form`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
+export const DiaryForm = styled(Form)`
   display: none;
-  @media screen and (min-width: ${mediaSizes.mobile}) {
-    /* flex-direction: column;
-    align-items: center; */
-    /* display: none; */
-  }
+
   @media screen and (min-width: ${mediaSizes.tablet}) {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 48px;
   }
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    flex-direction: row;
-    align-items: center;
   }
-`;
 
-export const DiaryStyledInp1 = styled.input`
-  border: none;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 20px;
-
-  @media screen and (min-width: ${mediaSizes.mobile}) {
+  & input[name='search'] {
     width: 280px;
-    margin-bottom: 8px;
-  }
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    width: 240px;
-    margin-bottom: 20px;
-  }
-  @media screen and (min-width: ${mediaSizes.desktop}) {
-    width: 240px;
-    margin-bottom: 20px;
-  }
-`;
-export const DiaryStyledInp2 = styled.input`
-  border: none;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 20px;
 
-  @media screen and (min-width: ${mediaSizes.mobile}) {
-    width: 285px;
-    margin-bottom: 8px;
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      width: 240px;
+    }
+
+    @media screen and (min-width: ${mediaSizes.desktop}) {
+    }
   }
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    width: 104px;
-    margin-bottom: 20px;
-  }
-  @media screen and (min-width: ${mediaSizes.desktop}) {
-    width: 105px;
-    margin-bottom: 20px;
+
+  & input[name='grams'] {
+    width: 280px;
+    text-align: right;
+
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      width: 106px;
+    }
+
+    @media screen and (min-width: ${mediaSizes.desktop}) {
+    }
+
+    & + label {
+      text-align: right;
+    }
   }
 `;
-// export const DiaryStyledInpSpan1 = styled.span`
-//   border: 1px solid #e0e0e0;
-//   @media screen and (min-width: ${mediaSizes.mobile}) {
-//     width: 280px;
-//   }
-//   @media screen and (min-width: ${mediaSizes.tablet}) {
-//     width: 240px;
-//   }
-//   @media screen and (min-width: ${mediaSizes.desktop}) {
-//     width: 240px;
-//   }
-// `;
-// export const DiaryStyledInpSpan2 = styled.span`
-//   border: 1px solid #e0e0e0;
-//   @media screen and (min-width: ${mediaSizes.mobile}) {
-//     width: 280px;
-//   }
-//   @media screen and (min-width: ${mediaSizes.tablet}) {
-//     width: 106px;
-//   }
-//   @media screen and (min-width: ${mediaSizes.desktop}) {
-//     width: 107px;
-//   }
-// `;
 
 export const DiaryStyledList = styled.ul`
   display: flex;

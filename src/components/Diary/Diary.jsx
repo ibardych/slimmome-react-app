@@ -1,7 +1,5 @@
 import {
   DiaryStyled,
-  DiaryStyledInp1,
-  DiaryStyledInp2,
   DiaryForm,
   DiaryStyledList,
   ProductsList,
@@ -9,7 +7,7 @@ import {
 } from './Diary.styled';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
-import { ButtonDiary } from 'components/Styled/Button-Diary.styled';
+import { ButtonDiary } from 'components/Styled/ButtonDiary.styled';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsList } from 'redux/dropdown/operations';
@@ -22,6 +20,9 @@ import {
   selectEatenProductsLoading,
 } from 'redux/diary/selectors';
 import { addProductThunk, deleteProductThunk } from 'redux/diary/operations';
+import { ErrorMessage, Field, Formik } from 'formik';
+import * as yup from 'yup';
+import { InputWraper } from 'components/Form/Input.styled';
 
 export const DiaryMain = () => {
   const dispatch = useDispatch();
@@ -33,10 +34,10 @@ export const DiaryMain = () => {
   const eatenProducts = useSelector(selectEatenProducts);
   const [weight, setWeight] = useState(0);
   const [searchValue, setSearchValue] = useState('');
-  const [productId, setProductId] = useState('5d51694802b2373622ff552c');
+  const [productId, setProductId] = useState('');
   const [showDropdown, setShowDropdown] = useState(false);
-  const handleSearchChange = event => {
-    const { value } = event.target;
+
+  const handleSearchChange = value => {
     setSearchValue(value);
 
     dispatch(fetchProductsList(value));
@@ -51,17 +52,11 @@ export const DiaryMain = () => {
     product.title.ua.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  const handleInputBlur = () => {
-    // setShowDropdown(false);
-  };
-
   const deleteProduct = id => {
     dispatch(deleteProductThunk([id, selectedDayId]));
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     dispatch(
       addProductThunk({
         date: selectedDate,
@@ -71,8 +66,20 @@ export const DiaryMain = () => {
     );
   };
 
-  const chengeWeight = e => {
-    setWeight(e.target.value);
+  const initialValues = { search: '', grams: '' };
+
+  const schema = yup.object().shape({
+    search: yup.string().min(1).max(30).required(),
+    grams: yup.number().min(1).max(3000).required(),
+  });
+
+  const handleOnChange = e => {
+    if (e.target.name === 'search') {
+      handleSearchChange(e.target.value);
+    }
+    if (e.target.name === 'grams') {
+      setWeight(e.target.value);
+    }
   };
 
   return (
@@ -84,52 +91,56 @@ export const DiaryMain = () => {
           </div>
           <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
         </div>
-        <DiaryForm>
-          <div className="Diary__box_input">
-            <div className="Diary__box_line">
-              <DiaryStyledInp1
+        <Formik
+          initialValues={initialValues}
+          validationSchema={schema}
+          onSubmit={handleSubmit}
+        >
+          <DiaryForm autoComplete="off" onChange={handleOnChange}>
+            <InputWraper>
+              <Field
                 type="text"
-                id="search"
                 name="search"
+                placeholder=" "
                 value={searchValue}
-                onChange={handleSearchChange}
-                onBlur={handleInputBlur}
-                className="Diary__input_name"
-                placeholder="Enter product name"
               />
-              {showDropdown && filteredProducts.length > 1 && (
-                <ProductsList>
-                  {filteredProducts.map(product => (
-                    <li
-                      onClick={() => {
-                        setSearchValue(product.title.ua);
-                        setProductId(product._id);
-                        setShowDropdown(false);
-                      }}
-                      key={product.title.ua}
-                    >
-                      {product.title.ua}
-                    </li>
-                  ))}
-                </ProductsList>
-              )}
-            </div>
-            <div className="Diary__box_line">
-              <DiaryStyledInp2
-                value={weight}
-                onChange={chengeWeight}
-                className="Diary__input_grams"
-                name="grams"
-                type="number"
-                placeholder="Grams"
-              />
-            </div>
-          </div>
+              <label htmlFor="search">Enter product name</label>
+              <ErrorMessage className="error" component="div" name="search" />
+            </InputWraper>
 
-          <ButtonDiary onClick={handleSubmit}>
-            <AiOutlinePlus color="white" />
-          </ButtonDiary>
-        </DiaryForm>
+            <InputWraper>
+              <Field
+                type="number"
+                name="grams"
+                placeholder=" "
+                value={weight || ''}
+              />
+              <label htmlFor="grams">Grams</label>
+              <ErrorMessage className="error" component="div" name="grams" />
+            </InputWraper>
+
+            <ButtonDiary type="submit">
+              <AiOutlinePlus color="white" />
+            </ButtonDiary>
+
+            {showDropdown && filteredProducts.length > 1 && (
+              <ProductsList>
+                {filteredProducts.map(product => (
+                  <li
+                    onClick={() => {
+                      setSearchValue(product.title.ua);
+                      setProductId(product._id);
+                      setShowDropdown(false);
+                    }}
+                    key={product.title.ua}
+                  >
+                    {product.title.ua}
+                  </li>
+                ))}
+              </ProductsList>
+            )}
+          </DiaryForm>
+        </Formik>
         {eatenProductsLoading ? (
           <span>Loading...</span>
         ) : eatenProducts.length ? (
