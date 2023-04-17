@@ -8,7 +8,6 @@ import {
 import { AiOutlinePlus } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ButtonDiary } from 'components/Styled/ButtonDiary.styled';
-import { AiOutlineCalendar } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsList } from 'redux/dropdown/operations';
 import { useState } from 'react';
@@ -70,7 +69,7 @@ export const DiaryMain = () => {
 
   const schema = yup.object().shape({
     search: yup.string().min(1).max(30).required(),
-    grams: yup.number().min(1).max(3000).required(),
+    grams: yup.number().min(1).max(3000).required().positive().integer(),
   });
 
   const handleOnChange = e => {
@@ -89,7 +88,6 @@ export const DiaryMain = () => {
           <div className="Diary__data">
             <DatePicker />
           </div>
-          <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
         </div>
         <Formik
           initialValues={initialValues}
@@ -147,17 +145,19 @@ export const DiaryMain = () => {
           <div className="Diarty__header-wrapper">
             <DiaryStyledList>
               {eatenProducts.map(product => (
-                <li key={product.id} className="Diarty__list-wrapper">
+                <li key={product.id} className="Diary__list-wrapper">
                   <ul className="Diarty__list">
-                    <li className="Diary__list-name">{product.title}</li>
+                    <li className="Diary__list-name" title={product.title}>
+                      {product.title}
+                    </li>
                     <li className="Diary__list-gram">
-                      {product.weight?.toFixed(2)} g
+                      {Math.ceil(product.weight)} g
                     </li>
                     <li className="Diary__list-kcal">
-                      {product.kcal?.toFixed(2)} kcal
+                      {Math.ceil(product.kcal)} <span>kcal</span>
                     </li>
                     <button
-                      className="Diary__btn"
+                      className="Diary__btn-delete"
                       type="button"
                       onClick={() => deleteProduct(product.id)}
                     >

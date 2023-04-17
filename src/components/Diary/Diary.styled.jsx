@@ -73,23 +73,22 @@ export const DiaryStyled = styled.div`
     line-height: 17px;
     letter-spacing: 0.04em;
     font-weight: 400;
+    flex-basis: 100%;
+    margin-right: 8px;
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px;
-    width: 240px;
-    margin-right: 48px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      width: 130px;
-      height: 21px;
-    }
+    padding-bottom: 8px;
+    width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
+      flex-basis: auto;
       width: 240px;
-      height: 34px;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      width: 240px;
-      height: 34px;
+      margin-right: 48px;
+      padding-bottom: 20px;
     }
   }
   & .Diary__list-gram {
@@ -98,23 +97,18 @@ export const DiaryStyled = styled.div`
     text-align: right;
     letter-spacing: 0.04em;
     font-weight: 400;
+    white-space: nowrap;
+    margin-right: 8px;
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px;
-    width: 106px;
-    margin-right: 32px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      width: 49px;
-      height: 21px;
-    }
+    padding-bottom: 8px;
+    width: 49px;
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 106px;
-      height: 34px;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      width: 106px;
-      height: 34px;
+      margin-right: 32px;
+      padding-bottom: 20px;
     }
   }
   & .Diary__list-kcal {
@@ -123,63 +117,79 @@ export const DiaryStyled = styled.div`
     text-align: right;
     letter-spacing: 0.04em;
     font-weight: 400;
+    white-space: nowrap;
 
     color: #212121;
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px;
-    width: 106px;
-    margin-right: 32px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      width: 58px;
-      margin-right: 17px;
-      height: 21px;
-    }
+    padding-bottom: 8px;
+    width: 58px;
+    margin-right: 17px;
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 106px;
       margin-right: 32px;
-      height: 34px;
+      padding-bottom: 20px;
     }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      width: 106px;
-      margin-right: 32px;
-      height: 34px;
+
+    & span {
+      font-size: 12px;
     }
   }
-  & .Diary__btn {
+
+  & .Diary__btn-delete {
     background-color: transparent;
     border: none;
     width: 15px;
     height: 15px;
     color: #9b9faa;
-    margin-right: 40px;
+    margin-right: 20px;
+    cursor: pointer;
+    ${transition('color')}
+
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      margin-right: 40px;
+    }
+
     &:hover {
-      transform: rotate(45deg);
-      transition: all 0.3s ease;
+      animation: jelly 0.5s;
+      color: ${colors.color1};
+    }
+
+    @keyframes jelly {
+      25% {
+        transform: scale(0.9, 1.1);
+      }
+
+      50% {
+        transform: scale(1.1, 0.9);
+      }
+
+      75% {
+        transform: scale(0.95, 1.05);
+      }
     }
   }
+
   & .Diarty__list {
     display: flex;
+    /* gap: 10px; */
   }
 
-  & .Diarty__list-wrapper {
+  & .Diary__list-wrapper {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      gap: 16px;
+    }
   }
 
   & .Diarty__header-wrapper {
     position: relative;
+    width: 100%;
 
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
     @media screen and (min-width: ${mediaSizes.tablet}) {
-      display: flex;
-      align-items: flex-start;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      display: flex;
+      width: auto;
       align-items: flex-start;
     }
 
@@ -189,40 +199,20 @@ export const DiaryStyled = styled.div`
       left: 0;
       bottom: 0px;
       pointer-events: none;
-
-      @media screen and (min-width: ${mediaSizes.mobile}) {
-      }
-      @media screen and (min-width: ${mediaSizes.tablet}) {
-        width: 100%;
-        height: 60px;
-        margin-top: -50px;
-        position: relative;
-        background-image: linear-gradient(
-          0deg,
-          #ffffff 18%,
-          rgba(255, 255, 255, 0) 100%
-        );
-      }
-      @media screen and (min-width: ${mediaSizes.desktop}) {
-        width: calc(100% - 5px);
-        height: 60px;
-        margin-top: -50px;
-        position: relative;
-        background-image: linear-gradient(
-          0deg,
-          #ffffff 18%,
-          rgba(255, 255, 255, 0) 100%
-        );
-      }
+      width: 100%;
+      height: 40px;
+      background-image: linear-gradient(
+        0deg,
+        #ffffff 18%,
+        rgba(255, 255, 255, 0) 100%
+      );
     }
   }
   & .Diary__header-wraper-data {
     display: flex;
     align-items: center;
-    margin-bottom: 32px;
     height: 20px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-    }
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
       margin-bottom: 60px;
       height: 38px;
@@ -336,7 +326,6 @@ export const DiaryForm = styled(Form)`
 
   & input[name='grams'] {
     width: 280px;
-    text-align: right;
 
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 106px;
@@ -358,8 +347,9 @@ export const DiaryStyledList = styled.ul`
   max-height: 280px;
   position: relative;
   overflow-y: auto;
-  width: 100%;
   margin-top: 32px;
+  margin-right: -20px;
+  padding-right: 5px;
 
   /* width */
   ::-webkit-scrollbar {
@@ -381,7 +371,11 @@ export const DiaryStyledList = styled.ul`
   }
 
   & > li:last-child {
-    margin-bottom: 6px;
+    margin-bottom: 14px;
+
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      margin-bottom: 6px;
+    }
   }
 `;
 
