@@ -20,7 +20,7 @@ import {
   selectEatenProducts,
   selectEatenProductsLoading,
 } from 'redux/diary/selectors';
-import { deleteProductThunk } from 'redux/diary/operations';
+import { addProductThunk, deleteProductThunk } from 'redux/diary/operations';
 
 export const DiaryMain = () => {
   const dispatch = useDispatch();
@@ -30,9 +30,10 @@ export const DiaryMain = () => {
   const selectedDayId = useSelector(selectDayId);
   const eatenProductsLoading = useSelector(selectEatenProductsLoading);
   const eatenProducts = useSelector(selectEatenProducts);
+  const [weight, setWeight] = useState(0);
   const [searchValue, setSearchValue] = useState('');
+  const [productId, setProductId] = useState('5d51694802b2373622ff552c');
   const [showDropdown, setShowDropdown] = useState(false);
-
   const handleSearchChange = event => {
     const { value } = event.target;
     setSearchValue(value);
@@ -50,11 +51,27 @@ export const DiaryMain = () => {
   );
 
   const handleInputBlur = () => {
-    setShowDropdown(false);
+    // setShowDropdown(false);
   };
 
   const deleteProduct = id => {
     dispatch(deleteProductThunk([id, selectedDayId]));
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    dispatch(
+      addProductThunk({
+        date: selectedDate,
+        productId: productId,
+        weight: weight,
+      })
+    );
+  };
+
+  const chengeWeight = e => {
+    setWeight(e.target.value);
   };
 
   return (
@@ -81,13 +98,24 @@ export const DiaryMain = () => {
               {showDropdown && filteredProducts.length > 1 && (
                 <ProductsList>
                   {filteredProducts.map(product => (
-                    <li key={product.title.ua}>{product.title.ua}</li>
+                    <li
+                      onClick={() => {
+                        setSearchValue(product.title.ua);
+                        setProductId(product._id);
+                        setShowDropdown(false);
+                      }}
+                      key={product.title.ua}
+                    >
+                      {product.title.ua}
+                    </li>
                   ))}
                 </ProductsList>
               )}
             </div>
             <div className="Diary__box_line">
               <DiaryStyledInp2
+                value={weight}
+                onChange={chengeWeight}
                 className="Diary__input_grams"
                 name="grams"
                 type="number"
@@ -96,7 +124,7 @@ export const DiaryMain = () => {
             </div>
           </div>
 
-          <ButtonDiary>
+          <ButtonDiary onClick={handleSubmit}>
             <AiOutlinePlus color="white" />
           </ButtonDiary>
         </DiaryForm>
@@ -132,6 +160,9 @@ export const DiaryMain = () => {
             You did not add any products!
           </EmptyProductsMessage>
         )}
+        <button className="Diary__btn-add">
+          <AiOutlinePlus color="white" />
+        </button>
       </div>
 
       {/* <DiaryStyled>Loading...</DiaryStyled> */}
