@@ -1,82 +1,75 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectModalOpened } from 'redux/selectors';
+import * as yup from 'yup';
+import Message from 'components/Message/Message';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { InputWraper } from 'components/Form/Input.styled';
+import { selectError } from 'redux/calculator/selectors';
+
 import {
   CalculatorStyled,
   InputsWrapper,
   FormWrapper,
-  Input,
-  Form,
   RadioGroup,
   RadioTitle,
   RadioLabel,
   RadioInput,
   ButtonCalc,
 } from './Calculator.styled';
-import { selectModalOpened } from 'redux/selectors';
 import { setModalOpened } from 'redux/modalOpenedSlice';
 import { ModalDailyCalories } from 'components/ModalDailyCalories';
 import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
-import { selectIsLoggedIn, selectUser, selectToken, } from 'redux/auth/selectors';
+import {
+  selectIsLoggedIn,
+  selectUser,
+  selectToken,
+} from 'redux/auth/selectors';
 
 export const CalculatorEl = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const schema = yup.object().shape({
+    weight: yup.number().required().positive().integer(),
+    height: yup.number().required().positive().integer(),
+    age: yup.number().required().positive().integer(),
+    desiredWeight: yup.number().required().positive().integer(),
+    bloodType: yup.number().required().positive().integer(),
+  });
   const user = useSelector(selectUser);
-  const token = useSelector(selectToken);
   const userWeight = user.userData?.weight ?? '';
   const userHeight = user.userData?.height ?? '';
   const userAge = user.userData?.age ?? '';
   const userdesiredWeight = user.userData?.desiredWeight ?? '';
   const userBloodType = user.userData?.bloodType ?? '';
-
-  const [weight, setWeight] = useState(userWeight);
-  const [height, setHeight] = useState(userHeight);
-  const [age, setAge] = useState(userAge);
-  const [desiredWeight, setDesiredWeight] = useState(userdesiredWeight);
-  const [bloodType, setBloodType] = useState(userBloodType);
+  const initialValues = {
+    weight: String(userWeight),
+    height: String(userHeight),
+    age: String(userAge),
+    desiredWeight: String(userdesiredWeight),
+    bloodType: String(userBloodType),
+  };
+  const message = useSelector(selectError);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const token = useSelector(selectToken);
 
   const dispatch = useDispatch();
 
   const modalOpened = useSelector(selectModalOpened);
 
-  const onEditCalculator = event => {
-    switch (event.target.name) {
-      case 'weight':
-        setWeight(s => (s = Number(event.target.value)));
-        break;
-      case 'height':
-        setHeight(s => (s = Number(event.target.value)));
-        break;
-      case 'age':
-        setAge(s => (s = Number(event.target.value)));
-        break;
-      case 'desiredWeight':
-        setDesiredWeight(s => (s = Number(event.target.value)));
-        break;
-      case 'bloodType':
-        setBloodType(s => (s = Number(event.target.value)));
-        break;
-      default:
-        return;
-    }
-  };
-
   const openModal = () => {
     dispatch(setModalOpened(true));
   };
-  const handleSubmit = e => {
-    e.preventDefault();
-    const id = user.id;
-
-    const data = {
-      weight,
-      height,
-      age,
-      desiredWeight,
-      bloodType,
+  const handleSubmit = (value, actions) => {
+    const sendData = {
+      weight: Number(value.weight),
+      height: Number(value.height),
+      age: Number(value.age),
+      desiredWeight: Number(value.desiredWeight),
+      bloodType: Number(value.bloodType),
     };
+    const id = user.id;
     isLoggedIn
-      ? dispatch(calculatorLogIn([id, data, token]))
-      : dispatch(calculatorAnonim(data));
+      ? dispatch(calculatorLogIn([id, sendData, token]))
+      : dispatch(calculatorAnonim(sendData));
     openModal();
   };
 
@@ -84,70 +77,84 @@ export const CalculatorEl = () => {
     <>
       <CalculatorStyled>
         <h2>Calculate your daily calorie intake right now</h2>
-        <Form onSubmit={handleSubmit}>
-          <FormWrapper>
-            <InputsWrapper>
-              <Input
-                placeholder="Height *"
-                type="text"
-                name="height"
-                min="140"
-                max="210"
-                pattern="^1([4-9]\d|0\d{2}|1\d{2}|200|20[1-9])$"
-                title="Height may contain only numbers. For example 165"
-                required
-                value={height}
-                onChange={onEditCalculator}
-              />
-              <Input
-                placeholder="Age *"
-                type="text"
-                name="age"
-                min="16"
-                max="120"
-                pattern="^(1[6-9]|[2-9]\d|1[01]\d|120)$"
-                title="Age may contain only numbers. For example 35"
-                required
-                value={age}
-                onChange={onEditCalculator}
-              />
-              <Input
-                placeholder="Current weight *"
-                type="text"
-                name="weight"
-                min="40"
-                max="220"
-                pattern="^([4-9]\d|1\d{2}|20\d|21\d|220)$"
-                title="Current weight may contain only numbers. For example 85"
-                required
-                value={weight}
-                onChange={onEditCalculator}
-              />
-            </InputsWrapper>
-            <InputsWrapper>
-              <Input
-                placeholder="Desired weight *"
-                type="text"
-                name="desiredWeight"
-                min="40"
-                max="150"
-                pattern="^(4\d|[5-9]\d|1[0-1]\d|150)$"
-                title="Desired weight may contain only numbers. For example 65"
-                required
-                value={desiredWeight}
-                onChange={onEditCalculator}
-              />
-              <div>
-                <RadioTitle>Blood type *</RadioTitle>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={schema}
+          onSubmit={handleSubmit}
+        >
+          <Form autoComplete="off">
+            <FormWrapper>
+              <InputsWrapper>
+                <InputWraper>
+                  <Field
+                    type="text"
+                    name="height"
+                    min="140"
+                    max="210"
+                    placeholder=" "
+                    required
+                  />
+                  <label htmlFor="height">Height *</label>
+                  <ErrorMessage
+                    className="error"
+                    component="div"
+                    name="height"
+                  />
+                </InputWraper>
+                <InputWraper>
+                  <Field
+                    type="text"
+                    name="age"
+                    min="16"
+                    max="120"
+                    placeholder=" "
+                    required
+                  />
+                  <label htmlFor="age">Age *</label>
+                  <ErrorMessage className="error" component="div" name="age" />
+                </InputWraper>
+                <InputWraper>
+                  <Field
+                    type="text"
+                    name="weight"
+                    min="40"
+                    max="220"
+                    placeholder=" "
+                    required
+                  />
+                  <label htmlFor="weight">Current weight *</label>
+                  <ErrorMessage
+                    className="error"
+                    component="div"
+                    name="weight"
+                  />
+                </InputWraper>
+              </InputsWrapper>
+              <InputsWrapper>
+                <InputWraper>
+                  <Field
+                    type="text"
+                    name="desiredWeight"
+                    min="40"
+                    max="150"
+                    placeholder=" "
+                    required
+                  />
+                  <label htmlFor="desiredWeight">Desired weight *</label>
+                  <ErrorMessage
+                    className="error"
+                    component="div"
+                    name="desiredWeight"
+                  />
+                </InputWraper>
 
-                <RadioGroup onChange={onEditCalculator}>
+                <RadioTitle>Blood type *</RadioTitle>
+                <RadioGroup>
                   <RadioLabel>
                     <RadioInput
                       type="radio"
                       name="bloodType"
                       value="1"
-                      required
-                      defaultChecked={userBloodType === 1 ? true : false}
                     />
                     1
                   </RadioLabel>
@@ -156,8 +163,6 @@ export const CalculatorEl = () => {
                       type="radio"
                       name="bloodType"
                       value="2"
-                      required
-                      defaultChecked={userBloodType === 2 ? true : false}
                     />
                     2
                   </RadioLabel>
@@ -166,8 +171,6 @@ export const CalculatorEl = () => {
                       type="radio"
                       name="bloodType"
                       value="3"
-                      required
-                      defaultChecked={userBloodType === 3 ? true : false}
                     />
                     3
                   </RadioLabel>
@@ -176,19 +179,18 @@ export const CalculatorEl = () => {
                       type="radio"
                       name="bloodType"
                       value="4"
-                      required
-                      defaultChecked={userBloodType === 4 ? true : false}
                     />
                     4
                   </RadioLabel>
                 </RadioGroup>
-              </div>
-            </InputsWrapper>
-          </FormWrapper>
-          <ButtonCalc className="orange" type="submit">
-            Start losing weight
-          </ButtonCalc>
-        </Form>
+              </InputsWrapper>
+            </FormWrapper>
+            <ButtonCalc className="orange" type="submit">
+              Start losing weight
+            </ButtonCalc>
+          </Form>
+        </Formik>
+        {message && <Message>{message}</Message>}
       </CalculatorStyled>
       <ModalDailyCalories modalOpened={modalOpened} />
     </>
