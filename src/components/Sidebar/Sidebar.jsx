@@ -17,6 +17,7 @@ const Sidebar = () => {
   // console.log(daySummary);
   const daySummary = useSelector(selectDaySummary);
   const forbiddenProducts = user.userData.notAllowedProducts;
+  
 
   useEffect(() => {
     const date = memoizedDayNow.toISOString().slice(0, 10);
