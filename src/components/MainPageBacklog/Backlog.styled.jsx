@@ -1,24 +1,48 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
+import grey_background from 'images/MainPageImgs/grey_background.png';
+import strawberry from 'images/MainPageImgs/strawberry.png';
+import banana from 'images/MainPageImgs/banana.png';
+import leafs from 'images/MainPageImgs/leafs.png';
+
+export const BacklogWrapper = styled.div`
+  position: relative;
+`;
 
 export const Background = styled.div`
-    background: url('src/images/MainPageImgs/grey_background.png') bottom 0px right 0px no-repeat;    
-    max-width: 602px;
-    max-height: 816px;
-` 
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  background: url(${grey_background}) no-repeat;
+  width: 602px;
+  height: 816px;
+  background-size: cover;
+`;
 
 export const Srtawberry = styled.div`
-    background: url('src/images/MainPageImgs/strawberry.png') bottom 65px right 36px no-repeat;
-    max-width: 286px;
-    max-height: 279;
-` 
+  position: absolute;
+    bottom: 65px;
+    right: 36px;
+  background: url(${strawberry}) no-repeat;
+  width: 286px;
+  height: 279px;
+  background-size: cover;
+`;
 
 export const Banana = styled.div`
-    background: url('src/images/MainPageImgs/banana.png') bottom 400px left 782px no-repeat;
-    max-width: 733px;
-    max-height: 552;
-`     
+  position: absolute;
+  right: 782px;
+  bottom: 400px
+  background: url(${banana}) no-repeat;
+  width: 733px;
+  height: 552px;
+  background-size: cover;
+`;
 export const Leafs = styled.div`
-    background: url('src/images/MainPageImgs/leafs.png') bottom 30px right 339px no-repeat;
-    max-width: 746px;
-    max-height: 846px;
-`  
+  position: absolute;
+  bottom: 30px;
+  right: 339px;
+  background: url(${leafs}) no-repeat;
+  width: 746px;
+  height: 846px;
+  background-size: cover;
+`;

@@ -1,12 +1,12 @@
-import { Background, Srtawberry, Banana, Leafs } from "./Backlog.styled"
+import { Background, Srtawberry, Banana, Leafs, BacklogWrapper} from "./Backlog.styled"
 
 export const MainPageBacklog = () => {
     return (
-        <div>
+        <BacklogWrapper>
             <Background></Background>
             <Srtawberry></Srtawberry>
             <Banana></Banana>
             <Leafs></Leafs>
-        </div>
+        </BacklogWrapper>
     )
 }

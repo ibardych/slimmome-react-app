@@ -29,8 +29,12 @@ export const HomeStyled = styled.div`
       bottom: 0;
       width: 40%;
       height: 100vh;
-      background: url(${imagedesk}) top 20px right #f0f1f3 no-repeat;
-      background-size: auto 900px;
+      ${({isLoggedIn}) => {
+        if (isLoggedIn) {
+          return `background: url(${imagedesk}) top 20px right #f0f1f3 no-repeat;      
+          background-size: auto 900px;`
+        }
+      }}
     }
   }
 `;
