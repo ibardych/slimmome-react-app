@@ -21,13 +21,17 @@ export const Div = styled.div`
   }
 `;
 
-export const BackButton = styled(Link)`
+export const BackButton = styled.span`
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: none;
   background-color: transparent;
+
+  @media screen and (min-width: ${mediaSizes.mobile}) {
+    display: none;
+  }
 `;
 
 export const Wrapper = styled.div`

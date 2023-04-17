@@ -1,36 +1,19 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants';
 import { colors } from 'constants';
-
-export const DiaryForm = styled.form`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  display: none;
-  @media screen and (min-width: ${mediaSizes.mobile}) {
-    /* flex-direction: column;
-    align-items: center; */
-    /* display: none; */
-  }
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  @media screen and (min-width: ${mediaSizes.desktop}) {
-    flex-direction: row;
-    align-items: center;
-  }
-`;
+import { container, transition } from 'helpers';
 
 export const DiaryStyled = styled.div`
+  ${container}
   margin-top: 140px;
   display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
   flex-direction: column;
-  margin-right: -20px;
 
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    margin-right: 0px;
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    width: 60%;
+    padding: 0;
   }
 
   input:focus {
@@ -289,6 +272,27 @@ export const DiaryStyled = styled.div`
   }
 `;
 
+export const DiaryForm = styled.form`
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  display: none;
+  @media screen and (min-width: ${mediaSizes.mobile}) {
+    /* flex-direction: column;
+    align-items: center; */
+    /* display: none; */
+  }
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
 export const DiaryStyledInp1 = styled.input`
   border: none;
   border-bottom: 1px solid #e0e0e0;
@@ -354,10 +358,11 @@ export const DiaryStyledList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 180px;
+  max-height: 280px;
   position: relative;
   overflow-y: auto;
   width: 100%;
+  margin-top: 32px;
 
   /* width */
   ::-webkit-scrollbar {
@@ -375,54 +380,50 @@ export const DiaryStyledList = styled.ul`
     background: #264061;
   }
   @media screen and (min-width: ${mediaSizes.tablet}) {
-    margin-top: 80px;
-    height: 280px;
-    width: auto;
+    margin-top: 60px;
+  }
+
+  & > li:last-child {
+    margin-bottom: 6px;
   }
 `;
 
 export const ProductsList = styled.ul`
   list-style: none;
-  padding: 8px;
-  padding-top: 15px;
+  padding: 15px;
   max-height: 300px;
   width: 350px;
   overflow-y: scroll;
-  border: 1px solid ${colors.color2};
-  border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: absolute;
   z-index: 3;
-  top: 92px;
+  top: 122px;
   background-color: white;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
   ::-webkit-scrollbar {
-    width: 8px;
-    background: rgba(50, 50, 93, 0.15);
+    width: 6px;
+    height: 0px;
   }
 
-  /* Track */
   ::-webkit-scrollbar-track {
-    -webkit-border-radius: 10px;
-    border-radius: 20px;
+    box-shadow: inset 0 0 6px #f0f1f3;
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: ${colors.color1};
-  }
-  ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(255, 0, 0, 0.4);
+    background: #264061;
   }
 
   @media screen and (min-width: ${mediaSizes.tablet}) {
-    top: 144px;
+    top: 364px;
     max-height: 400px;
     width: 400px;
+  }
+
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    top: 444px;
+    max-height: 350px;
+    width: 440px;
   }
 
   & li {
@@ -430,14 +431,19 @@ export const ProductsList = styled.ul`
     font-weight: 400;
     line-height: 1.4;
     color: ${colors.color2};
-    border-bottom: 1px solid ${colors.color5};
 
-    padding: 8px;
+    padding: 10px 0;
     cursor: pointer;
-  }
 
-  & li:hover {
-    background-color: #f2f2f2;
+    &:not(:last-child) {
+      border-bottom: 0.5px solid ${colors.color2};
+      transition: ${transition};
+    }
+
+    &:hover {
+      color: ${colors.color4};
+      border-bottom: 0.5px solid ${colors.color4};
+    }
   }
 `;
 

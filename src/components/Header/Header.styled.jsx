@@ -7,9 +7,13 @@ export const HeaderStyled = styled.header`
   @media screen and (max-width: ${mediaSizes.mobile}) {
     height: 120px;
     border: none;
+
+    &.guest {
+      height: 80px;
+    }
   }
   position: sticky;
-  z-index: 999;
+  z-index: 4;
   top: 0;
   width: 100%;
   height: 80px;

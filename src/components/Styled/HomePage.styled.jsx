@@ -3,19 +3,17 @@ import { mediaSizes } from 'constants';
 import { container } from 'helpers';
 import imagedesk from 'images/Sidebarimg/imgdesk2x.png';
 
-export const DiaryStyled = styled.div`
+export const HomeStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 55px;
 
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-  }
-
   @media screen and (min-width: ${mediaSizes.desktop}) {
     ${container}
     flex-direction: row;
     align-items: flex-start;
+    justify-content: flex-start;
   }
 
   &::before {

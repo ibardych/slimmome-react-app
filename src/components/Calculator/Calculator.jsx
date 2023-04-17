@@ -18,17 +18,15 @@ import { ModalDailyCalories } from 'components/ModalDailyCalories';
 import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
 import { selectIsLoggedIn, selectUser, selectToken, } from 'redux/auth/selectors';
 
-
 export const CalculatorEl = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
   const token = useSelector(selectToken);
-  
-  const userWeight = user.userData.weight;
-  const userHeight = user.userData.height;
-  const userAge = user.userData.age;
-  const userdesiredWeight = user.userData.desiredWeight;
-  const userBloodType = user.userData.bloodType;
+  const userWeight = user.userData?.weight ?? '';
+  const userHeight = user.userData?.height ?? '';
+  const userAge = user.userData?.age ?? '';
+  const userdesiredWeight = user.userData?.desiredWeight ?? '';
+  const userBloodType = user.userData?.bloodType ?? '';
 
   const [weight, setWeight] = useState(userWeight);
   const [height, setHeight] = useState(userHeight);
@@ -76,7 +74,9 @@ export const CalculatorEl = () => {
       desiredWeight,
       bloodType,
     };
-    isLoggedIn ? dispatch(calculatorLogIn([id, data, token])) : dispatch(calculatorAnonim(data));
+    isLoggedIn
+      ? dispatch(calculatorLogIn([id, data, token]))
+      : dispatch(calculatorAnonim(data));
     openModal();
   };
 
