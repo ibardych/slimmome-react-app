@@ -10,6 +10,8 @@ export const LoginFormStyled = styled.div`
 `;
 
 export const FormFields = styled.div`
+  margin-bottom: 60px;
+
   @media screen and (min-width: ${mediaSizes.tablet}) {
     max-width: 240px;
   }

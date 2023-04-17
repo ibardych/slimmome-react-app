@@ -76,9 +76,28 @@ export const ModalDailyCaloriesStyled = styled.div`
       flex-direction: column;
       gap: 10px;
 
-      padding-left: 24px;
+      padding-left: 35px;
 
       margin-bottom: 40px;
+
+      height: 110px;
+      overflow: auto;
+
+      /* width */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 0px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px #f0f1f3;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #264061;
+      }
     }
 
     &__item {

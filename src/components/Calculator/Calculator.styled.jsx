@@ -4,18 +4,21 @@ import { Button } from 'components/Styled';
 
 import { mediaSizes } from 'constants/media';
 import { colors } from 'constants';
+import { Field } from 'formik';
 
 export const ButtonCalc = styled(Button)`
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    margin-left: 340px;
+    min-width: 210px;
+    margin-left: 320px;
   }
 `;
 
 export const CalculatorStyled = styled.div`
   ${container};
   display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
   flex-direction: column;
-  align-items: center;
   padding-top: 32px;
   padding-bottom: 100px;
 
@@ -23,14 +26,14 @@ export const CalculatorStyled = styled.div`
     padding-top: 100px;
     align-items: flex-start;
   }
-  @media screen and (min-width: ${mediaSizes.deskop}) {
-    width: 608px;
-    padding-top: 153px;
-    padding-left: 13px;
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    padding: 0;
+    margin: 0;
+    padding-top: 140px;
+    width: 60%;
   }
 
   h2 {
-    width: 280px;
     font-size: 18px;
     font-weight: 700;
     line-height: 1.4;
@@ -48,20 +51,22 @@ export const CalculatorStyled = styled.div`
   }
 `;
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-top: 34px;
+// export const FormEl = styled.form`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   margin-top: 34px;
 
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    margin-top: 68px;
-  }
-`;
+//   @media screen and (min-width: ${mediaSizes.tablet}) {
+//     margin-top: 68px;
+//   }
+// `;
+
 export const FormWrapper = styled.div`
   margin-bottom: 32px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  /* gap: 32px; */
 
   @media screen and (min-width: ${mediaSizes.tablet}) {
     margin-bottom: 60px;
@@ -73,38 +78,6 @@ export const FormWrapper = styled.div`
 export const InputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 32px;
-
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    gap: 40px;
-  }
-`;
-
-export const Input = styled.input`
-  height: 24px;
-  width: 240px;
-  border: none;
-  font-size: 14px;
-  font-weight: 700;
-  border-bottom: 1px solid ${colors.color3};
-  color: ${colors.color2};
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    height: 37px;
-  }
-  &:focus {
-    outline: none;
-  }
-  &::placeholder {
-    color: ${colors.color2};
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.21;
-    letter-spacing: 0.04em;
-    text-align: left;
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      padding-bottom: 20px;
-    }
-  }
 `;
 
 export const RadioGroup = styled.div`
@@ -112,7 +85,8 @@ export const RadioGroup = styled.div`
   gap: 24px;
 `;
 export const RadioTitle = styled.div`
-  margin-bottom: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding-bottom: 20px;
   font-size: 14px;
   text-align: left;
@@ -148,7 +122,7 @@ export const RadioLabel = styled.label`
     color: ${colors.color1};
   }
 `;
-export const RadioInput = styled.input`
+export const RadioInput = styled(Field)`
   display: flex;
   justify-content: center;
   margin: 0;

@@ -8,7 +8,11 @@ import { PrivateRoute } from 'components/PrivateRoute';
 import { Loader } from 'components/Loader/Loader';
 import Home from 'pages/Home';
 import { refreshUser } from 'redux/auth/operations';
-import { selectIsRefreshing, selectToken } from 'redux/auth/selectors';
+import {
+  selectIsLoggedIn,
+  selectIsRefreshing,
+  selectToken,
+} from 'redux/auth/selectors';
 import axios from 'axios';
 import { selectIsLoading } from 'redux/loader/selectors';
 
@@ -24,6 +28,7 @@ const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
   const isLoading = useSelector(selectIsLoading);
   const token = useSelector(selectToken);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -44,7 +49,16 @@ const App = () => {
         <MainContainer>
           <Routes>
             <Route path="/" element={<SharedLayout />}>
-              <Route index element={<Home />} />
+              <Route
+                index
+                element={
+                  isLoggedIn ? (
+                    <RestrictedRoute redirectTo="/diary" component={<Home />} />
+                  ) : (
+                    <Home />
+                  )
+                }
+              />
               <Route
                 path="login"
                 element={

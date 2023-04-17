@@ -6,6 +6,7 @@ export const LinkStyled = styled(NavLink)`
   cursor: pointer;
   position: relative;
   top: 2px;
+  margin-left: -15px;
 
   &:hover {
   }

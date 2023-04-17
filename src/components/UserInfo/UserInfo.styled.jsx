@@ -21,19 +21,25 @@ export const Div = styled.div`
   }
 `;
 
-export const BackButton = styled(Link)`
+export const BackButton = styled.span`
   padding: 10px;
   display: flex;
   justify-content: center;
-  aling-items: center;
+  align-items: center;
   border: none;
   background-color: transparent;
+
+  @media screen and (min-width: ${mediaSizes.mobile}) {
+    display: none;
+  }
 `;
 
 export const Wrapper = styled.div`
-@media screen and (max-width: ${mediaSizes.mobile}){ display: flex;
-  align-items: center;
-  margin-left: auto;
+  @media screen and (max-width: ${mediaSizes.mobile}) {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
 `;
 
 export const Span = styled.span`
