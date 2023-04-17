@@ -13,7 +13,7 @@ export const Div = styled.div`
     width: 100%;
     height: 40px;
     background-color: #eff1f3;
-    border-top: 2px solid ${colors.color3};
+    margin-left: auto;
   }
 
   @media screen and (min-width: ${mediaSizes.mobile}) {
@@ -21,19 +21,25 @@ export const Div = styled.div`
   }
 `;
 
-export const BackButton = styled(Link)`
+export const BackButton = styled.span`
   padding: 10px;
   display: flex;
   justify-content: center;
-  aling-items: center;
+  align-items: center;
   border: none;
   background-color: transparent;
+
+  @media screen and (min-width: ${mediaSizes.mobile}) {
+    display: none;
+  }
 `;
 
 export const Wrapper = styled.div`
-@media screen and (max-width: ${mediaSizes.mobile}){ display: flex;
-  align-items: center;
-  margin-left: auto;
+  @media screen and (max-width: ${mediaSizes.mobile}) {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
 `;
 
 export const Span = styled.span`
@@ -49,8 +55,8 @@ export const Button = styled.button`
   margin-left: 15px;
   padding-left: 15px;
   border: none;
-  background-color: transparent;
   border-left: 2px solid ${colors.color3};
+  background-color: transparent;
   height: 32px;
   font-family: 'Verdana';
   font-style: normal;

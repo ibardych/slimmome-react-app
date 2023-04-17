@@ -1,6 +1,6 @@
 import { ModalStyled } from './Modal.styled';
 import { IoMdClose } from 'react-icons/io';
-import { TbArrowBack } from 'react-icons/tb';
+import { ReactComponent as BackArrow } from 'images/backarrow.svg';
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -33,12 +33,16 @@ const Modal = ({ children }) => {
     };
   });
 
+  const closeModal = () => {
+    dispatch(setModalOpened(false));
+  };
+
   const handleCloseModal = e => {
     if (
       (e.type === 'click' && e.target === e.currentTarget) ||
       (e.type === 'keydown' && e.key === 'Escape')
     ) {
-      dispatch(setModalOpened(false));
+      closeModal();
     }
   };
 
@@ -49,9 +53,9 @@ const Modal = ({ children }) => {
     >
       <div className="modal">
         <div className="inner">
-          <button type="buttn" className="close" onClick={handleCloseModal}>
+          <button type="buttn" className="close" onClick={closeModal}>
             {isSmallScreen ? (
-              <TbArrowBack className="return__icon" />
+              <BackArrow className="return__icon" />
             ) : (
               <IoMdClose className="close__icon" />
             )}

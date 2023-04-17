@@ -7,15 +7,17 @@ import { colors } from 'constants';
 
 export const ButtonCalc = styled(Button)`
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    margin-left: 340px;
+    min-width: 210px;
+    margin-left: 320px;
   }
 `;
 
 export const CalculatorStyled = styled.div`
   ${container};
   display: flex;
+  flex-shrink: 0;
+  flex-grow: 0;
   flex-direction: column;
-  align-items: center;
   padding-top: 32px;
   padding-bottom: 100px;
 
@@ -23,14 +25,14 @@ export const CalculatorStyled = styled.div`
     padding-top: 100px;
     align-items: flex-start;
   }
-  @media screen and (min-width: ${mediaSizes.deskop}) {
-    width: 608px;
-    padding-top: 153px;
-    padding-left: 13px;
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    padding: 0;
+    margin: 0;
+    padding-top: 140px;
+    width: 60%;
   }
 
   h2 {
-    width: 280px;
     font-size: 18px;
     font-weight: 700;
     line-height: 1.4;
@@ -49,6 +51,7 @@ export const CalculatorStyled = styled.div`
 `;
 
 export const Form = styled.form`
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 34px;
@@ -57,6 +60,7 @@ export const Form = styled.form`
     margin-top: 68px;
   }
 `;
+
 export const FormWrapper = styled.div`
   margin-bottom: 32px;
   display: flex;
@@ -82,7 +86,7 @@ export const InputsWrapper = styled.div`
 
 export const Input = styled.input`
   height: 24px;
-  width: 240px;
+  width: 100%;
   border: none;
   font-size: 14px;
   font-weight: 700;
@@ -178,3 +182,74 @@ export const RadioInput = styled.input`
     outline: 1px solid ${colors.color3};
   }
 `;
+
+// <div className={css.form}>
+//              <input
+//               class="in"
+//               type="email"
+//               name="email"
+//               autocomplete="off"
+//               required
+//               value={fields.name}
+//               onChange={handleInputChange}
+//             />
+//             <label for="text" className={css.labelName}>
+//               <span className={css.contentName}>Your Text</span>
+//             </label>
+//           </div>
+
+// .form {
+//   width: 100%;
+//   position: relative;
+//   height: 40px;
+//   color: #9B9FAA;
+//   overflow: hidden;
+// }
+
+// .form input {
+//   width: 100%;
+//   height: 100%;
+//   color: #9B9FAA;
+//   padding-top: 20px;
+//   border: none;
+//   background-color: #fff;
+
+// }
+// .form label {
+//   position: absolute;
+//   bottom: 0px;
+//   left: 0px;
+//   width: 100%;
+//   height: 100%;
+//   pointer-events: none;
+//   border-bottom: 1px solid white;
+// }
+// .form label::after {
+//   content: "";
+//   position: absolute;
+//   bottom: -1px;
+//   left: 0px;
+//   width: 100%;
+//   height: 100%;
+//   border-bottom: 1px solid rgba(224, 224, 224, 1);
+//   transition: all 0.3s ease;
+// }
+
+// .contentName {
+//   position: absolute;
+//   bottom: 0px;
+//   left: 0px;
+//   padding-bottom: 5px;
+//   transition: all 0.3s ease;
+//   font-size: 14px;
+// }
+// .form input:focus {
+//   outline: none;
+// }
+// .form input:focus + .labelName .contentName,
+// .form input:valid + .labelName .contentName {
+//   transform: translateY(-100%);
+//   font-size: 10px;
+//   left: 0px;
+//   color: #9B9FAA;
+// }

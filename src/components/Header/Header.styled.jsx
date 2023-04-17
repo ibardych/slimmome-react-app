@@ -7,12 +7,15 @@ export const HeaderStyled = styled.header`
   @media screen and (max-width: ${mediaSizes.mobile}) {
     height: 120px;
     border: none;
+
+    &.guest {
+      height: 80px;
+    }
   }
   position: sticky;
-  z-index: 999;
+  z-index: 4;
   top: 0;
   width: 100%;
-  padding: 0 20px;
   height: 80px;
   border-bottom: 2px solid ${colors.color3};
 
@@ -21,13 +24,9 @@ export const HeaderStyled = styled.header`
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   }
 
-  @media screen and (min-width: ${mediaSizes.tablet}) {
-    padding: 0 32px;
-  }
-
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    padding: 0 16px;
     border-bottom: none;
+    margin-top: 80px;
   }
 `;
 
@@ -36,8 +35,8 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  width: 100%;
   height: 80px;
+  justify-content: space-between;
 `;
 
 export const MenuButton = styled.button`

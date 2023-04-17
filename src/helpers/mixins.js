@@ -20,12 +20,18 @@ export const ishidden = () => {
 export const container = () => {
   return `
     margin: 0 auto;
-    width: ${mediaSizes.desktop};
+    width: ${mediaSizes.mobile};
     max-width: 100%;
     padding: 0 20px;
 
     @media screen and (min-width: ${mediaSizes.tablet}) {
       padding: 0 32px;
+      width: ${mediaSizes.tablet};
+    }
+
+    @media screen and (min-width: ${mediaSizes.desktop}) {
+      padding: 0 32px;
+      width: ${mediaSizes.desktop};
     }
   `;
 };
