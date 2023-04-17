@@ -36,6 +36,7 @@ export const InputWraper = styled.div`
     background-color: #fff;
     border-bottom: 1px solid ${colors.color3};
     padding-bottom: 7px;
+    background-color: transparent;
 
     &:focus {
       outline: none;
@@ -73,10 +74,10 @@ export const InputWraper = styled.div`
 `;
 
 export const ErrorBloodType = styled.div`
-    position: absolute;
-    top: 50px;
-    font-size: 12px;
-    color: ${colors.color1};
-  `
+  position: absolute;
+  top: 50px;
+  font-size: 12px;
+  color: ${colors.color1};
+`;
 
 export const LabelInfo = styled.span``;

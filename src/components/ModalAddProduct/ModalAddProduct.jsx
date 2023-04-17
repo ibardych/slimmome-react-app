@@ -1,5 +1,4 @@
 import { ModalStyled } from './ModalAddProduct.styled';
-import { IoMdClose } from 'react-icons/io';
 import { ReactComponent as BackArrow } from 'images/backarrow.svg';
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
