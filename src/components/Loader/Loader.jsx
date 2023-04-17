@@ -1,5 +1,6 @@
 import {
   LoaderContainer,
+  LoaderSmallStyled,
   LoaderStyled,
   StrawberryImg,
   StyledTriangle,
@@ -22,4 +23,8 @@ export const Loader = () => {
       </LoaderContainer>
     </LoaderStyled>
   );
+};
+
+export const LoaderSmall = () => {
+  return <LoaderSmallStyled />;
 };

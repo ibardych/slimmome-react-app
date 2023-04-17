@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectModalOpened } from 'redux/selectors';
 import * as yup from 'yup';
@@ -6,7 +6,6 @@ import Message from 'components/Message/Message';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { InputWraper } from 'components/Form/Input.styled';
 import { selectError } from 'redux/calculator/selectors';
-import { diaryDayInfo } from 'redux/diary/operations';
 
 import {
   CalculatorStyled,
@@ -26,6 +25,7 @@ import {
   selectUser,
   selectToken,
 } from 'redux/auth/selectors';
+import { setUserData } from 'redux/auth/slice';
 
 export const CalculatorEl = () => {
   const dispatch = useDispatch();
@@ -69,18 +69,6 @@ export const CalculatorEl = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const id = user.id;
-  //   const sendData = {
-  //     weight,
-  //     height,
-  //     age,
-  //     desiredWeight,
-  //     bloodType,
-  //   };
-  //   dispatch(calculatorLogIn([id, sendData, token]))
-  // }, [dispatch, weight, height, age, desiredWeight, bloodType]);
-
   const schema = yup.object().shape({
     weight: yup.number().required().min(20).max(500).positive().integer(),
     height: yup.number().required().min(100).max(250).positive().integer(),
@@ -96,11 +84,11 @@ export const CalculatorEl = () => {
   });
 
   const initialValues = {
-    weight: String(userWeight),
-    height: String(userHeight),
-    age: String(userAge),
-    desiredWeight: String(userdesiredWeight),
-    bloodType: String(userBloodType),
+    weight: String(weight),
+    height: String(height),
+    age: String(age),
+    desiredWeight: String(desiredWeight),
+    bloodType: String(bloodType),
   };
 
   const message = useSelector(selectError);
@@ -113,14 +101,17 @@ export const CalculatorEl = () => {
     dispatch(setModalOpened(true));
   };
 
-  const handleSubmit = value => {
+  const handleSubmit = ({ weight, height, age, desiredWeight, bloodType }) => {
     const sendData = {
-      weight: Number(value.weight),
-      height: Number(value.height),
-      age: Number(value.age),
-      desiredWeight: Number(value.desiredWeight),
-      bloodType: Number(value.bloodType),
+      weight: Number(weight),
+      height: Number(height),
+      age: Number(age),
+      desiredWeight: Number(desiredWeight),
+      bloodType: Number(bloodType),
     };
+
+    dispatch(setUserData({ weight, height, age, desiredWeight, bloodType }));
+
     const id = user.id;
     isLoggedIn
       ? dispatch(calculatorLogIn([id, sendData, token]))
@@ -144,10 +135,8 @@ export const CalculatorEl = () => {
                   <Field
                     type="text"
                     name="height"
-                    min="140"
-                    max="210"
                     placeholder=" "
-                    value={height}
+                    value={height || ''}
                   />
                   <label htmlFor="height">Height *</label>
                   <ErrorMessage
@@ -160,10 +149,8 @@ export const CalculatorEl = () => {
                   <Field
                     type="text"
                     name="age"
-                    min="16"
-                    max="120"
                     placeholder=" "
-                    value={age}
+                    value={age || ''}
                   />
                   <label htmlFor="age">Age *</label>
                   <ErrorMessage className="error" component="div" name="age" />
@@ -172,10 +159,8 @@ export const CalculatorEl = () => {
                   <Field
                     type="text"
                     name="weight"
-                    min="40"
-                    max="220"
                     placeholder=" "
-                    value={weight}
+                    value={weight || ''}
                   />
                   <label htmlFor="weight">Current weight *</label>
                   <ErrorMessage
@@ -190,10 +175,8 @@ export const CalculatorEl = () => {
                   <Field
                     type="text"
                     name="desiredWeight"
-                    min="40"
-                    max="150"
                     placeholder=" "
-                    value={desiredWeight}
+                    value={desiredWeight || ''}
                   />
                   <label htmlFor="desiredWeight">Desired weight *</label>
                   <ErrorMessage

@@ -24,6 +24,7 @@ const diarySlice = createSlice({
     builder
       .addCase(addProductThunk.fulfilled, (state, action) => {
         state.dayInfo = action.payload.day;
+        state.dayInfo.daySummary = action.payload.daySummary;
         state.isLoading = false;
       })
       .addCase(addProductThunk.pending, state => {

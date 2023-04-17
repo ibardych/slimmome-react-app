@@ -1,12 +1,13 @@
 import { ForbiddenProducts, SidebarStyled } from './Sidebar.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectDaySummary } from 'redux/diary/selectors';
+import { selectDaySummary, selectIsLoading } from 'redux/diary/selectors';
 import { formatDate } from 'helpers';
 import { diaryDayInfo } from 'redux/diary/operations';
-// import { selectNotAllowedProducts } from 'redux/calculator/selectors';
+import { selectNotAllowedProducts } from 'redux/calculator/selectors';
 import { selectUser } from 'redux/auth/selectors';
 import { useEffect } from 'react';
 import { useMemo } from 'react';
+import { LoaderSmall } from 'components/Loader/Loader';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -16,8 +17,13 @@ const Sidebar = () => {
   // const daySummary = user.days.daySummary;
   // console.log(daySummary);
   const daySummary = useSelector(selectDaySummary);
-  const forbiddenProducts = user.userData.notAllowedProducts;
-  
+  const forbiddenProductsCalculator = useSelector(selectNotAllowedProducts);
+  const forbiddenProducts =
+    forbiddenProductsCalculator.length !== 0
+      ? forbiddenProductsCalculator
+      : user.userData.notAllowedProducts;
+
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     const date = memoizedDayNow.toISOString().slice(0, 10);
@@ -29,24 +35,27 @@ const Sidebar = () => {
       <div className="container">
         <div className="summary">
           <h2 className="title">Summary for {formatDate(memoizedDayNow)}</h2>
-          <ul className="listData">
-            <li className="item">
-              <h3 className="title__name">Left</h3>
-              <p>{daySummary?.kcalLeft?.toFixed(2) ?? 0} kgal</p>
-            </li>
-            <li className="item">
-              <h3 className="title__name">Consumed</h3>
-              <p>{daySummary?.kcalConsumed?.toFixed(2) ?? 0} kcal</p>
-            </li>
-            <li className="item">
-              <h3 className="title__name">Daily rate</h3>
-              <p>{daySummary?.dailyRate?.toFixed(2) ?? 0} kcal</p>
-            </li>
-            <li className="item">
-              <h3 className="title__name">n% of normal</h3>
-              <p>{daySummary?.percentsOfDailyRate?.toFixed(2) ?? 0} %</p>
-            </li>
-          </ul>
+          {isLoading && <LoaderSmall />}
+          {!isLoading && (
+            <ul className="listData">
+              <li className="item">
+                <h3 className="title__name">Left</h3>
+                <p>{daySummary?.kcalLeft?.toFixed(2) ?? 0} kgal</p>
+              </li>
+              <li className="item">
+                <h3 className="title__name">Consumed</h3>
+                <p>{daySummary?.kcalConsumed?.toFixed(2) ?? 0} kcal</p>
+              </li>
+              <li className="item">
+                <h3 className="title__name">Daily rate</h3>
+                <p>{daySummary?.dailyRate?.toFixed(2) ?? 0} kcal</p>
+              </li>
+              <li className="item">
+                <h3 className="title__name">n% of normal</h3>
+                <p>{daySummary?.percentsOfDailyRate?.toFixed(2) ?? 0} %</p>
+              </li>
+            </ul>
+          )}
         </div>
         {forbiddenProducts.length > 0 && (
           <div className="reccommended">

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Triangle } from 'react-loader-spinner';
+import img from 'images/strawberry-small.png';
 
 export const LoaderStyled = styled.div`
   position: fixed;
@@ -36,4 +37,18 @@ export const StrawberryImg = styled.img`
   top: 50%;
   transform: translate(-55%, -18%);
   max-width: initial;
+`;
+
+export const LoaderSmallStyled = styled.div`
+  margin: 0 auto;
+  width: 47px;
+  height: 49px;
+  background: url(${img}) no-repeat center;
+  animation: spin 1.5s infinite linear;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 `;

@@ -45,8 +45,9 @@ export const CalculatorStyled = styled.div`
       font-weight: 700;
       line-height: 1.41;
     }
-    @media screen and (min-width: ${mediaSizes.deskop}) {
+    @media screen and (min-width: ${mediaSizes.desktop}) {
       width: 608px;
+      margin-bottom: 60px;
     }
   }
 `;
@@ -75,19 +76,16 @@ export const FormWrapper = styled.div`
   }
 `;
 
-export const InputsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+export const InputsWrapper = styled.div``;
 
 export const RadioGroup = styled.div`
   display: flex;
   gap: 24px;
 `;
 export const RadioTitle = styled.div`
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   font-size: 14px;
   text-align: left;
   font-weight: 700;
@@ -100,7 +98,7 @@ export const RadioTitle = styled.div`
   }
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     border-bottom: 1px solid ${colors.color3};
   }
 `;

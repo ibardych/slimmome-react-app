@@ -47,6 +47,16 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       });
   },
+  reducers: {
+    setUserData(state, action) {
+      state.user.userData.height = action.payload.height;
+      state.user.userData.age = action.payload.age;
+      state.user.userData.weight = action.payload.weight;
+      state.user.userData.desiredWeight = action.payload.desiredWeight;
+      state.user.userData.bloodType = action.payload.bloodType;
+    },
+  },
 });
 
+export const { setUserData } = authSlice.actions;
 export const authReducer = authSlice.reducer;

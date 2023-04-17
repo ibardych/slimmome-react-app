@@ -31,6 +31,7 @@ export const DiaryMain = () => {
   const selectedDayId = useSelector(selectDayId);
   const eatenProductsLoading = useSelector(selectEatenProductsLoading);
   const eatenProducts = useSelector(selectEatenProducts);
+  const eatenProductsSorted = [...eatenProducts].reverse();
   const [weight, setWeight] = useState(0);
   const [searchValue, setSearchValue] = useState('');
   const [productId, setProductId] = useState('');
@@ -63,6 +64,9 @@ export const DiaryMain = () => {
         weight: weight,
       })
     );
+
+    setSearchValue('');
+    setWeight('');
   };
 
   const initialValues = { search: '', grams: '' };
@@ -141,10 +145,10 @@ export const DiaryMain = () => {
         </Formik>
         {eatenProductsLoading ? (
           <span>Loading...</span>
-        ) : eatenProducts.length ? (
+        ) : eatenProductsSorted.length ? (
           <div className="Diarty__header-wrapper">
             <DiaryStyledList>
-              {eatenProducts.map(product => (
+              {eatenProductsSorted.map(product => (
                 <li key={product.id} className="Diary__list-wrapper">
                   <ul className="Diarty__list">
                     <li className="Diary__list-name" title={product.title}>
