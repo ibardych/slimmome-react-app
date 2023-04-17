@@ -20,6 +20,20 @@ export const DiaryStyled = styled.div`
     outline: none;
   }
 
+  & .mobile-diary-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (min-width: ${mediaSizes.mobile}) {
+    }
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      align-items: flex-start;
+    }
+    @media screen and (min-width: ${mediaSizes.desktop}) {
+      align-items: flex-start;
+    }
+  }
+
   & .Diary__box_line {
     display: flex;
     flex-direction: column;
@@ -157,6 +171,10 @@ export const DiaryStyled = styled.div`
     height: 15px;
     color: #9b9faa;
     margin-right: 40px;
+    &:hover {
+      transform: rotate(45deg);
+      transition: all 0.3s ease;
+    }
   }
   & .Diarty__list {
     display: flex;
@@ -268,6 +286,46 @@ export const DiaryStyled = styled.div`
     @media screen and (min-width: ${mediaSizes.desktop}) {
       width: 25px;
       height: 25px;
+    }
+  }
+  & .Diary__btn-add {
+    width: 48px;
+    height: 48px;
+    background: #fc842d;
+    box-shadow: 0px 4px 10px rgba(252, 132, 45, 0.5);
+    border-radius: 50%;
+    border: none;
+    margin-left: 0px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      animation: jelly 0.5s;
+    }
+    @media screen and (min-width: ${mediaSizes.mobile}) {
+      display: flex;
+    }
+    @media screen and (min-width: ${mediaSizes.tablet}) {
+      display: none;
+    }
+    @media screen and (min-width: ${mediaSizes.desktop}) {
+      display: none;
+    }
+
+    @keyframes jelly {
+      25% {
+        transform: scale(0.9, 1.1);
+      }
+
+      50% {
+        transform: scale(1.1, 0.9);
+      }
+
+      75% {
+        transform: scale(0.95, 1.05);
+      }
     }
   }
 `;
