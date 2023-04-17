@@ -11,9 +11,13 @@ import { useMemo } from 'react';
 const Sidebar = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  // console.log(user);
   const memoizedDayNow = useMemo(() => new Date(), []);
+  // const daySummary = user.days.daySummary;
+  // console.log(daySummary);
   const daySummary = useSelector(selectDaySummary);
   const forbiddenProducts = user.userData.notAllowedProducts;
+  
 
   useEffect(() => {
     const date = memoizedDayNow.toISOString().slice(0, 10);
