@@ -254,22 +254,6 @@ export const DiaryStyled = styled.div`
       line-height: 41px;
     }
   }
-  & .Diary__icon-data {
-    width: 25px;
-    height: 25px;
-    @media screen and (min-width: ${mediaSizes.mobile}) {
-      width: 15px;
-      height: 15px;
-    }
-    @media screen and (min-width: ${mediaSizes.tablet}) {
-      width: 25px;
-      height: 25px;
-    }
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      width: 25px;
-      height: 25px;
-    }
-  }
 `;
 
 export const DiaryForm = styled.form`

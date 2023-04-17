@@ -10,7 +10,6 @@ import {
 import { AiOutlinePlus } from 'react-icons/ai';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ButtonDiary } from 'components/Styled/Button-Diary.styled';
-import { AiOutlineCalendar } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductsList } from 'redux/dropdown/operations';
 import { useState } from 'react';
@@ -65,7 +64,6 @@ export const DiaryMain = () => {
           <div className="Diary__data">
             <DatePicker />
           </div>
-          <AiOutlineCalendar color="#9B9FAA" className="Diary__icon-data" />
         </div>
         <DiaryForm>
           <div className="Diary__box_input">
