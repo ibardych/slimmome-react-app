@@ -108,7 +108,7 @@ export const DiaryMain = () => {
               {eatenProducts.map(product => (
                 <li key={product.id} className="Diarty__list-wrapper">
                   <ul className="Diarty__list">
-                    <li className="Diary__list-name">{product.title}</li>
+                    <li className="Diary__list-name" title={product.title}>{product.title}</li>
                     <li className="Diary__list-gram">
                       {product.weight?.toFixed(2)} g
                     </li>
