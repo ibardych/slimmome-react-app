@@ -6,7 +6,7 @@ const {
 } = require('./operations');
 
 const initialState = {
-  dayInfo: null,
+  dayInfo: {},
   selectedDate: null,
   isLoading: false,
   isDeleting: false,

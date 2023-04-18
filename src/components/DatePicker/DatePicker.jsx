@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CalendarIcon, CustomDatePicker, DatePickerContainer } from './DatePicker.styled';
-import { useDispatch } from 'react-redux';
+import {
+  CalendarIcon,
+  CustomDatePicker,
+  DatePickerContainer,
+} from './DatePicker.styled';
+import { useDispatch, useSelector } from 'react-redux';
 import { diaryDayInfo } from 'redux/diary/operations';
 import { setSelectedDate } from 'redux/diary/slice';
+import { selectUser } from 'redux/auth/selectors';
 
 const DatePicker = () => {
   const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date());
+
+  const daysProduct = useSelector(selectUser);
 
   useEffect(() => {
     const date = startDate.toISOString().slice(0, 10);
@@ -15,6 +22,17 @@ const DatePicker = () => {
     dispatch(diaryDayInfo(date));
     dispatch(setSelectedDate(date));
   }, [dispatch, startDate]);
+
+  const dateProduct = () => {
+    return [
+      {
+        'curent-day': [new Date()],
+      },
+      {
+        'product-days': daysProduct.days.map(day => new Date(day.date)),
+      },
+    ];
+  };
 
   return (
     <DatePickerContainer>
@@ -24,6 +42,7 @@ const DatePicker = () => {
         selected={startDate}
         onChange={setStartDate}
         readonly
+        highlightDates={dateProduct()}
       />
       <label htmlFor="date-picker">
         <CalendarIcon color="#9B9FAA" />
