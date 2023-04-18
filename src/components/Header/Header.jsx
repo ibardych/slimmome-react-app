@@ -65,11 +65,6 @@ const Header = () => {
     };
   }, [isLoggedIn]);
 
-  useEffect(() => {
-    document.addEventListener('keydown', clickHandler);
-    return () => document.removeEventListener('keydown', clickHandler);
-  }, [clickHandler]);
-
   return (
     <>
       <HeaderStyled
