@@ -12,7 +12,6 @@ const modalRoot = document.querySelector('#modal-root');
 const ModalAddProduct = () => {
   const dispatch = useDispatch();
   const modalOpened = useSelector(selectAddProductModalOpened);
-  console.log(modalOpened);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

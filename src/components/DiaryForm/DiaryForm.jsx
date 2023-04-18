@@ -1,7 +1,7 @@
 import { InputWraper } from 'components/Form/Input.styled';
 import { ButtonDiary } from 'components/Styled/ButtonDiary.styled';
 import { ErrorMessage, Field, Formik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProductThunk } from 'redux/diary/operations';
 import { fetchProductsList } from 'redux/dropdown/operations';
@@ -63,6 +63,18 @@ export const DiaryForm = ({ type }) => {
     }
   };
 
+  useEffect(() => {
+    const closeDropdown = e => {
+      if (!e.target.classList.contains('productlist')) {
+        setShowDropdown(false);
+      }
+    };
+
+    window.addEventListener('click', closeDropdown);
+
+    return () => window.removeEventListener('click', closeDropdown);
+  }, []);
+
   const filteredProducts = products.filter(product =>
     product.title.ua.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -109,13 +121,13 @@ export const DiaryForm = ({ type }) => {
         )}
 
         {showDropdown && isFetchingProducts && (
-          <ProductsList>
+          <ProductsList className="productlist">
             <LoaderSmall />
           </ProductsList>
         )}
 
         {showDropdown && !isFetchingProducts && filteredProducts.length > 1 && (
-          <ProductsList>
+          <ProductsList className="productlist">
             {filteredProducts.map(product => (
               <li
                 onClick={() => {

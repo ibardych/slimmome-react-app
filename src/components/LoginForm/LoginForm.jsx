@@ -16,6 +16,8 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
   const [passwordShown, setPasswordShown] = useState(false);
 
+  const message = useSelector(selectError);
+
   const schema = yup.object().shape({
     email: yup.string().min(3).max(254).required(),
     password: yup.string().min(8).max(100).required(),
@@ -25,7 +27,7 @@ export const LoginForm = () => {
 
   const handleSubmit = (values, { resetForm }) => {
     dispatch(logIn(values));
-    resetForm();
+    //if (!message) resetForm();
   };
 
   const onClickHandler = () => {
@@ -39,8 +41,6 @@ export const LoginForm = () => {
     navigate(path);
   };
 
-  const message = useSelector(selectError);
-
   return (
     <LoginFormStyled>
       <Formik
@@ -52,7 +52,12 @@ export const LoginForm = () => {
           <Caption>Login</Caption>
           <FormFields>
             <InputWraper>
-              <Field type="text" name="email" placeholder=" " />
+              <Field
+                type="text"
+                name="email"
+                placeholder=" "
+                autoComplete="off"
+              />
               <label htmlFor="email">Email *</label>
               <ErrorMessage className="error" component="div" name="email" />
             </InputWraper>
@@ -62,6 +67,7 @@ export const LoginForm = () => {
                 type={passwordShown ? 'text' : 'password'}
                 name="password"
                 placeholder=" "
+                autoComplete="off"
               />
               <label htmlFor="password">Password *</label>
               <ShowPassword

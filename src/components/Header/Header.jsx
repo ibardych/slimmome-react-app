@@ -54,7 +54,7 @@ const Header = () => {
       } else {
         setShowBurgerIcon(false);
       }
-      if (window.innerWidth >= parseInt(mediaSizes.mobile)) {
+      if (window.innerWidth > parseInt(mediaSizes.mobile)) {
         setUserInfoShown(true);
       } else {
         setUserInfoShown(false);

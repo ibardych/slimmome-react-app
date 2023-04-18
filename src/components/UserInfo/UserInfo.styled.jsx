@@ -1,15 +1,14 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants/media';
 import { colors } from 'constants';
-import { transition } from 'helpers';
+import { container, transition } from 'helpers';
 
 export const Div = styled.div`
   @media screen and (max-width: ${mediaSizes.mobile}) {
+    ${container}
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px 0 10px;
-    width: 100%;
     height: 40px;
     background-color: #eff1f3;
     margin-left: auto;

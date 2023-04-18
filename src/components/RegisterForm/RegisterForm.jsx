@@ -51,13 +51,23 @@ export const RegisterForm = () => {
           <Caption>Register</Caption>
           <FormFields>
             <InputWraper>
-              <Field type="text" name="username" placeholder=" " />
+              <Field
+                type="text"
+                name="username"
+                placeholder=" "
+                autoComplete="off"
+              />
               <label htmlFor="username">Name *</label>
               <ErrorMessage className="error" component="div" name="username" />
             </InputWraper>
 
             <InputWraper>
-              <Field type="text" name="email" placeholder=" " />
+              <Field
+                type="text"
+                name="email"
+                placeholder=" "
+                autoComplete="off"
+              />
               <label htmlFor="email">Email *</label>
               <ErrorMessage className="error" component="div" name="email" />
             </InputWraper>
@@ -71,6 +81,7 @@ export const RegisterForm = () => {
                 type={passwordShown ? 'text' : 'password'}
                 name="password"
                 placeholder=" "
+                autoComplete="off"
               />
               <label htmlFor="password">Password *</label>
               <ErrorMessage className="error" component="div" name="password" />
