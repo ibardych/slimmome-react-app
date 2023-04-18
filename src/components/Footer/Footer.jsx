@@ -1,6 +1,6 @@
 import { FooterStyled, Team } from './Footer.styled';
 import { GiBee } from 'react-icons/gi';
-import beeCodeTeam from 'images/Team/BeeCodeTeam.jpg';
+import beeCodeTeam from 'images/Team/BeeCodeTeam.png';
 import { useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
