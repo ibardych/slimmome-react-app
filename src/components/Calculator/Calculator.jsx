@@ -16,7 +16,11 @@ import { selectModalOpened } from 'redux/selectors';
 import { setModalOpened } from 'redux/modalOpenedSlice';
 import { ModalDailyCalories } from 'components/ModalDailyCalories';
 import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
-import { selectIsLoggedIn, selectUser, selectToken } from 'redux/auth/selectors';
+import {
+  selectIsLoggedIn,
+  selectUser,
+  selectToken,
+} from 'redux/auth/selectors';
 
 export const CalculatorEl = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -73,7 +77,9 @@ export const CalculatorEl = () => {
       desiredWeight,
       bloodType,
     };
-    isLoggedIn ? dispatch(calculatorLogIn([id, data, token])):dispatch(calculatorAnonim(data));
+    isLoggedIn
+      ? dispatch(calculatorLogIn([id, data, token]))
+      : dispatch(calculatorAnonim(data));
     setWeight('');
     setHeight('');
     setAge('');
@@ -184,7 +190,7 @@ export const CalculatorEl = () => {
               </div>
             </InputsWrapper>
           </FormWrapper>
-          <ButtonCalc className="orange" type="submit">
+          <ButtonCalc className="orange" type="submit" data-toggle="modal">
             Start losing weight
           </ButtonCalc>
         </Form>
