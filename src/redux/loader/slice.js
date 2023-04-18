@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { logIn, logOut, register } from 'redux/auth/operations';
+import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
 
 const loadingSlice = createSlice({
   name: 'loading',
@@ -32,6 +33,24 @@ const loadingSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(logOut.rejected, state => {
+      state.isLoading = false;
+    });
+    builder.addCase(calculatorAnonim.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(calculatorAnonim.rejected, state => {
+      state.isLoading = false;
+    });
+    builder.addCase(calculatorAnonim.fulfilled, state => {
+      state.isLoading = false;
+    });
+    builder.addCase(calculatorLogIn.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(calculatorLogIn.rejected, state => {
+      state.isLoading = false;
+    });
+    builder.addCase(calculatorLogIn.fulfilled, state => {
       state.isLoading = false;
     });
   },

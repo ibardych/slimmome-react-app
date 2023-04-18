@@ -3,7 +3,8 @@ export const selectEatenProducts = state =>
 
 export const selectSelectedDate = state => state.diary.selectedDate;
 
-export const selectDaySummary = state => state.diary.dayInfo?.daySummary; // || state.diary?.dayInfo
+export const selectDaySummary = state =>
+  state.diary.dayInfo?.daySummary || state.diary?.dayInfo; //
 
 export const selectEatenProductsLoading = state => state.diary.isLoading;
 

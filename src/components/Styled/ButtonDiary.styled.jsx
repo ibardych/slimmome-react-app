@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants';
+import { transition } from 'helpers';
 
 export const ButtonDiary = styled.button`
   width: 48px;
@@ -18,6 +19,11 @@ export const ButtonDiary = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  ${transition('opacity')}
+
+  &[disabled] {
+    opacity: 0.5;
+  }
 
   &:hover {
     animation: jelly 0.5s;

@@ -5,7 +5,11 @@ import * as yup from 'yup';
 import Message from 'components/Message/Message';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { InputWraper } from 'components/Form/Input.styled';
-import { selectError } from 'redux/calculator/selectors';
+import {
+  selectError,
+  selectFullfilled,
+  selectIsLoading,
+} from 'redux/calculator/selectors';
 
 import {
   CalculatorStyled,
@@ -16,7 +20,7 @@ import {
   RadioLabel,
   RadioInput,
   ButtonCalc,
-  ErrorMSG
+  ErrorMSG,
 } from './Calculator.styled';
 import { setModalOpened } from 'redux/modalOpenedSlice';
 import { ModalDailyCalories } from 'components/ModalDailyCalories';
@@ -30,6 +34,8 @@ import { setUserData } from 'redux/auth/slice';
 
 export const CalculatorEl = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
+  const isFullfilled = useSelector(selectFullfilled);
   const user = useSelector(selectUser);
   const userWeight = user.userData?.weight ?? '';
   const userHeight = user.userData?.height ?? '';
@@ -111,12 +117,13 @@ export const CalculatorEl = () => {
       bloodType: Number(bloodType),
     };
 
-  if (isLoggedIn) dispatch(setUserData({ weight, height, age, desiredWeight, bloodType }));
-    
+    if (isLoggedIn)
+      dispatch(setUserData({ weight, height, age, desiredWeight, bloodType }));
+
     const id = user.id;
     isLoggedIn
-    ? dispatch(calculatorLogIn([id, sendData, token]))
-    : dispatch(calculatorAnonim(sendData));
+      ? dispatch(calculatorLogIn([id, sendData, token]))
+      : dispatch(calculatorAnonim(sendData));
     openModal();
   };
 
@@ -202,10 +209,7 @@ export const CalculatorEl = () => {
                     <RadioInput type="radio" name="bloodType" value="4" />4
                   </RadioLabel>
                 </RadioGroup>
-                  <ErrorMSG
-                    component="div"
-                    name="bloodType"
-                  />
+                <ErrorMSG component="div" name="bloodType" />
               </InputsWrapper>
             </FormWrapper>
             <ButtonCalc className="orange" type="submit">
@@ -215,7 +219,7 @@ export const CalculatorEl = () => {
         </Formik>
         {message && <Message>{message}</Message>}
       </CalculatorStyled>
-      <ModalDailyCalories modalOpened={modalOpened} />
+      {isFullfilled && <ModalDailyCalories modalOpened={modalOpened} />}
     </>
   );
 };

@@ -23,6 +23,11 @@ export const DiaryForm = ({ type }) => {
   const isFetchingProducts = useSelector(selectIsLoading);
   const products = useSelector(selectProducts);
   const initialValues = { search: '', grams: '' };
+  const filteredProducts = products.filter(product =>
+    product.title.ua.toLowerCase().includes(searchValue.toLowerCase())
+  );
+  const addButtonDisabled =
+    filteredProducts.length === 0 || !searchValue || weight === 0;
 
   const schema = yup.object().shape({
     search: yup.string().min(1).max(30).required(),
@@ -75,10 +80,6 @@ export const DiaryForm = ({ type }) => {
     return () => window.removeEventListener('click', closeDropdown);
   }, []);
 
-  const filteredProducts = products.filter(product =>
-    product.title.ua.toLowerCase().includes(searchValue.toLowerCase())
-  );
-
   return (
     <Formik
       initialValues={initialValues}
@@ -109,7 +110,7 @@ export const DiaryForm = ({ type }) => {
         </InputWraper>
 
         {type !== 'mobile' && (
-          <ButtonDiary type="submit">
+          <ButtonDiary type="submit" disabled={addButtonDisabled}>
             <AiOutlinePlus color="white" />
           </ButtonDiary>
         )}
@@ -142,6 +143,13 @@ export const DiaryForm = ({ type }) => {
             ))}
           </ProductsList>
         )}
+        {showDropdown &&
+          !isFetchingProducts &&
+          filteredProducts.length === 0 && (
+            <ProductsList className="productlist">
+              Products not found
+            </ProductsList>
+          )}
       </FormikForm>
     </Formik>
   );
