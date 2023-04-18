@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { animation } from 'constants/animation';
 import { mediaSizes } from 'constants/media';
 import { ishidden, transition } from 'helpers';
 
@@ -27,6 +28,8 @@ export const ModalStyled = styled.div`
     & .inner {
       transform: scale(0.7);
       ${transition('transform')};
+      -webkit-animation: bounce_out 3000ms linear both;
+      animation: bounce_out 3000ms linear both;
     }
   }
 
@@ -56,6 +59,9 @@ export const ModalStyled = styled.div`
     background-color: #ffffff;
     overflow: hidden;
     position: relative;
+    border-radius: 20px;
+    -webkit-animation: bounce_in 1500ms ease-in-out both;
+    animation: bounce_in 1500ms ease-in-out both;
 
     @media screen and (min-width: ${mediaSizes.tablet}) {
       box-shadow: 0px 22px 40px rgba(0, 0, 0, 0.1);
@@ -114,4 +120,5 @@ export const ModalStyled = styled.div`
       position: absolute;
     }
   }
+  ${animation}
 `;

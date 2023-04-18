@@ -79,7 +79,7 @@ export const CalculatorEl = () => {
       .number()
       .min(20)
       .max(500)
-      .required()
+      .required('desired weight is a required field')
       .positive()
       .integer(),
     bloodType: yup.number().min(1).max(4).required().positive().integer(),

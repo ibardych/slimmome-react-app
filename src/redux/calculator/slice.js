@@ -24,10 +24,12 @@ const calculatorSlice = createSlice({
       })
       .addCase(calculatorAnonim.pending, state => {
         state.isLoading = true;
+        state.fullfilled = false;
       })
       .addCase(calculatorAnonim.rejected, (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
+        state.fullfilled = false;
       })
       .addCase(calculatorLogIn.fulfilled, (state, action) => {
         state.dailyRate = action.payload.dailyRate;
@@ -38,10 +40,12 @@ const calculatorSlice = createSlice({
       })
       .addCase(calculatorLogIn.pending, state => {
         state.isLoading = true;
+        state.fullfilled = false;
       })
       .addCase(calculatorLogIn.rejected, (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
+        state.fullfilled = false;
       });
   },
 });

@@ -30,8 +30,14 @@ export const DiaryForm = ({ type }) => {
     filteredProducts.length === 0 || !searchValue || weight === 0;
 
   const schema = yup.object().shape({
-    search: yup.string().min(1).max(30).required(),
-    grams: yup.number().min(1).max(3000).required().positive().integer(),
+    search: yup.string().min(1).max(30).required('Please enter product name'),
+    grams: yup
+      .number()
+      .min(1)
+      .max(3000)
+      .required('Required field')
+      .positive()
+      .integer(),
   });
 
   const handleSubmit = () => {
