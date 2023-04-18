@@ -58,16 +58,16 @@ export const LoginForm = () => {
             </InputWraper>
 
             <InputWraper>
-              <ShowPassword
-                clickHandler={onClickHandler}
-                isShown={passwordShown}
-              />
               <Field
                 type={passwordShown ? 'text' : 'password'}
                 name="password"
                 placeholder=" "
               />
               <label htmlFor="password">Password *</label>
+              <ShowPassword
+                clickHandler={onClickHandler}
+                isShown={passwordShown}
+              />
               <ErrorMessage className="error" component="div" name="password" />
             </InputWraper>
           </FormFields>

@@ -65,7 +65,7 @@ export const Banana = styled.div`
   }
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    background: url(${banana}) no-repeat top right -200px;
+    background: url(${banana}) no-repeat top -50px right -200px;
     background-size: auto auto;
   }
 `;
@@ -83,7 +83,7 @@ export const Leafs = styled.div`
   }
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
-    background: url(${leafs}) no-repeat right 100px bottom 100px;
-    background-size: auto 100%;
+    background: url(${leafs}) no-repeat left 300px top 0px;
+    background-size: auto 70%;
   }
 `;

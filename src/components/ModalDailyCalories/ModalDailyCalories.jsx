@@ -11,9 +11,11 @@ import { setModalOpened } from 'redux/modalOpenedSlice';
 import { useNavigate } from 'react-router-dom';
 import { selectIsLoading } from 'redux/calculator/selectors';
 import { Loader } from 'components/Loader/Loader';
+import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 export const ModalDailyCalories = () => {
   const isLoading = useSelector(selectIsLoading);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notAllowedProducts = useSelector(selectNotAllowedProducts);
@@ -23,7 +25,8 @@ export const ModalDailyCalories = () => {
 
   const clickHandler = () => {
     dispatch(setModalOpened(false));
-    navigate('/diary');
+    if (isLoggedIn) navigate('/diary');
+    else navigate('/register');
   };
 
   return (

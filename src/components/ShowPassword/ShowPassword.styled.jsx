@@ -4,7 +4,7 @@ import { BsFillEyeSlashFill } from 'react-icons/bs';
 
 export const ShowPasswordButton = styled.button`
   position: absolute;
-  top: 22px;
+  top: 19px;
   right: 5px;
   border: none;
   background-color: transparent;
@@ -13,13 +13,11 @@ export const ShowPasswordButton = styled.button`
 `;
 
 export const ShowIcon = styled(BsFillEyeFill)`
-  width: 14px;
-  height: 12 px;
+  width: 18px;
   fill: rgba(0, 0, 0, 1);
 `;
 
 export const HideIcon = styled(BsFillEyeSlashFill)`
-  width: 14px;
-  height: 12 px;
+  width: 18px;
   fill: rgba(0, 0, 0, 0.3);
 `;
