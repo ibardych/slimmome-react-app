@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/slimmome-react-app/static/css/main.02c0c300.css",
-    "main.js": "/slimmome-react-app/static/js/main.021e41db.js",
+    "main.js": "/slimmome-react-app/static/js/main.973758f4.js",
     "static/js/427.cf031d6f.chunk.js": "/slimmome-react-app/static/js/427.cf031d6f.chunk.js",
     "static/js/284.aab97f35.chunk.js": "/slimmome-react-app/static/js/284.aab97f35.chunk.js",
     "static/js/459.c9a90db9.chunk.js": "/slimmome-react-app/static/js/459.c9a90db9.chunk.js",
@@ -22,7 +22,7 @@
     "index.html": "/slimmome-react-app/index.html",
     "static/media/backarrow.svg": "/slimmome-react-app/static/media/backarrow.24ce6b342eecfc3ce7e0b459a70fddbb.svg",
     "main.02c0c300.css.map": "/slimmome-react-app/static/css/main.02c0c300.css.map",
-    "main.021e41db.js.map": "/slimmome-react-app/static/js/main.021e41db.js.map",
+    "main.973758f4.js.map": "/slimmome-react-app/static/js/main.973758f4.js.map",
     "427.cf031d6f.chunk.js.map": "/slimmome-react-app/static/js/427.cf031d6f.chunk.js.map",
     "284.aab97f35.chunk.js.map": "/slimmome-react-app/static/js/284.aab97f35.chunk.js.map",
     "459.c9a90db9.chunk.js.map": "/slimmome-react-app/static/js/459.c9a90db9.chunk.js.map",
@@ -34,6 +34,6 @@
   },
   "entrypoints": [
     "static/css/main.02c0c300.css",
-    "static/js/main.021e41db.js"
+    "static/js/main.973758f4.js"
   ]
 }
