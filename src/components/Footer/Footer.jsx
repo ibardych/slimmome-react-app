@@ -16,7 +16,6 @@ const Footer = () => {
   };
 
   const handleCloseModal = e => {
-    console.log(e);
     if (
       (e.type === 'click' && e.target === e.currentTarget) ||
       (e.type === 'keydown' && e.key === 'Escape')

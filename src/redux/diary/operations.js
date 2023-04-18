@@ -5,11 +5,15 @@ export const diaryDayInfo = createAsyncThunk(
   'diary/dayInfo',
   async (date, thunkApi) => {
     try {
+      // const { getState } = thunkApi;
+      // const state = getState();
+      // console.log(state);
+
       const response = await axios.post('/day/info', { date });
 
       return response.data;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      return thunkApi.rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -18,7 +22,6 @@ export const deleteProductThunk = createAsyncThunk(
   'diary/deleteProduct',
   async ([eatenProductId, dayId], thunkApi) => {
     try {
-      console.log({ dayId, eatenProductId });
       const response = await axios.delete('/day', {
         data: { dayId, eatenProductId },
       });

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import {
   CalendarIcon,
@@ -16,7 +16,14 @@ const DatePicker = () => {
 
   const daysProduct = useSelector(selectUser);
 
+  const isFirstLoad = useRef(false);
+
   useEffect(() => {
+    if (!isFirstLoad.current) {
+      isFirstLoad.current = true;
+      return;
+    }
+
     const date = startDate.toISOString().slice(0, 10);
 
     dispatch(diaryDayInfo(date));
@@ -29,7 +36,9 @@ const DatePicker = () => {
         'curent-day': [new Date()],
       },
       {
-        'product-days': daysProduct.days.map(day => new Date(day.date)),
+        'product-days': daysProduct.days
+          ? daysProduct.days.map(day => new Date(day.date))
+          : [],
       },
     ];
   };

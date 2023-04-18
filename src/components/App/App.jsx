@@ -8,12 +8,7 @@ import { PrivateRoute } from 'components/PrivateRoute';
 import { Loader } from 'components/Loader/Loader';
 import Home from 'pages/Home';
 import { refreshUser } from 'redux/auth/operations';
-import {
-  selectIsLoggedIn,
-  selectIsRefreshing,
-  selectToken,
-} from 'redux/auth/selectors';
-import axios from 'axios';
+import { selectIsLoggedIn, selectIsRefreshing } from 'redux/auth/selectors';
 import { selectIsLoading } from 'redux/loader/selectors';
 
 // const Home = lazy(() => import('pages/Home'));
@@ -27,18 +22,12 @@ const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
   const isLoading = useSelector(selectIsLoading);
-  const token = useSelector(selectToken);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  //const token = useSelector(selectToken);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
-
-  useEffect(() => {
-    axios.defaults.headers.common.Authorization = token
-      ? `Bearer ${token}`
-      : '';
-  }, [token]);
 
   return (
     <>

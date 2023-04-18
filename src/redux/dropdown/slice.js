@@ -10,20 +10,20 @@ const initialState = {
 const productsSlice = createSlice({
   name: 'product',
   initialState,
-  extraReducers: {
-    [fetchProductsList.pending](state, action) {
-      state.isLoading = true;
-    },
-
-    [fetchProductsList.fulfilled](state, action) {
-      state.isLoading = false;
-      state.error = null;
-      state.products = action.payload;
-    },
-    [fetchProductsList.rejected](state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchProductsList.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchProductsList.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.products = action.payload;
+      })
+      .addCase(fetchProductsList.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 

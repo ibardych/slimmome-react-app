@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
@@ -9,14 +8,10 @@ const setAuthHeader = token => {
 export const calculatorAnonim = createAsyncThunk(
   'calculator/calculatorAnonim',
   async (credentials, thunkAPI) => {
-    console.log(credentials);
     try {
       const res = await axios.post('/daily-rate', credentials);
-      console.log(res.data);
       return res.data;
     } catch (error) {
-      console.log(error.message);
-      console.log(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -28,12 +23,13 @@ export const calculatorLogIn = createAsyncThunk(
     setAuthHeader(token);
     try {
       const res = await axios.post(`/daily-rate/${id}`, { ...data });
+
+      // const userResponse = await axios.get('/user');
+      //return { user: userResponse.data, accessToken: res.data.accessToken };
+
       return res.data;
     } catch (error) {
-      // console.log(error.message);
-      console.log(error.response.data.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-

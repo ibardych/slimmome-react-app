@@ -1,25 +1,21 @@
 import { ForbiddenProducts, SidebarStyled } from './Sidebar.styled';
 import { useSelector } from 'react-redux';
-import {
-  selectDaySummary,
-  selectIsLoading,
-  selectSelectedDate,
-} from 'redux/diary/selectors';
+import { selectIsLoading, selectSelectedDate } from 'redux/diary/selectors';
 import { formatDate } from 'helpers';
-import { selectNotAllowedProducts } from 'redux/calculator/selectors';
 import { selectUser } from 'redux/auth/selectors';
 import { LoaderSmall } from 'components/Loader/Loader';
 
 const Sidebar = () => {
+  const today = new Date();
+  const isoDate = today.toISOString().slice(0, 10);
   const user = useSelector(selectUser);
+  console.log(user);
+  const daySummaryFiltered =
+    user.days?.filter(day => day.daySummary.date === isoDate) || [];
+  const daySummary = daySummaryFiltered[0]?.daySummary || [];
   const selectedDate = useSelector(selectSelectedDate);
 
-  const daySummary = useSelector(selectDaySummary);
-  const forbiddenProductsCalculator = useSelector(selectNotAllowedProducts);
-  const forbiddenProducts =
-    forbiddenProductsCalculator.length !== 0
-      ? forbiddenProductsCalculator
-      : user.userData.notAllowedProducts;
+  const forbiddenProducts = user.userData.notAllowedProducts;
 
   const isLoading = useSelector(selectIsLoading);
 

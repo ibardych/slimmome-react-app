@@ -13,3 +13,5 @@ export const selectDayId = state => state.diary.dayInfo?.id;
 export const selectIsLoading = state => state.diary.isLoading;
 
 export const selectIsDeleting = state => state.diary.isDeleting;
+
+export const selectError = state => state.diary.error;

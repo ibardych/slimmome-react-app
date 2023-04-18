@@ -19,7 +19,6 @@ export const ModalDailyCalories = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const notAllowedProducts = useSelector(selectNotAllowedProducts);
-  // console.log(notAllowedProducts);
 
   const dailyRate = useSelector(selectDailyRate);
 

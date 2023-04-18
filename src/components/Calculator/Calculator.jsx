@@ -26,7 +26,7 @@ import {
   selectUser,
   selectToken,
 } from 'redux/auth/selectors';
-import { setUserData } from 'redux/auth/slice';
+import { refreshUser } from 'redux/auth/operations';
 
 export const CalculatorEl = () => {
   const dispatch = useDispatch();
@@ -73,7 +73,13 @@ export const CalculatorEl = () => {
 
   const schema = yup.object().shape({
     weight: yup.number().required().min(20).max(500).positive().integer(),
-    height: yup.number().required().min(100).max(250).positive().integer(),
+    height: yup
+      .number('test1')
+      .required()
+      .min(100)
+      .max(250)
+      .positive('test3')
+      .integer('test4'),
     age: yup.number().required().min(18).max(100).positive().integer(),
     desiredWeight: yup
       .number()
@@ -103,7 +109,13 @@ export const CalculatorEl = () => {
     dispatch(setModalOpened(true));
   };
 
-  const handleSubmit = ({ weight, height, age, desiredWeight, bloodType }) => {
+  const handleSubmit = async ({
+    weight,
+    height,
+    age,
+    desiredWeight,
+    bloodType,
+  }) => {
     const sendData = {
       weight: Number(weight),
       height: Number(height),
@@ -112,14 +124,20 @@ export const CalculatorEl = () => {
       bloodType: Number(bloodType),
     };
 
-    if (isLoggedIn)
-      dispatch(setUserData({ weight, height, age, desiredWeight, bloodType }));
+    // if (isLoggedIn)
+    //   dispatch(setUserData({ weight, height, age, desiredWeight, bloodType }));
 
     const id = user.id;
-    isLoggedIn
-      ? dispatch(calculatorLogIn([id, sendData, token]))
-      : dispatch(calculatorAnonim(sendData));
-    openModal();
+    try {
+      isLoggedIn
+        ? await dispatch(calculatorLogIn([id, sendData, token]))
+        : await dispatch(calculatorAnonim(sendData));
+      openModal();
+
+      dispatch(refreshUser());
+    } catch (error) {
+      console.log('Error fetching data', error);
+    }
   };
 
   return (

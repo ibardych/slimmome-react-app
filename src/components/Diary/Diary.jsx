@@ -12,6 +12,7 @@ import {
   selectDayId,
   selectEatenProducts,
   selectEatenProductsLoading,
+  selectError,
   selectIsDeleting,
 } from 'redux/diary/selectors';
 import { deleteProductThunk } from 'redux/diary/operations';
@@ -20,6 +21,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { DiaryForm } from 'components/DiaryForm/DiaryForm';
 import { setProductModalOpened } from 'redux/ModalAddProductOpened/slice';
 import ModalAddProduct from 'components/ModalAddProduct/ModalAddProduct';
+import { selectIsLoggedIn } from 'redux/auth/selectors';
 
 export const DiaryMain = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,8 @@ export const DiaryMain = () => {
   const [deletingProductId, setDeletingProductId] = useState(null);
   const isDeleting = useSelector(selectIsDeleting);
   const [isMobile, setIsMobile] = useState(false);
+  const isLoggedin = useSelector(selectIsLoggedIn);
+  const dayInfoError = useSelector(selectError);
 
   const deleteProduct = id => {
     setDeletingProductId(id);
@@ -55,9 +59,7 @@ export const DiaryMain = () => {
     <DiaryStyled>
       <div className="mobile-diary-wrap">
         <div className="Diary__header-wraper-data">
-          <div className="Diary__data">
-            <DatePicker />
-          </div>
+          <div className="Diary__data">{isLoggedin && <DatePicker />}</div>
         </div>
 
         {!isMobile && <DiaryForm />}
@@ -96,7 +98,7 @@ export const DiaryMain = () => {
           </div>
         ) : (
           <EmptyProductsMessage>
-            You did not add any products!
+            {dayInfoError || 'You did not add any products!'}
           </EmptyProductsMessage>
         )}
         <button className="Diary__btn-add" onClick={openAddProductModal}>
