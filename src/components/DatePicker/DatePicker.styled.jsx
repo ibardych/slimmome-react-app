@@ -22,7 +22,7 @@ export const CustomDatePicker = styled(DatePicker)`
   }
 `;
 
-export const Label = styled.label`
+export const DatePickerContainer = styled.div`
   display: flex;
   align-items: center;
 
