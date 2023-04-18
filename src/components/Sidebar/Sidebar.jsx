@@ -1,21 +1,19 @@
 import { ForbiddenProducts, SidebarStyled } from './Sidebar.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectDaySummary, selectIsLoading } from 'redux/diary/selectors';
+import { useSelector } from 'react-redux';
+import {
+  selectDaySummary,
+  selectIsLoading,
+  selectSelectedDate,
+} from 'redux/diary/selectors';
 import { formatDate } from 'helpers';
-import { diaryDayInfo } from 'redux/diary/operations';
 import { selectNotAllowedProducts } from 'redux/calculator/selectors';
 import { selectUser } from 'redux/auth/selectors';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
 import { LoaderSmall } from 'components/Loader/Loader';
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  // console.log(user);
-  const memoizedDayNow = useMemo(() => new Date(), []);
-  // const daySummary = user.days.daySummary;
-  // console.log(daySummary);
+  const selectedDate = useSelector(selectSelectedDate);
+
   const daySummary = useSelector(selectDaySummary);
   const forbiddenProductsCalculator = useSelector(selectNotAllowedProducts);
   const forbiddenProducts =
@@ -25,16 +23,11 @@ const Sidebar = () => {
 
   const isLoading = useSelector(selectIsLoading);
 
-  useEffect(() => {
-    const date = memoizedDayNow.toISOString().slice(0, 10);
-    dispatch(diaryDayInfo(date));
-  }, [dispatch, memoizedDayNow]);
-
   return (
     <SidebarStyled>
       <div className="container">
         <div className="summary">
-          <h2 className="title">Summary for {formatDate(memoizedDayNow)}</h2>
+          <h2 className="title">Summary for {formatDate(selectedDate)}</h2>
           {isLoading && <LoaderSmall />}
           {!isLoading && (
             <ul className="listData">

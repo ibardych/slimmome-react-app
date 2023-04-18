@@ -39,7 +39,7 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isDesktop]);
 
   useEffect(() => {
     const handleResize = () => {
