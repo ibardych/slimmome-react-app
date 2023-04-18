@@ -5,6 +5,28 @@ import banana from 'images/Background/banana.png';
 import leafs from 'images/Background/leafs.png';
 import leafsTablet from 'images/Background/leafs-tablet.png';
 import { mediaSizes } from 'constants';
+import { keyframes } from '@emotion/react';
+
+const jelly = keyframes`
+
+  0% {
+    transform: scale(1, 1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.35, 1);
+  }
+  50% {
+    transform: scale(1, 1.35);
+  }
+  75% {
+    transform: scale(1.15, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.1, 1.1);
+  }
+`;
 
 export const Wrapper = styled.div`
   position: relative;
@@ -41,9 +63,11 @@ export const Srtawberry = styled.div`
     left: 0px;
     width: 100%;
     height: 100%;
+    opacity: 0;
     background: url(${strawberry}) no-repeat right 100px bottom 350px;
     background-size: 300px auto;
     z-index: 0;
+    animation: ${jelly} 0.75s ease-in-out 1.05s forwards;
   }
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
@@ -62,6 +86,8 @@ export const Banana = styled.div`
     background: url(${banana}) no-repeat bottom right -200px;
     background-size: auto auto;
     z-index: 0;
+    opacity: 0;
+    animation: ${jelly} 0.75s ease-in-out 0.2s forwards;
   }
 
   @media screen and (min-width: ${mediaSizes.desktop}) {
