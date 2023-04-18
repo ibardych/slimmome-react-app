@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { mediaSizes } from 'constants';
 import { colors } from 'constants';
+import { animation } from 'constants/animation';
 import { transition } from 'helpers';
 
 export const FooterStyled = styled.footer`
@@ -60,17 +61,32 @@ export const FooterStyled = styled.footer`
 
 export const Team = styled.div`
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
-  padding: 20px 0;
   width: 100%;
-  background-color: #262b38;
-  text-align: center;
-  opacity: 0;
+  height: 100%;
   pointer-events: none;
-  ${transition('opacity')}
+
+  & .wrapper {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 20px 0;
+    background-color: #262b38;
+    text-align: center;
+    opacity: 0;
+    border-radius: 40px;
+    ${transition('opacity')}
+  }
 
   &.opened {
+    pointer-events: all;
+  }
+
+  &.opened .wrapper {
+    -webkit-animation: bounce_in 1500ms ease-in-out both;
+    animation: bounce_in 1500ms ease-in-out both;
     opacity: 1;
     pointer-events: all;
   }
@@ -86,12 +102,14 @@ export const Team = styled.div`
     right: 30px;
     width: 30px;
     height: 30px;
-    fill: rgba(255, 255, 255, 0.3);
+    fill: rgba(255, 255, 255, 0.5);
     cursor: pointer;
     ${transition('fill')}
 
     &:hover {
-      fill: rgba(255, 255, 255, 0.6);
+      fill: rgba(255, 255, 255, 1);
     }
   }
+
+  ${animation}
 `;

@@ -1,7 +1,7 @@
 import { FooterStyled, Team } from './Footer.styled';
 import { GiBee } from 'react-icons/gi';
 import beeCodeTeam from 'images/Team/BeeCodeTeam.jpg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
 const Footer = () => {
@@ -10,6 +10,28 @@ const Footer = () => {
   const toggleTeam = () => {
     setTeamOpened(!teamOpened);
   };
+
+  const closeModal = e => {
+    setTeamOpened(false);
+  };
+
+  const handleCloseModal = e => {
+    console.log(e);
+    if (
+      (e.type === 'click' && e.target === e.currentTarget) ||
+      (e.type === 'keydown' && e.key === 'Escape')
+    ) {
+      closeModal();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleCloseModal);
+
+    return () => {
+      window.removeEventListener('keydown', handleCloseModal);
+    };
+  });
 
   return (
     <FooterStyled>
@@ -26,9 +48,11 @@ const Footer = () => {
         </li>
       </ul>
 
-      <Team onClick={toggleTeam} className={teamOpened ? 'opened' : ''}>
-        <img src={beeCodeTeam} alt="Bee Code Tem" />
-        <IoMdClose />
+      <Team onClick={closeModal} className={teamOpened ? 'opened' : ''}>
+        <div className="wrapper">
+          <img src={beeCodeTeam} alt="Bee Code Tem" />
+          <IoMdClose />
+        </div>
       </Team>
     </FooterStyled>
   );
