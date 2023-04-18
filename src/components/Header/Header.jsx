@@ -20,23 +20,17 @@ const Header = () => {
   const [isUserInfoShown, setUserInfoShown] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const [isDesktop, setIsDesktop] = useState(false);
 
-  const clickHandler = useCallback(
-    event => {
-      if (!isLoggedIn) return;
-      if (
-        event.type === 'click' ||
-        (event.type === 'keydown' && event.key === 'Escape')
-      ) {
-        setIsMobileMenuOpen(state => !state);
-      }
-    },
-    [isLoggedIn]
-  );
+  const clickHandler = useCallback(() => {
+    if (!isLoggedIn) return;
+    setIsMobileMenuOpen(state => !state);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const handleScroll = () => {
-      const isTop = window.scrollY <= 80;
+      const height = isDesktop ? 100 : 40;
+      const isTop = window.scrollY <= height;
       setIsScrolled(!isTop);
     };
 
@@ -61,6 +55,8 @@ const Header = () => {
       }
     };
     handleResize();
+
+    setIsDesktop(window.innerWidth >= parseInt(mediaSizes.desktop));
 
     window.addEventListener('resize', handleResize);
 

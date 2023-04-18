@@ -39,11 +39,14 @@ export const CalculatorStyled = styled.div`
     line-height: 1.4;
     color: ${colors.color4};
     text-align: left;
+    margin-bottom: 34px;
+
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 554px;
       font-size: 34px;
       font-weight: 700;
       line-height: 1.41;
+      margin-bottom: 68px;
     }
     @media screen and (min-width: ${mediaSizes.desktop}) {
       width: 608px;

@@ -68,7 +68,10 @@ const App = () => {
               <Route
                 path="register"
                 element={
-                  <RestrictedRoute redirectTo="/" component={<Register />} />
+                  <RestrictedRoute
+                    redirectTo="/calculator"
+                    component={<Register />}
+                  />
                 }
               />
               <Route

@@ -107,6 +107,16 @@ export const ModalDailyCaloriesStyled = styled.div`
 
       color: ${colors.color2};
     }
+
+    & .recomendation__list {
+      list-style: disc;
+      padding-left: 17px;
+
+      & li {
+        font-weight: 400;
+        margin-bottom: 4px;
+      }
+    }
   }
 
   & .button-container {

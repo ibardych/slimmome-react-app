@@ -5,11 +5,7 @@ import * as yup from 'yup';
 import Message from 'components/Message/Message';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { InputWraper } from 'components/Form/Input.styled';
-import {
-  selectError,
-  selectFullfilled,
-  selectIsLoading,
-} from 'redux/calculator/selectors';
+import { selectError, selectFullfilled } from 'redux/calculator/selectors';
 
 import {
   CalculatorStyled,
@@ -34,7 +30,6 @@ import { setUserData } from 'redux/auth/slice';
 
 export const CalculatorEl = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
   const isFullfilled = useSelector(selectFullfilled);
   const user = useSelector(selectUser);
   const userWeight = user.userData?.weight ?? '';

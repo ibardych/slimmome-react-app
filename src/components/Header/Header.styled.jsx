@@ -4,6 +4,14 @@ import { container } from 'helpers';
 import { colors } from 'constants/colors';
 
 export const HeaderStyled = styled.header`
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+
+  @media screen and (min-width: ${mediaSizes.tablet}) {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
   @media screen and (max-width: ${mediaSizes.mobile}) {
     height: 120px;
     border: none;

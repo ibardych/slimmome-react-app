@@ -32,7 +32,7 @@ export const RegisterForm = () => {
 
   const navigate = useNavigate();
   const redirection = () => {
-    const path = '/login';
+    const path = '/register';
     navigate(path);
   };
 
