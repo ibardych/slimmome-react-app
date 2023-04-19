@@ -20,7 +20,15 @@ const initialState = {
     email: null,
     username: null,
     id: null,
-    userData: {},
+    userData: {
+      weight: 0,
+      height: 0,
+      age: 0,
+      bloodType: null,
+      desiredWeight: 0,
+      dailyRate: 0,
+      notAllowedProducts: [],
+    },
     days: [],
   },
   error: null,
@@ -69,7 +77,10 @@ const userSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        const { username, email, id } = action.payload.user;
+        state.user.id = id;
+        state.user.username = username;
+        state.user.email = email;
         state.token = action.payload.accessToken;
         state.isLoggedIn = true;
         state.authError = null;
@@ -139,16 +150,15 @@ const userSlice = createSlice({
       })
       // diary
       .addCase(addProduct.fulfilled, (state, action) => {
+        const dayIndex = state.user.days.findIndex(
+          day => day.date === state.selectedDate
+        );
+
         let day;
         let daySummary;
 
-        if (action.payload.newDay !== undefined) {
-          day = action.payload.newDay;
-          daySummary = action.payload.newSummary;
-        } else {
-          day = action.payload.day;
-          daySummary = action.payload.daySummary;
-        }
+        day = action.payload.newDay ?? action.payload.day;
+        daySummary = action.payload.newSummary ?? action.payload.daySummary;
 
         const newDay = {};
         newDay._id = day.id;
@@ -156,9 +166,33 @@ const userSlice = createSlice({
         newDay.eatenProducts = day.eatenProducts;
         newDay.daySummary = daySummary;
 
-        if (state.user.days === undefined) state.user.days = [];
+        if (dayIndex === -1) {
+          state.user.days.push(newDay);
+        } else {
+          state.user.days[dayIndex] = newDay;
+        }
 
-        state.user.days.push(newDay);
+        // const dayIndex = state.user.days.findIndex(
+        //   day => day.date === state.selectedDate
+        // );
+        // console.log(state.user);
+        // const DaysCopy = state.user.days.reduce((acc, day) => {
+        //   acc.push(day);
+        // }, []);
+        // console.log(DaysCopy);
+
+        // const dayFiltered = state.user.days.filter(
+        //   (day, index) => day.date === state.selectedDate
+        // );
+
+        // console.log(dayFiltered);
+        // state.user.days[dayIndex]
+
+        // state.user.days = state.user.days.map(contact => contact.id === action.payload.id ? action.payload : contact);
+
+        // console.log('index: ', state.user.days[dayIndex]);
+        // console.log('newDay: ', newDay);
+        // state.user.days.push(newDay);
 
         state.isLoadingAddProduct = false;
       })

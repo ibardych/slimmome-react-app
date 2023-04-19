@@ -155,7 +155,8 @@ export const RadioInput = styled(Field)`
 `;
 
 export const ErrorMSG = styled(ErrorMessage)`
-  padding-top: 5px;
+  padding-top: 7px;
   font-size: 12px;
   color: ${colors.color1};
+  font-weight: 500;
 `;

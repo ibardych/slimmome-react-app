@@ -71,23 +71,41 @@ export const CalculatorEl = () => {
   };
 
   const schema = yup.object().shape({
-    weight: yup.number().required().min(20).max(500).positive().integer(),
+    weight: yup
+      .number()
+      .required('Weight is a required field')
+      .min(20)
+      .max(500)
+      .positive()
+      .integer(),
     height: yup
-      .number('test1')
-      .required()
+      .number()
+      .required('Height is a required field')
       .min(100)
       .max(250)
-      .positive('test3')
-      .integer('test4'),
-    age: yup.number().required().min(18).max(100).positive().integer(),
+      .positive()
+      .integer(),
+    age: yup
+      .number()
+      .required('Age is a required field')
+      .min(18)
+      .max(100)
+      .positive()
+      .integer(),
     desiredWeight: yup
       .number()
       .min(20)
       .max(500)
-      .required('desired weight is a required field')
+      .required('Desired weight is a required field')
       .positive()
       .integer(),
-    bloodType: yup.number().min(1).max(4).required().positive().integer(),
+    bloodType: yup
+      .number()
+      .min(1)
+      .max(4)
+      .required('Blood type is a required field')
+      .positive()
+      .integer(),
   });
 
   const initialValues = {

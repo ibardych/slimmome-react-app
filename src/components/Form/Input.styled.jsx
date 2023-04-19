@@ -67,9 +67,10 @@ export const InputWraper = styled.div`
 
   & .error {
     position: absolute;
-    top: 50px;
+    top: 52px;
     font-size: 12px;
     color: ${colors.color1};
+    font-weight: 500;
   }
 `;
 
