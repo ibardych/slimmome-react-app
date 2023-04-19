@@ -1,8 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import { authReducer } from './auth/slice';
 import { ModalOpenedReducer } from './modalOpenedSlice';
-import { calculatorReducer } from './calculator/slice';
 import {
   persistStore,
   persistReducer,
@@ -14,9 +12,8 @@ import {
   REGISTER,
 } from 'redux-persist';
 import { loadingReducer } from './loader/slice';
-import { productsReducer } from './dropdown/slice';
-import { diaryReducer } from './diary/slice';
 import { addProductModalReducer } from './ModalAddProductOpened/slice';
+import { userReducer } from './user/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -26,12 +23,10 @@ const authPersistConfig = {
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authPersistConfig, authReducer),
+    auth: persistReducer(authPersistConfig, userReducer),
+    user: userReducer,
     modalopened: ModalOpenedReducer,
-    calculator: calculatorReducer,
     loading: loadingReducer,
-    products: productsReducer,
-    diary: diaryReducer,
     addproductmodalopened: addProductModalReducer,
   },
   middleware: getDefaultMiddleware =>

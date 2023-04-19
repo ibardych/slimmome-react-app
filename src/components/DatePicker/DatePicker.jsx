@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import {
   CalendarIcon,
@@ -6,16 +6,13 @@ import {
   DatePickerContainer,
 } from './DatePicker.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { diaryDayInfo } from 'redux/diary/operations';
-import { setSelectedDate } from 'redux/diary/slice';
-import { selectUser } from 'redux/auth/selectors';
+import { setSelectedDate } from 'redux/user/slice';
+import { selectSelectedDate, selectUser } from 'redux/user/selectors';
 
 const DatePicker = () => {
   const dispatch = useDispatch();
-  const [startDate, setStartDate] = useState(new Date());
-
-  const daysProduct = useSelector(selectUser);
-
+  const selectedDate = useSelector(selectSelectedDate);
+  const user = useSelector(selectUser);
   const isFirstLoad = useRef(false);
 
   useEffect(() => {
@@ -24,11 +21,9 @@ const DatePicker = () => {
       return;
     }
 
-    const date = startDate.toISOString().slice(0, 10);
-
-    dispatch(diaryDayInfo(date));
-    dispatch(setSelectedDate(date));
-  }, [dispatch, startDate]);
+    // dispatch(diaryDayInfo(selectedDate));
+    dispatch(setSelectedDate(selectedDate));
+  }, [dispatch, selectedDate]);
 
   const dateProduct = () => {
     return [
@@ -36,11 +31,19 @@ const DatePicker = () => {
         'curent-day': [new Date()],
       },
       {
-        'product-days': daysProduct.days
-          ? daysProduct.days.map(day => new Date(day.date))
+        'product-days': user.days
+          ? user.days
+              .filter(day => day.eatenProducts.length > 0)
+              .map(day => new Date(day.date))
           : [],
       },
     ];
+  };
+
+  const changeDate = date => {
+    const formattedDate = date.toISOString().slice(0, 10);
+
+    dispatch(setSelectedDate(formattedDate));
   };
 
   return (
@@ -48,8 +51,8 @@ const DatePicker = () => {
       <CustomDatePicker
         id="date-picker"
         dateFormat="dd.MM.yyyy"
-        selected={startDate}
-        onChange={setStartDate}
+        selected={new Date(selectedDate)}
+        onChange={changeDate}
         readonly
         highlightDates={dateProduct()}
       />

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn, logOut, register } from 'redux/auth/operations';
-import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
+import { logIn, logOut, register } from 'redux/user/operations';
+import { calculatorAnonim, calculatorLogIn } from 'redux/user/operations';
 
 const loadingSlice = createSlice({
   name: 'loading',

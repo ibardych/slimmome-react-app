@@ -1,9 +1,9 @@
 import { Div, Span, Button, Wrapper, BackButton } from './UserInfo.styled';
 import { ReactComponent as BackArrow } from 'images/backarrow.svg';
-import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { selectIsLoggedIn, selectUser } from 'redux/user/selectors';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { logOut } from 'redux/auth/operations';
+import { logOut } from 'redux/user/operations';
 import { selectModalOpened } from 'redux/selectors';
 import { setModalOpened } from 'redux/modalOpenedSlice';
 import { selectAddProductModalOpened } from 'redux/ModalAddProductOpened/selectors';
@@ -13,7 +13,8 @@ const UserInfo = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const modalOpened = useSelector(selectModalOpened);
   const addProductModalOpened = useSelector(selectAddProductModalOpened);
-  const userName = useSelector(state => state.auth.user.username);
+  const user = useSelector(selectUser);
+  const userName = user.username;
   const dispatch = useDispatch();
 
   const clickHandler = () => {

@@ -11,7 +11,8 @@ export const Menu = styled.div`
   bottom: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 60px;
   background-color: ${colors.color5};
   z-index: 100;
 `;

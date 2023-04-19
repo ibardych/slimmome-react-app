@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import Message from 'components/Message/Message';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { InputWraper } from 'components/Form/Input.styled';
-import { selectError, selectFullfilled } from 'redux/calculator/selectors';
+import { selectError } from 'redux/user/selectors';
 
 import {
   CalculatorStyled,
@@ -20,17 +20,16 @@ import {
 } from './Calculator.styled';
 import { setModalOpened } from 'redux/modalOpenedSlice';
 import { ModalDailyCalories } from 'components/ModalDailyCalories';
-import { calculatorAnonim, calculatorLogIn } from 'redux/calculator/operations';
+import { calculatorAnonim, calculatorLogIn } from 'redux/user/operations';
 import {
   selectIsLoggedIn,
   selectUser,
-  selectToken,
-} from 'redux/auth/selectors';
-import { refreshUser } from 'redux/auth/operations';
+  selectFullfilledCalculator,
+} from 'redux/user/selectors';
 
 export const CalculatorEl = () => {
   const dispatch = useDispatch();
-  const isFullfilled = useSelector(selectFullfilled);
+  const isFullfilled = useSelector(selectFullfilledCalculator);
   const user = useSelector(selectUser);
   const userWeight = user.userData?.weight ?? '';
   const userHeight = user.userData?.height ?? '';
@@ -101,7 +100,6 @@ export const CalculatorEl = () => {
 
   const message = useSelector(selectError);
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const token = useSelector(selectToken);
 
   const modalOpened = useSelector(selectModalOpened);
 
@@ -109,13 +107,7 @@ export const CalculatorEl = () => {
     dispatch(setModalOpened(true));
   };
 
-  const handleSubmit = async ({
-    weight,
-    height,
-    age,
-    desiredWeight,
-    bloodType,
-  }) => {
+  const handleSubmit = ({ weight, height, age, desiredWeight, bloodType }) => {
     const sendData = {
       weight: Number(weight),
       height: Number(height),
@@ -124,20 +116,12 @@ export const CalculatorEl = () => {
       bloodType: Number(bloodType),
     };
 
-    // if (isLoggedIn)
-    //   dispatch(setUserData({ weight, height, age, desiredWeight, bloodType }));
-
     const id = user.id;
-    try {
-      isLoggedIn
-        ? await dispatch(calculatorLogIn([id, sendData, token]))
-        : await dispatch(calculatorAnonim(sendData));
-      openModal();
+    isLoggedIn
+      ? dispatch(calculatorLogIn([id, sendData]))
+      : dispatch(calculatorAnonim(sendData));
 
-      dispatch(refreshUser());
-    } catch (error) {
-      console.log('Error fetching data', error);
-    }
+    openModal();
   };
 
   return (

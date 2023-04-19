@@ -18,10 +18,9 @@ export const NavigationStyled = styled.ul`
     padding-left: 20px;
   }
 
-  &.borderLeft {
-    @media screen and (min-width: ${mediaSizes.desktop}) {
-      border-left: 2px solid ${colors.color3};
-      margin-left: 20px;
-    }
+  @media screen and (min-width: ${mediaSizes.desktop}) {
+    border-left: 2px solid ${colors.color3};
+    margin-left: 20px;
+    margin-right: auto;
   }
 `;

@@ -29,7 +29,7 @@ export const FormikForm = styled(Form)`
 
   & input[name='grams'] {
     width: 280px;
-    text-align: right;
+    text-align: left;
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -39,6 +39,7 @@ export const FormikForm = styled(Form)`
 
     @media screen and (min-width: ${mediaSizes.tablet}) {
       width: 106px;
+      text-align: right;
     }
 
     @media screen and (min-width: ${mediaSizes.desktop}) {

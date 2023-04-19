@@ -59,6 +59,22 @@ export const LoaderSmallStyled = styled.div`
     height: 30px;
   }
 
+  &.addProduct {
+    position: absolute;
+    right: -42px;
+    top: 16px;
+    width: 30px;
+    height: 30px;
+  }
+
+  &.addProductMobile {
+    width: 30px;
+    height: 30px;
+    margin-top: -30px;
+    position: relative;
+    top: 40px;
+  }
+
   @keyframes spin {
     to {
       transform: rotate(360deg);

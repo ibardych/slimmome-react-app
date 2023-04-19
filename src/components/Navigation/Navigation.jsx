@@ -1,9 +1,12 @@
 // import PropTypes from 'prop-types';
+import { selectIsLoggedIn } from 'redux/user/selectors';
 import { LinkStyled } from './Link.styled';
 import { NavigationStyled } from './Navigation.styled';
 import { useSelector } from 'react-redux';
+
 const Navigation = () => {
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return !isLoggedIn ? (
     <NavigationStyled>
       <li>
@@ -14,7 +17,7 @@ const Navigation = () => {
       </li>
     </NavigationStyled>
   ) : (
-    <NavigationStyled className="borderLeft">
+    <NavigationStyled>
       <li>
         <LinkStyled to="/diary">diary</LinkStyled>
       </li>

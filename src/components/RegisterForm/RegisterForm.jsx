@@ -4,13 +4,13 @@ import { InputWraper } from 'components/Form/Input.styled';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components/Styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from 'redux/auth/operations';
+import { register } from 'redux/user/operations';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import Message from 'components/Message/Message';
 import ShowPassword from 'components/ShowPassword/ShowPassword';
-import { selectError } from 'redux/auth/selectors';
 import { useState } from 'react';
+import { selectAuthError } from 'redux/user/selectors';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const RegisterForm = () => {
     password: yup.string().min(8).max(100).required(),
   });
 
-  const message = useSelector(selectError);
+  const message = useSelector(selectAuthError);
 
   const navigate = useNavigate();
   const redirection = () => {

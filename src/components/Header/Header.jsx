@@ -11,7 +11,7 @@ import MobileMenu from 'components/MobileMenu/MobileMenu';
 import { useSelector } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
 import { mediaSizes } from 'constants/media';
-import { selectIsLoggedIn } from 'redux/auth/selectors';
+import { selectIsLoggedIn } from 'redux/user/selectors';
 import { Logo } from 'components/Logo/Logo';
 
 const Header = () => {

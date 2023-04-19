@@ -4,19 +4,19 @@ import { Button } from 'components/Styled';
 import { useNavigate } from 'react-router-dom';
 import { FormFields, LoginFormStyled } from './LoginForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
-import { selectError } from 'redux/auth/selectors';
+import { logIn } from 'redux/user/operations';
 import Message from 'components/Message/Message';
 import ShowPassword from 'components/ShowPassword/ShowPassword';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useState } from 'react';
+import { selectAuthError } from 'redux/user/selectors';
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const [passwordShown, setPasswordShown] = useState(false);
 
-  const message = useSelector(selectError);
+  const message = useSelector(selectAuthError);
 
   const schema = yup.object().shape({
     email: yup.string().min(3).max(254).required(),

@@ -8,36 +8,38 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import DatePicker from 'components/DatePicker/DatePicker';
-import {
-  selectDayId,
-  selectEatenProducts,
-  selectEatenProductsLoading,
-  selectError,
-  selectIsDeleting,
-} from 'redux/diary/selectors';
-import { deleteProductThunk } from 'redux/diary/operations';
+import { deleteProduct } from 'redux/user/operations';
 import { LoaderSmall } from 'components/Loader/Loader';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { DiaryForm } from 'components/DiaryForm/DiaryForm';
 import { setProductModalOpened } from 'redux/ModalAddProductOpened/slice';
 import ModalAddProduct from 'components/ModalAddProduct/ModalAddProduct';
-import { selectIsLoggedIn } from 'redux/auth/selectors';
+import {
+  selectDiaryError,
+  selectIsLoggedIn,
+  selectIsProductDeleting,
+  selectSelectedDate,
+  selectUser,
+} from 'redux/user/selectors';
 
 export const DiaryMain = () => {
   const dispatch = useDispatch();
-  const selectedDayId = useSelector(selectDayId);
-  const eatenProductsLoading = useSelector(selectEatenProductsLoading);
-  const eatenProducts = useSelector(selectEatenProducts);
+  const selectedDate = useSelector(selectSelectedDate);
+  const user = useSelector(selectUser);
+  const isProductDeleting = useSelector(selectIsProductDeleting);
+  const eatenProductsFiltered =
+    user.days?.filter(day => day.date === selectedDate) || [];
+  const eatenProducts = eatenProductsFiltered[0]?.eatenProducts || [];
   const eatenProductsSorted = [...eatenProducts].reverse();
   const [deletingProductId, setDeletingProductId] = useState(null);
-  const isDeleting = useSelector(selectIsDeleting);
   const [isMobile, setIsMobile] = useState(false);
   const isLoggedin = useSelector(selectIsLoggedIn);
-  const dayInfoError = useSelector(selectError);
+  const dayInfoError = useSelector(selectDiaryError);
 
-  const deleteProduct = id => {
+  const handleDeleteProduct = id => {
+    const dayId = user.days?.filter(day => day.date === selectedDate)[0]._id;
     setDeletingProductId(id);
-    dispatch(deleteProductThunk([id, selectedDayId]));
+    dispatch(deleteProduct([id, dayId]));
   };
 
   useEffect(() => {
@@ -62,11 +64,15 @@ export const DiaryMain = () => {
           <div className="Diary__data">{isLoggedin && <DatePicker />}</div>
         </div>
 
-        {!isMobile && <DiaryForm />}
+        {!isMobile && !!user.userData.dailyRate && <DiaryForm />}
 
-        {eatenProductsLoading ? (
-          <LoaderSmall name="eatenProducts" />
-        ) : eatenProductsSorted.length ? (
+        {!user.userData.dailyRate && (
+          <EmptyProductsMessage>
+            Please, count your daily rate first
+          </EmptyProductsMessage>
+        )}
+
+        {eatenProductsSorted.length > 0 ? (
           <div className="Diarty__header-wrapper">
             <DiaryStyledList>
               {eatenProductsSorted.map(product => (
@@ -84,11 +90,11 @@ export const DiaryMain = () => {
                     <button
                       className="Diary__btn-delete"
                       type="button"
-                      onClick={() => deleteProduct(product.id)}
+                      onClick={() => handleDeleteProduct(product.id)}
                     >
                       <AiOutlineClose />
                     </button>
-                    {isDeleting && deletingProductId === product.id && (
+                    {isProductDeleting && deletingProductId === product.id && (
                       <LoaderSmall name="deleteProduct" />
                     )}
                   </div>
@@ -97,17 +103,17 @@ export const DiaryMain = () => {
             </DiaryStyledList>
           </div>
         ) : (
-          <EmptyProductsMessage>
-            {dayInfoError || 'You did not add any products!'}
-          </EmptyProductsMessage>
+          !!user.userData.dailyRate && (
+            <EmptyProductsMessage>
+              {dayInfoError || 'You did not add any products!'}
+            </EmptyProductsMessage>
+          )
         )}
         <button className="Diary__btn-add" onClick={openAddProductModal}>
           <AiOutlinePlus color="white" />
         </button>
         <ModalAddProduct />
       </div>
-
-      {/* <DiaryStyled>Loading...</DiaryStyled> */}
     </DiaryStyled>
   );
 };

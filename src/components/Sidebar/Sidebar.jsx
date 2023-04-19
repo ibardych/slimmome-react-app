@@ -1,19 +1,20 @@
 import { ForbiddenProducts, SidebarStyled } from './Sidebar.styled';
 import { useSelector } from 'react-redux';
-import { selectIsLoading, selectSelectedDate } from 'redux/diary/selectors';
+import { selectIsLoading, selectSelectedDate } from 'redux/user/selectors';
 import { formatDate } from 'helpers';
-import { selectUser } from 'redux/auth/selectors';
+import { selectUser } from 'redux/user/selectors';
 import { LoaderSmall } from 'components/Loader/Loader';
 
 const Sidebar = () => {
-  const today = new Date();
-  const isoDate = today.toISOString().slice(0, 10);
   const user = useSelector(selectUser);
-  console.log(user);
-  const daySummaryFiltered =
-    user.days?.filter(day => day.daySummary.date === isoDate) || [];
-  const daySummary = daySummaryFiltered[0]?.daySummary || [];
   const selectedDate = useSelector(selectSelectedDate);
+
+  const daySummaryFiltered =
+    user.days?.filter(day => day.daySummary.date === selectedDate) || [];
+
+  const daySummary = daySummaryFiltered[0]?.daySummary || [];
+
+  const dailyRate = user.userData.dailyRate;
 
   const forbiddenProducts = user.userData.notAllowedProducts;
 
@@ -29,19 +30,19 @@ const Sidebar = () => {
             <ul className="listData">
               <li className="item">
                 <h3 className="title__name">Left</h3>
-                <p>{daySummary?.kcalLeft?.toFixed(2) ?? 0} kgal</p>
+                <p>{Math.ceil(daySummary.kcalLeft) || 0} kgal</p>
               </li>
               <li className="item">
                 <h3 className="title__name">Consumed</h3>
-                <p>{daySummary?.kcalConsumed?.toFixed(2) ?? 0} kcal</p>
+                <p>{Math.ceil(daySummary.kcalConsumed) || 0} kcal</p>
               </li>
               <li className="item">
                 <h3 className="title__name">Daily rate</h3>
-                <p>{daySummary?.dailyRate?.toFixed(2) ?? 0} kcal</p>
+                <p>{Math.ceil(dailyRate) || 0} kcal</p>
               </li>
               <li className="item">
                 <h3 className="title__name">n% of normal</h3>
-                <p>{daySummary?.percentsOfDailyRate?.toFixed(2) ?? 0} %</p>
+                <p>{Math.ceil(daySummary.percentsOfDailyRate) || 0} %</p>
               </li>
             </ul>
           )}

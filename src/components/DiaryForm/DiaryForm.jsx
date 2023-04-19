@@ -3,11 +3,16 @@ import { ButtonDiary } from 'components/Styled/ButtonDiary.styled';
 import { ErrorMessage, Field, Formik } from 'formik';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProductThunk } from 'redux/diary/operations';
-import { fetchProductsList } from 'redux/dropdown/operations';
+import { addProduct } from 'redux/user/operations';
+import { fetchProductsList } from 'redux/user/operations';
 import { AiOutlinePlus } from 'react-icons/ai';
 import * as yup from 'yup';
-import { selectIsLoading, selectProducts } from 'redux/dropdown/selectors';
+import {
+  selectIsLoadingAddProduct,
+  selectIsLoadingProducts,
+  selectProducts,
+  selectSelectedDate,
+} from 'redux/user/selectors';
 import { LoaderSmall } from 'components/Loader/Loader';
 import { FormikForm, ProductsList } from './DiaryForm.styled';
 import { Button } from 'components/Styled';
@@ -15,13 +20,14 @@ import { setProductModalOpened } from 'redux/ModalAddProductOpened/slice';
 
 export const DiaryForm = ({ type }) => {
   const dispatch = useDispatch();
-  const selectedDate = useSelector(state => state.diary.selectedDate);
+  const selectedDate = useSelector(selectSelectedDate);
   const [productId, setProductId] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [weight, setWeight] = useState(0);
   const [showDropdown, setShowDropdown] = useState(false);
-  const isFetchingProducts = useSelector(selectIsLoading);
+  const isFetchingProducts = useSelector(selectIsLoadingProducts);
   const products = useSelector(selectProducts);
+  const isLoadingAddProduct = useSelector(selectIsLoadingAddProduct);
   const initialValues = { search: '', grams: '' };
   const filteredProducts = products.filter(product =>
     product.title.ua.toLowerCase().includes(searchValue.toLowerCase())
@@ -42,7 +48,7 @@ export const DiaryForm = ({ type }) => {
 
   const handleSubmit = () => {
     dispatch(
-      addProductThunk({
+      addProduct({
         date: selectedDate,
         productId: productId,
         weight: weight,
@@ -51,6 +57,7 @@ export const DiaryForm = ({ type }) => {
 
     setSearchValue('');
     setWeight('');
+
     dispatch(setProductModalOpened(false));
   };
 
@@ -116,15 +123,21 @@ export const DiaryForm = ({ type }) => {
         </InputWraper>
 
         {type !== 'mobile' && (
-          <ButtonDiary type="submit" disabled={addButtonDisabled}>
-            <AiOutlinePlus color="white" />
-          </ButtonDiary>
+          <>
+            <ButtonDiary type="submit" disabled={addButtonDisabled}>
+              <AiOutlinePlus color="white" />
+            </ButtonDiary>
+            {isLoadingAddProduct && <LoaderSmall name="addProduct" />}
+          </>
         )}
 
         {type === 'mobile' && (
-          <Button type="submit" className="orange">
-            Add
-          </Button>
+          <>
+            {isLoadingAddProduct && <LoaderSmall name="addProductMobile" />}
+            <Button type="submit" className="orange">
+              Add
+            </Button>
+          </>
         )}
 
         {showDropdown && isFetchingProducts && (
