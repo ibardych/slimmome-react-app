@@ -19,8 +19,13 @@ export const LoginForm = () => {
   const message = useSelector(selectAuthError);
 
   const schema = yup.object().shape({
-    email: yup.string().min(3).max(254).required(),
-    password: yup.string().min(8).max(100).required(),
+    email: yup
+      .string()
+      .email('Email must be a valid email')
+      .min(3)
+      .max(254)
+      .required('Email is a required field'),
+    password: yup.string().required('Password is a required field'),
   });
 
   const initialValues = { email: '', password: '' };

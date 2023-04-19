@@ -23,9 +23,22 @@ export const RegisterForm = () => {
   };
 
   const schema = yup.object().shape({
-    username: yup.string().min(3).max(254).required(),
-    email: yup.string().min(3).max(254).required(),
-    password: yup.string().min(8).max(100).required(),
+    username: yup
+      .string()
+      .min(3, 'Username must be at least 3 characters')
+      .max(254, 'Username must be less than or equal to 254 characters')
+      .required('Username is a required field'),
+    email: yup
+      .string()
+      .email('Email must be a valid email')
+      .min(3, 'Email must be at least 3 characters')
+      .max(254, 'Email must be less than or equal to 254 characters')
+      .required('Email is a required field'),
+    password: yup
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .max(100, 'Password must be less than or equal to 100 characters')
+      .required('Password is a required field'),
   });
 
   const message = useSelector(selectAuthError);

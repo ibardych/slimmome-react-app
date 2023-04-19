@@ -156,11 +156,7 @@ const userSlice = createSlice({
         newDay.eatenProducts = day.eatenProducts;
         newDay.daySummary = daySummary;
 
-        // const dayIndex = state.user.days.findIndex(
-        //   day => day.date === state.selectedDate
-        // );
-
-        // console.log(dayIndex);
+        if (state.user.days === undefined) state.user.days = [];
 
         state.user.days.push(newDay);
 
